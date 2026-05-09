@@ -35,7 +35,7 @@ export function BingoNumbers({
                 color={highlight(value) ? "green" : "gray"}
                 variant={highlight(value) ? "solid" : undefined} 
                 onClick={() => onClick(value)}
-                style={{ fontSize: "24px", height: "48px", display: "flex", justifyContent: "center", width: "48px", cursor: "pointer", userSelect: "none"}}
+                style={{ fontSize: "24px", height: "40px", display: "flex", justifyContent: "center", width: "40px", cursor: "pointer", userSelect: "none"}}
             >
                 {value}
             </Badge>)}

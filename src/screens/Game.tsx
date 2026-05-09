@@ -22,7 +22,7 @@ export function Game() {
 	}, [numbers, storage]);
 
 	const bingoNumbersHighlight = useCallback(
-		(value: number) => numbers.includes(value),
+		(value: number) => value === 0 || numbers.includes(value),
 		[numbers],
 	);
 

@@ -3,7 +3,7 @@ export interface IBingoCard {
     board: [
         [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
         [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
-        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
         [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
         [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
     ];
