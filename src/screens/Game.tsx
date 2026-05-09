@@ -1,18 +1,41 @@
 import { AlertDialog, Box, Button, Flex } from "@radix-ui/themes";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BingoCards, BingoNumbers } from "../bingo";
+import { IStorageAdapterKey, useStorageAdapter } from "../storage";
+import z from "zod";
+
+const bingoNumbersSchema = z.array(z.number());
 
 export function Game() {
-    const [numbers, setNumbers] = useState<number[]>([]);
+    const storage = useStorageAdapter();
 
-    const bingoNumbersHighlight = useCallback((value: number) => numbers.includes(value), [numbers])
+	const [numbers, setNumbers] = useState<number[]>(() =>
+		bingoNumbersSchema.safeParse(
+			storage.unsafeGet<unknown>(
+				IStorageAdapterKey.BINGO_CARDS,
+			),
+		).data ?? [],
+	);
 
-    const bingoNumbersOnClick = useCallback((value: number) => 
-        setNumbers(currentNumbers => currentNumbers.includes(value) ? 
-            currentNumbers.filter(n => n !== value) 
-            : [...currentNumbers, value]), 
-        []
-    );
+	useEffect(() => {
+		storage.set(IStorageAdapterKey.BINGO_CARDS, numbers);
+	}, [numbers, storage]);
+
+	const bingoNumbersHighlight = useCallback(
+		(value: number) => numbers.includes(value),
+		[numbers],
+	);
+
+	const bingoNumbersOnClick = useCallback(
+		(value: number) =>
+			setNumbers((currentNumbers) =>
+				currentNumbers.includes(value)
+					? currentNumbers.filter((n) => n !== value)
+					: [...currentNumbers, value],
+			),
+		[],
+	);
+
 
     return <Flex direction="row" gap="8">
         <Box>
