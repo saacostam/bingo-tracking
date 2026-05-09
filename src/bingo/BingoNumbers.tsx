@@ -20,7 +20,7 @@ export function BingoNumbers({
         for (let i = 0; i < height; i++) {
             const row: number[] = [];
             for (let j = 0; j < width; j++) {
-                const val = i * width + j;
+                const val = 1 + i * width + j;
                 row.push(val);
             }
             values.push(row);
@@ -32,7 +32,8 @@ export function BingoNumbers({
     return <Flex direction="column" gap="1">
         {values.map(row => <Flex direction="row" gap="1">
             {row.map(value => <Badge
-                color={highlight(value) ? "green" : "gray"} 
+                color={highlight(value) ? "green" : "gray"}
+                variant={highlight(value) ? "solid" : undefined} 
                 onClick={() => onClick(value)}
                 style={{ fontSize: "24px", height: "48px", display: "flex", justifyContent: "center", width: "48px", cursor: "pointer", userSelect: "none"}}
             >

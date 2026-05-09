@@ -16,6 +16,7 @@ export function BingoCard({
             {card.board.map((row) => <Flex direction="column" gap="1">
                 {row.map(value => <Badge 
                     color={highlight?.(value) ? "amber" : "blue"} 
+                    variant={highlight?.(value) ? "solid" : undefined} 
                     style={{ fontSize: "24px", height: "36px",  display: "flex", justifyContent: "center", width: "36px"}}
                 >
                     {value}
