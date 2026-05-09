@@ -16,7 +16,7 @@ export function BingoCards({
             <Callout.Text>No tienes cartones</Callout.Text>
         </Callout.Root>
 
-        return <Flex direction="column" gap="4">
+        return <Flex direction="row" gap="4" wrap="wrap">
             {queryBingoCards.data.map(card => 
                 <BingoCard 
                     key={card.id}
