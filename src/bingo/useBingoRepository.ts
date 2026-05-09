@@ -1,17 +1,5 @@
 import { useCallback, useMemo } from "react";
 import type { IBingoCard } from "./bingo.types";
-import { IStorageAdapterKey, type IStorageAdapter } from "../storage";
-import z from "zod";
-
-const bingoCardCellSchema = z.object({
-    id: z.string(),
-    value: z.number(),
-})
-
-const bingoCardsSchema = z.object({
-    id: z.string(),
-    board: z.array(z.array(bingoCardCellSchema)),
-})
 
 /**
  * Abstraction over bingo related persistence
@@ -20,24 +8,31 @@ export interface IBingoRepository {
     getAllBingoCards(): Promise<IBingoCard[]>;
 }
 
-export interface UseBingoRepositoryArgs {
-    storage: IStorageAdapter;
-}
-
-export function useBingoRepository({
-    storage,
-}: UseBingoRepositoryArgs): IBingoRepository {
+export function useBingoRepository(): IBingoRepository {
     const getAllBingoCards: IBingoRepository["getAllBingoCards"] = useCallback(async () => {
-        const rawObject = storage.unsafeGet(IStorageAdapterKey.BINGO_CARDS);
-
-        try {
-            return z.array(bingoCardsSchema).parse(rawObject);
-        } catch {
-            return [];
-        }
-    }, [
-        storage,
-    ])
+        return [
+            {
+                id: "santiago-000084",
+                board: [
+                    [3, 1, 2, 12, 5],
+                    [17, 16, 20, 22, 26],
+                    [44, 42, 34, 39],
+                    [55, 48, 54, 58, 56],
+                    [74, 75, 68, 61, 67],
+                ]
+            },
+            {
+                id: "santiago-000085",
+                board: [
+                    [5, 6, 3, 4, 8],
+                    [27, 20, 24, 21, 16],
+                    [37, 44, 36, 40],
+                    [49, 48, 52, 46, 50],
+                    [73, 68, 63, 75, 67],
+                ]
+            }
+        ]
+    }, [])
     
     return useMemo(() => ({
         getAllBingoCards,

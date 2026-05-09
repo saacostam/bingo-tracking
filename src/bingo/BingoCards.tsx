@@ -2,7 +2,13 @@ import { Callout, Flex, Spinner } from "@radix-ui/themes";
 import { useQueryBingoCards } from "./useQueryBingoCards";
 import { BingoCard } from "./BingoCard";
 
-export function BingoCards() {
+export interface BingoCardsProps {
+    highlight?: (value: number) => boolean;
+}
+
+export function BingoCards({
+    highlight,
+}: BingoCardsProps) {
     const queryBingoCards = useQueryBingoCards();
 
     if (queryBingoCards.isSuccess) {
@@ -10,11 +16,12 @@ export function BingoCards() {
             <Callout.Text>No tienes cartones</Callout.Text>
         </Callout.Root>
 
-        return <Flex direction="column" gap="2">
+        return <Flex direction="column" gap="4">
             {queryBingoCards.data.map(card => 
                 <BingoCard 
                     key={card.id}
                     card={card}
+                    highlight={highlight} 
                 />
             )}
         </Flex>

@@ -1,9 +1,12 @@
 export interface IBingoCard {
     id: string;
-    board: IBingoCardCell[][];
+    board: [
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+        [IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell, IBingoCardCell],
+    ];
 }
 
-export interface IBingoCardCell {
-    id: string;
-    value: number;
-}
+export type IBingoCardCell = number;
