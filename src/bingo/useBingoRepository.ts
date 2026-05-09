@@ -18,9 +18,6 @@ const bingoCardsSchema = z.object({
  */
 export interface IBingoRepository {
     getAllBingoCards(): Promise<IBingoCard[]>;
-    upsertBingoCard(args: {
-        card: IBingoCard;
-    }): Promise<void>;
 }
 
 export interface UseBingoRepositoryArgs {
@@ -41,29 +38,10 @@ export function useBingoRepository({
     }, [
         storage,
     ])
-
-    const upsertBingoCard: IBingoRepository["upsertBingoCard"] = useCallback(async ({
-        card,
-    }) => {
-        const existingBingoCards = await getAllBingoCards();
-
-        const isNew = existingBingoCards.find(existingCard => existingCard.id === card.id) === undefined;
-
-        let bingoCards: IBingoCard[];
-        if (isNew) {
-            bingoCards = [...existingBingoCards, card];
-        } else {
-            bingoCards = existingBingoCards.map(c => c.id === card.id ? card : c)
-        }
-
-        storage.set(IStorageAdapterKey.BINGO_CARDS, bingoCards);
-    }, [getAllBingoCards, storage])
     
     return useMemo(() => ({
         getAllBingoCards,
-        upsertBingoCard,
     }), [
         getAllBingoCards,
-        upsertBingoCard,
     ])
 }
