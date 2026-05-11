@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "clean-react-template",
+      "name": "bingo-tracking",
       "dependencies": {
         "@hookform/resolvers": "^5.2.2",
         "@mantine/core": "^8.3.11",
