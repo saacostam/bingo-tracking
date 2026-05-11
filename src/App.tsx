@@ -1,31 +1,35 @@
-import {  Box, Tabs, Theme } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Cards, Game } from "./screens";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { HashRouter } from "react-router";
+import { AdaptersProvider } from "@/shared/adapters/core/ui";
+import { ClientsProvider } from "@/shared/clients/ui";
+import { MainErrorBoundary } from "@/shared/errors/ui";
+import { AppRoot } from "./AppRoot";
+import { theme } from "./mantine-theme";
 
-const client = new QueryClient();
+const queryClient = new QueryClient();
 
 function App() {
-  return <QueryClientProvider client={client}>
-    <Theme accentColor="indigo" grayColor="gray">
-      <Tabs.Root defaultValue="game">
-        <Tabs.List>
-          <Tabs.Trigger value="game">Juego</Tabs.Trigger>
-          <Tabs.Trigger value="cards">Cartones</Tabs.Trigger>
-        </Tabs.List>
-
-        <Box pt="3">
-          <Tabs.Content value="game">
-            <Game />
-          </Tabs.Content>
-
-          <Tabs.Content value="cards">
-            <Cards />
-          </Tabs.Content>
-        </Box>
-      </Tabs.Root>
-    </Theme>
-  </QueryClientProvider>;
+	return (
+		<MainErrorBoundary>
+			<ColorSchemeScript defaultColorScheme="auto" />
+			<MantineProvider defaultColorScheme="auto" theme={theme}>
+				<QueryClientProvider client={queryClient}>
+					<HashRouter>
+						<AdaptersProvider>
+							<ClientsProvider>
+								<AppRoot />
+							</ClientsProvider>
+						</AdaptersProvider>
+						<ReactQueryDevtools />
+					</HashRouter>
+				</QueryClientProvider>
+				<Notifications />
+			</MantineProvider>
+		</MainErrorBoundary>
+	);
 }
 
-export default App
+export default App;
