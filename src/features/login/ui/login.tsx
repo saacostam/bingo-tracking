@@ -3,6 +3,7 @@ import {
 	Box,
 	Button,
 	Card,
+	Divider,
 	PasswordInput,
 	Space,
 	Text,
@@ -51,6 +52,10 @@ export function MockLogin() {
 					Login
 				</Button>
 			</form>
+			<Divider my="md" />
+			<Alert>
+				Login has not been implemented yet. Any username and password will work.
+			</Alert>
 		</Card>
 	);
 }
