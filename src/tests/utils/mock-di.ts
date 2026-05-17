@@ -1,4 +1,6 @@
 import type { IAdapters } from "@/shared/adapters/core/domain";
+import { ILanguageAdapterLanguage } from "@/shared/adapters/language/domain";
+import { ENGLISH_KEY_VALUE_PAIRS } from "@/shared/adapters/language/infra";
 import type { ISession } from "@/shared/adapters/session/domain";
 import { IThemeVariant } from "@/shared/adapters/theme/domain";
 import type { IClients } from "@/shared/clients/domain";
@@ -35,6 +37,12 @@ export function mockDi(overrides?: {
 			put: vi.fn(),
 			patch: vi.fn(),
 			delete: vi.fn(),
+		},
+		languageAdapter: {
+			// We default to english, but the consumer can override
+			language: ILanguageAdapterLanguage.ENGLISH,
+			setLanguage: vi.fn(),
+			get: (key) => ENGLISH_KEY_VALUE_PAIRS[key],
 		},
 		persistenceAdapter: {
 			get: vi.fn(),

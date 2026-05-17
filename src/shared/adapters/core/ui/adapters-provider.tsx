@@ -5,6 +5,7 @@ import { AdaptersContext } from "@/shared/adapters/core/app";
 import type { IAdapters } from "@/shared/adapters/core/domain";
 import { useMockErrorMonitoringAdapter } from "@/shared/adapters/error-monitoring/infra";
 import { HttpFetcherAdapter } from "@/shared/adapters/fetcher/infra";
+import { useLanguageAdapter } from "@/shared/adapters/language/infra";
 import { useNotificationAdapter } from "@/shared/adapters/notification/infra";
 import { useLocalStoragePersistenceAdapter } from "@/shared/adapters/persistence/infra";
 import { usePersistanceSessionAdapter } from "@/shared/adapters/session/infra";
@@ -50,6 +51,7 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 
 	const analyticsAdapter = useMockAnalyticsProvider();
 	const errorMonitoringAdapter = useMockErrorMonitoringAdapter();
+	const languageAdapter = useLanguageAdapter();
 	const notificationAdapter = useNotificationAdapter({
 		uuidAdapter,
 	});
@@ -82,6 +84,7 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 			sessionAdapter,
 			errorMonitoringAdapter,
 			fetcherAdapter,
+			languageAdapter,
 			notificationAdapter,
 			persistenceAdapter,
 			themeAdapter,
@@ -91,6 +94,7 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 			analyticsAdapter,
 			errorMonitoringAdapter,
 			fetcherAdapter,
+			languageAdapter,
 			notificationAdapter,
 			persistenceAdapter,
 			sessionAdapter,
