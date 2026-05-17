@@ -26,8 +26,8 @@ export function LandingLayout({ children }: PropsWithChildren) {
 						<Logo />
 					</UnstyledButton>
 					<Flex gap="lg">
-						<LanguageMenu />
 						<ThemeToggle />
+						<LanguageMenu />
 					</Flex>
 				</Group>
 			</AppShell.Header>

@@ -73,8 +73,8 @@ export function AppLayout({ children }: PropsWithChildren) {
 								))}
 							</Group>
 							<Button onClick={onClickLogout}>Logout</Button>
-							<LanguageMenu />
 							<ThemeToggle />
+							<LanguageMenu />
 						</Flex>
 					</Group>
 				</Group>
