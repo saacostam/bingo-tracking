@@ -1,6 +1,6 @@
 export enum ILanguageAdapterLanguage {
 	ENGLISH = "English",
-	// SPANISH = "Español",
+	SPANISH = "Español",
 }
 
 export interface ILanguageAdapter {

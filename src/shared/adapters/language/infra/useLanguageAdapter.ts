@@ -1,22 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
 import {
 	type ILanguageAdapter,
-	ILanguageAdapterKey,
+	type ILanguageAdapterKey,
 	ILanguageAdapterLanguage,
 } from "@/shared/adapters/language/domain";
-
-export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
-	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
-
-	// LOGIN
-	[ILanguageAdapterKey.LOGIN_HEADER]: "Login",
-	[ILanguageAdapterKey.LOGIN_DESCRIPTION]: "Lorem ipsum dolor sit met!",
-	[ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL]: "Username",
-	[ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL]: "Password",
-	[ILanguageAdapterKey.LOGIN_SUBMIT_CTA]: "Login",
-	[ILanguageAdapterKey.LOGIN_MOCK_IMPLEMENTATION_DISCLAIMER]:
-		"Login has not been implemented yet. Any username and password will work.",
-};
+import { ENGLISH_KEY_VALUE_PAIRS } from "./english-key-value-pairs";
+import { SPANISH_KEY_VALUE_PAIRS } from "./spanish-key-value-pairs";
 
 export function useLanguageAdapter(): ILanguageAdapter {
 	const [language, setLanguage] = useState<ILanguageAdapterLanguage>(
@@ -30,6 +19,11 @@ export function useLanguageAdapter(): ILanguageAdapter {
 			switch (language) {
 				case ILanguageAdapterLanguage.ENGLISH: {
 					keyValuePairs = ENGLISH_KEY_VALUE_PAIRS;
+					break;
+				}
+				case ILanguageAdapterLanguage.SPANISH: {
+					keyValuePairs = SPANISH_KEY_VALUE_PAIRS;
+					break;
 				}
 			}
 
