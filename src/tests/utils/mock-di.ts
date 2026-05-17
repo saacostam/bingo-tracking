@@ -38,7 +38,7 @@ export function mockDi(overrides?: {
 			patch: vi.fn(),
 			delete: vi.fn(),
 		},
-		languageAdapter: {
+		lang: {
 			// We default to english, but the consumer can override
 			language: ILanguageAdapterLanguage.ENGLISH,
 			setLanguage: vi.fn(),

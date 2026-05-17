@@ -15,7 +15,7 @@ export interface IAdapters {
 	analyticsAdapter: IAnalyticsAdapter;
 	errorMonitoringAdapter: IErrorMonitoringAdapter;
 	fetcherAdapter: IFetcherAdapter;
-	languageAdapter: ILanguageAdapter;
+	lang: ILanguageAdapter;
 	notificationAdapter: INotificationAdapter;
 	persistenceAdapter: IPersistenceAdapter;
 	sessionAdapter: ISessionAdapter;

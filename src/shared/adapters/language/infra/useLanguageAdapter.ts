@@ -7,6 +7,8 @@ import {
 
 export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// LOGIN
+	[ILanguageAdapterKey.LOGIN_HEADER]: "Login",
+	[ILanguageAdapterKey.LOGIN_DESCRIPTION]: "Lorem ipsum dolor sit met!",
 	[ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL]: "Username",
 	[ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL]: "Password",
 	[ILanguageAdapterKey.LOGIN_SUBMIT_CTA]: "Login",

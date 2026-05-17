@@ -9,9 +9,13 @@ import {
 	Text,
 	TextInput,
 } from "@mantine/core";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useLogin } from "../app";
 
 export function MockLogin() {
+	const { lang } = useAdapters();
+
 	const { form, isLoading, onSubmit } = useLogin();
 
 	const errors = form.formState.errors;
@@ -22,22 +26,24 @@ export function MockLogin() {
 			<form onSubmit={form.handleSubmit(onSubmit)}>
 				<Box ta="center" mb="md">
 					<Text size="xl" fw="bold">
-						Login
+						{lang.get(ILanguageAdapterKey.LOGIN_HEADER)}
 					</Text>
-					<Text size="sm">Lorem ipsum dolor sit amet!</Text>
+					<Text size="sm">
+						{lang.get(ILanguageAdapterKey.LOGIN_DESCRIPTION)}
+					</Text>
 				</Box>
 				<TextInput
 					size="sm"
-					label="Username"
-					placeholder="Username"
+					label={lang.get(ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL)}
+					placeholder={lang.get(ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL)}
 					{...form.register("username")}
 					error={errors.username?.message}
 				/>
 				<Space h="md" />
 				<PasswordInput
 					size="sm"
-					label="Password"
-					placeholder="Password"
+					label={lang.get(ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL)}
+					placeholder={lang.get(ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL)}
 					{...form.register("password")}
 					error={errors.password?.message}
 				/>
@@ -49,12 +55,12 @@ export function MockLogin() {
 				)}
 				<Space h="xl" />
 				<Button fullWidth loading={isLoading} type="submit">
-					Login
+					{lang.get(ILanguageAdapterKey.LOGIN_SUBMIT_CTA)}
 				</Button>
 			</form>
 			<Divider my="md" />
 			<Alert>
-				Login has not been implemented yet. Any username and password will work.
+				{lang.get(ILanguageAdapterKey.LOGIN_MOCK_IMPLEMENTATION_DISCLAIMER)}
 			</Alert>
 		</Card>
 	);

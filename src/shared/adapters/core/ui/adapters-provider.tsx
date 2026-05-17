@@ -84,7 +84,7 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 			sessionAdapter,
 			errorMonitoringAdapter,
 			fetcherAdapter,
-			languageAdapter,
+			lang: languageAdapter,
 			notificationAdapter,
 			persistenceAdapter,
 			themeAdapter,
