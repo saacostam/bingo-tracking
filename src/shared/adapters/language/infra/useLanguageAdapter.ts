@@ -6,6 +6,8 @@ import {
 } from "@/shared/adapters/language/domain";
 
 export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
+	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
+
 	// LOGIN
 	[ILanguageAdapterKey.LOGIN_HEADER]: "Login",
 	[ILanguageAdapterKey.LOGIN_DESCRIPTION]: "Lorem ipsum dolor sit met!",

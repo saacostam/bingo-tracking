@@ -1,5 +1,6 @@
 export enum ILanguageAdapterLanguage {
 	ENGLISH = "English",
+	// SPANISH = "Español",
 }
 
 export interface ILanguageAdapter {
@@ -10,6 +11,9 @@ export interface ILanguageAdapter {
 }
 
 export enum ILanguageAdapterKey {
+	// LANGUAGE
+	LANGUAGE_MENU_HEADER = "LANGUAGE_MENU_HEADER",
+
 	// LOGIN
 	LOGIN_HEADER = "LOGIN_HEADER",
 	LOGIN_DESCRIPTION = "LOGIN_DESCRIPTION",

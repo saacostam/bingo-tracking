@@ -7,6 +7,7 @@ import {
 } from "@mantine/core";
 import type { PropsWithChildren } from "react";
 import { Link } from "react-router";
+import { LanguageMenu } from "@/features/language/ui";
 import { ThemeToggle } from "@/features/theme/ui";
 import { Logo } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
@@ -25,6 +26,7 @@ export function LandingLayout({ children }: PropsWithChildren) {
 						<Logo />
 					</UnstyledButton>
 					<Flex gap="lg">
+						<LanguageMenu />
 						<ThemeToggle />
 					</Flex>
 				</Group>

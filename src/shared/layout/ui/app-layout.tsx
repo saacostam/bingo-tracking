@@ -10,6 +10,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { type PropsWithChildren, useCallback, useMemo } from "react";
 import { Link } from "react-router";
+import { LanguageMenu } from "@/features/language/ui";
 import { ThemeToggle } from "@/features/theme/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { Logo } from "@/shared/components";
@@ -72,6 +73,7 @@ export function AppLayout({ children }: PropsWithChildren) {
 								))}
 							</Group>
 							<Button onClick={onClickLogout}>Logout</Button>
+							<LanguageMenu />
 							<ThemeToggle />
 						</Flex>
 					</Group>
