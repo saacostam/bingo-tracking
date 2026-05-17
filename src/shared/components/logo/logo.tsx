@@ -1,22 +1,15 @@
 import { Flex, Text, ThemeIcon } from "@mantine/core";
-import { FireIcon } from "@/shared/icons";
+import { TableCellsIcon } from "@/shared/icons";
 
 export function Logo() {
 	return (
 		<Flex align="center" gap="xs">
-			<ThemeIcon
-				variant="transparent"
-				size="lg"
-				color="var(--mantine-primary-color-5)"
-			>
-				<FireIcon />
+			<ThemeIcon variant="transparent" color="var(--mantine-primary-color-5)">
+				<TableCellsIcon />
 			</ThemeIcon>
 			<Text fw="bold" size="xl">
-				<span style={{ color: "var(--mantine-primary-color-5)" }}>Clean</span>{" "}
-				React{" "}
-				<span style={{ color: "var(--mantine-primary-color-5)" }}>
-					Template
-				</span>
+				<span style={{ color: "var(--mantine-primary-color-5)" }}>D</span>a
+				<span style={{ color: "var(--mantine-primary-color-5)" }}>B</span>o
 			</Text>
 		</Flex>
 	);
