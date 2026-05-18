@@ -72,9 +72,9 @@ export function AppLayout({ children }: PropsWithChildren) {
 									</UnstyledButton>
 								))}
 							</Group>
-							<Button onClick={onClickLogout}>Logout</Button>
 							<ThemeToggle />
 							<LanguageMenu />
+							<Button onClick={onClickLogout}>Logout</Button>
 						</Flex>
 					</Group>
 				</Group>
