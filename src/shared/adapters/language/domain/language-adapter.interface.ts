@@ -11,6 +11,9 @@ export interface ILanguageAdapter {
 }
 
 export enum ILanguageAdapterKey {
+	// GAMES
+	GAMES_HEADER = "GAMES_HEADER",
+
 	// LANGUAGE
 	LANGUAGE_MENU_HEADER = "LANGUAGE_MENU_HEADER",
 

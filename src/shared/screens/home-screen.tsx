@@ -1,21 +1,15 @@
-import { Button, Flex, Text } from "@mantine/core";
-import { TodoList } from "@/features/todo/ui";
-import { useGlobalModals } from "@/shared/modals/app";
-import { IModalType } from "../modals/domain";
+import { Flex, Text } from "@mantine/core";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export default function HomeScreen() {
-	const modals = useGlobalModals();
+	const { lang } = useAdapters();
 
 	return (
 		<Flex direction="column" gap="md">
 			<Text size="xl" fw="bold" display="block">
-				📌 Todo List
+				{lang.get(ILanguageAdapterKey.GAMES_HEADER)}
 			</Text>
-			<TodoList />
-
-			<Button onClick={() => modals.set({ type: IModalType.TEST })}>
-				Open Test Modal
-			</Button>
 		</Flex>
 	);
 }

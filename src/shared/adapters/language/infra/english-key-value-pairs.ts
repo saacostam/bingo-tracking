@@ -1,6 +1,9 @@
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
+	// HOME
+	[ILanguageAdapterKey.GAMES_HEADER]: "Games",
+
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
 
