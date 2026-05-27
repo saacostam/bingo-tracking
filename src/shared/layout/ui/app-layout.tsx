@@ -13,6 +13,7 @@ import { Link } from "react-router";
 import { LanguageMenu } from "@/features/language/ui";
 import { ThemeToggle } from "@/features/theme/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { Logo } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
@@ -22,7 +23,7 @@ const MAIN_LINKS: {
 }[] = [] as const;
 
 export function AppLayout({ children }: PropsWithChildren) {
-	const { sessionAdapter } = useAdapters();
+	const { lang, sessionAdapter } = useAdapters();
 
 	const [opened, { toggle }] = useDisclosure();
 
@@ -74,7 +75,9 @@ export function AppLayout({ children }: PropsWithChildren) {
 							</Group>
 							<ThemeToggle />
 							<LanguageMenu />
-							<Button onClick={onClickLogout}>Logout</Button>
+							<Button onClick={onClickLogout}>
+								{lang.get(ILanguageAdapterKey.LOGOUT_BUTTON_CTA)}
+							</Button>
 						</Flex>
 					</Group>
 				</Group>
