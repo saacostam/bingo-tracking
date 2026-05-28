@@ -1,4 +1,7 @@
 export enum QueryKeys {
+	// GAMES
+	GET_GAMES = "Get Games",
+
 	QUERY_TODOS = "Query Todos",
 }
 
