@@ -1,8 +1,13 @@
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
-	// HOME
+	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Games",
+	[ILanguageAdapterKey.GAMES_QUERY_GAMES_ERROR_MSG]:
+		"Unable to retrieve game information.",
+	[ILanguageAdapterKey.GAMES_NO_GAMES_TITLE]: "No Games Found",
+	[ILanguageAdapterKey.GAMES_NO_GAMES_DESCRIPTION]:
+		"There are currently no games available.",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
