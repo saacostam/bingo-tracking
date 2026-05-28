@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useMockAnalyticsProvider } from "@/shared/adapters/analytics/infra";
 import { AdaptersContext } from "@/shared/adapters/core/app";
 import type { IAdapters } from "@/shared/adapters/core/domain";
+import { useDateAdapter } from "@/shared/adapters/date/infra";
 import { useMockErrorMonitoringAdapter } from "@/shared/adapters/error-monitoring/infra";
 import { HttpFetcherAdapter } from "@/shared/adapters/fetcher/infra";
 import { useLanguageAdapter } from "@/shared/adapters/language/infra";
@@ -50,6 +51,7 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 	const uuidAdapter = useUuidAdapter();
 
 	const analyticsAdapter = useMockAnalyticsProvider();
+	const dateAdapter = useDateAdapter();
 	const errorMonitoringAdapter = useMockErrorMonitoringAdapter();
 	const languageAdapter = useLanguageAdapter();
 	const notificationAdapter = useNotificationAdapter({
@@ -81,17 +83,19 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 	const adapters: IAdapters = useMemo(
 		() => ({
 			analyticsAdapter,
-			sessionAdapter,
+			date: dateAdapter,
 			errorMonitoringAdapter,
 			fetcherAdapter,
 			lang: languageAdapter,
 			notificationAdapter,
 			persistenceAdapter,
+			sessionAdapter,
 			themeAdapter,
 			uuidAdapter,
 		}),
 		[
 			analyticsAdapter,
+			dateAdapter,
 			errorMonitoringAdapter,
 			fetcherAdapter,
 			languageAdapter,

@@ -1,4 +1,5 @@
 import type { IAnalyticsAdapter } from "@/shared/adapters/analytics/domain";
+import type { IDateAdapter } from "@/shared/adapters/date/domain";
 import type { IErrorMonitoringAdapter } from "@/shared/adapters/error-monitoring/domain";
 import type { IFetcherAdapter } from "@/shared/adapters/fetcher/domain";
 import type { ILanguageAdapter } from "@/shared/adapters/language/domain";
@@ -13,6 +14,7 @@ import type { IUuidAdapter } from "@/shared/adapters/uuid/domain";
  */
 export interface IAdapters {
 	analyticsAdapter: IAnalyticsAdapter;
+	date: IDateAdapter;
 	errorMonitoringAdapter: IErrorMonitoringAdapter;
 	fetcherAdapter: IFetcherAdapter;
 	lang: ILanguageAdapter;
