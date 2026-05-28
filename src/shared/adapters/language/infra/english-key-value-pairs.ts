@@ -23,4 +23,7 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// LOGOUT
 	[ILanguageAdapterKey.LOGOUT_BUTTON_CTA]: "Logout",
+
+	// QUERY_ERROR
+	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
 };

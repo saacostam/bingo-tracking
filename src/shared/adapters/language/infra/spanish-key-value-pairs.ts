@@ -23,4 +23,7 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// LOGOUT
 	[ILanguageAdapterKey.LOGOUT_BUTTON_CTA]: "Salir",
+
+	// QUERY_ERROR
+	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",
 };
