@@ -168,7 +168,7 @@ export function TodoListContent({
 		<Flex direction="column" gap="md">
 			{todos.length <= 0 ? (
 				<Card withBorder>
-					<EmptyQuery description="Create a todo" />
+					<EmptyQuery title="No todos" description="Create a todo" />
 				</Card>
 			) : (
 				todos.map((todo) => (

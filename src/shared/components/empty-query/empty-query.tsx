@@ -2,14 +2,11 @@ import { Flex, Text, ThemeIcon, Title } from "@mantine/core";
 import { CubeTransparentIcon } from "@/shared/icons";
 
 export interface EmptyQueryProps {
-	title?: string;
-	description?: string;
+	title: string;
+	description: string;
 }
 
-export function EmptyQuery({
-	title = "Nothing Here!",
-	description = "Once something is available, it will be visible here",
-}: EmptyQueryProps) {
+export function EmptyQuery({ title, description }: EmptyQueryProps) {
 	return (
 		<Flex align="center" direction="column">
 			<ThemeIcon variant="light" size="xl" mb="sm">
