@@ -1,8 +1,10 @@
 import { Avatar, Box, Card, Flex, GridCol, Text, Title } from "@mantine/core";
+import { Link } from "react-router";
 import { useGameColor } from "@/features/games/app";
 import type { IGame } from "@/features/games/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { PuzzlePieceIcon } from "@/shared/icons";
+import { genRoute, RouteName } from "@/shared/router/app";
 
 export interface GameItemProps {
 	game: IGame;
@@ -19,7 +21,15 @@ export function GameItem({ game }: GameItemProps) {
 			data-testid="games-content-item"
 			span={{ base: 12, sm: 6, md: 4 }}
 		>
-			<Card h="100%" withBorder>
+			<Card
+				component={Link}
+				h="100%"
+				to={genRoute({
+					name: RouteName.GAME_BY_ID,
+					params: { id: game.id },
+				})}
+				withBorder
+			>
 				<Flex direction="row" gap="md">
 					<Avatar color={color}>
 						<PuzzlePieceIcon />

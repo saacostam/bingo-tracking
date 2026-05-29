@@ -17,10 +17,7 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { Logo } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
-const MAIN_LINKS: {
-	name: RouteName;
-	label: string;
-}[] = [] as const;
+const MAIN_LINKS = [] as const;
 
 export function AppLayout({ children }: PropsWithChildren) {
 	const { lang, sessionAdapter } = useAdapters();

@@ -12,6 +12,7 @@ import { genRoute, RouteName } from "@/shared/router/app";
 // Lazy imports
 const ErrorScreen = lazy(() => import("@/shared/screens/error-screen"));
 const HomeScreen = lazy(() => import("@/shared/screens/home-screen"));
+const GameByIdScreen = lazy(() => import("@/shared/screens/game-by-id-screen"));
 const LandingScreen = lazy(() => import("@/shared/screens/landing-screen"));
 
 export interface RouterProps {
@@ -34,6 +35,9 @@ export function Router({ Provider }: RouterProps) {
 						/>
 						<Route path="app" element={<AppLayout>{<Outlet />}</AppLayout>}>
 							<Route element={<HomeScreen />} index />
+						</Route>
+						<Route path="app/:id" element={<AppLayout>{<Outlet />}</AppLayout>}>
+							<Route element={<GameByIdScreen />} index />
 						</Route>
 					</Route>
 					<Route
