@@ -8,7 +8,7 @@ export interface EmptyQueryProps {
 
 export function EmptyQuery({ title, description }: EmptyQueryProps) {
 	return (
-		<Flex align="center" direction="column">
+		<Flex align="center" data-testid="empty-query" direction="column">
 			<ThemeIcon variant="light" size="xl" mb="sm">
 				<CubeTransparentIcon />
 			</ThemeIcon>
