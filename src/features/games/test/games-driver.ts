@@ -7,6 +7,9 @@ const expensesBreakdownSelector = {
 	emptyQuery: {
 		default: "empty-query",
 	},
+	item: {
+		default: "games-content-item",
+	},
 	queryError: {
 		default: "query-error",
 	},

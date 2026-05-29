@@ -14,7 +14,11 @@ export function GameItem({ game }: GameItemProps) {
 	const color = useGameColor(game.createdAt);
 
 	return (
-		<GridCol key={game.id} span={{ base: 12, sm: 6, md: 4 }}>
+		<GridCol
+			key={game.id}
+			data-testid="games-content-item"
+			span={{ base: 12, sm: 6, md: 4 }}
+		>
 			<Card h="100%" withBorder>
 				<Flex direction="row" gap="md">
 					<Avatar color={color}>
