@@ -1,5 +1,5 @@
 import { Box, Grid, Paper } from "@mantine/core";
-import type { IGame } from "@/features/games/domain";
+import type { IGame } from "@/features/games/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";

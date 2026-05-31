@@ -1,7 +1,8 @@
 import { waitForElementToBeRemoved } from "@testing-library/dom";
-import type { IGameClientPayload } from "@/features/games/domain";
-import { gameMockFactory, gamesDriver } from "@/features/games/test";
-import { Games } from "@/features/games/ui";
+import type { IGameClientPayload } from "@/features/games/core/domain";
+import { gameMockFactory } from "@/features/games/core/test";
+import { gamesDriver } from "@/features/games/list/test";
+import { Games } from "@/features/games/list/ui";
 import { mockDi, renderWithProviders } from "@/tests";
 
 describe("Games", () => {

@@ -1,5 +1,5 @@
 import { Flex, Text } from "@mantine/core";
-import { Games } from "@/features/games/ui";
+import { Games } from "@/features/games/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
