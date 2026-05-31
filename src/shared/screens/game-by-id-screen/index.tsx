@@ -1,5 +1,6 @@
+import { Anchor, Breadcrumbs, Flex, Text } from "@mantine/core";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { SuspenseLoader } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
@@ -25,5 +26,17 @@ export function GameByIdScreenController({
 		}
 	}, [id, nav]);
 
-	return id ? <GameById id={id} /> : <SuspenseLoader />;
+	if (!id) return <SuspenseLoader />;
+
+	return (
+		<Flex direction="column" gap="xl">
+			<Breadcrumbs>
+				<Anchor component={Link} to={genRoute({ name: RouteName.HOME })}>
+					Dashboard
+				</Anchor>
+				<Text c="var(--mantine-color-anchor)">Game</Text>
+			</Breadcrumbs>
+			<GameById id={id} />
+		</Flex>
+	);
 }
