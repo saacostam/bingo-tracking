@@ -8,7 +8,7 @@ export interface BoardProps {
 
 export function Board({ board }: BoardProps) {
 	return (
-		<Paper key={board.id} h="100%" p="sm" withBorder>
+		<Paper key={board.id} data-testid="board-item" h="100%" p="sm" withBorder>
 			<Flex direction="column" gap="sm">
 				<Title size="h4" ta="center">
 					{board.name}
