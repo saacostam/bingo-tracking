@@ -33,4 +33,5 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",
+	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Reintentar",
 };

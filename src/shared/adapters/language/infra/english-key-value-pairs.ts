@@ -33,4 +33,5 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
+	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Retry",
 };

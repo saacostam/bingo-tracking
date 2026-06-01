@@ -39,7 +39,7 @@ export function QueryError({
 			{msg}
 			<Flex justify="end">
 				<Button color="red" loading={retry.isPending} onClick={retry.onClick}>
-					Retry
+					{lang.get(ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL)}
 				</Button>
 			</Flex>
 		</Alert>
