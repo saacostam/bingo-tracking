@@ -1,21 +1,21 @@
 import type { ComponentType } from "react";
 
-export interface GameByIdUpdateSlotProps {
+export interface UpdateBoardSlotProps {
 	id: string;
 }
-export interface GameByIdDeleteSlotProps {
+export interface DeleteBoardSlotProps {
 	id: string;
 }
 
 /**
- * UI slots rendered by the GameById feature.
+ * UI slots for managing boards.
  *
  * These slots allow the application layer to provide implementations
- * for game-related actions while keeping the feature independent of
+ * for board-related actions while keeping the feature independent of
  * specific workflows.
  */
-export interface GameByIdSlots {
+export interface IBoardSlots {
 	Create: ComponentType;
-	Update: ComponentType<GameByIdUpdateSlotProps>;
-	Delete: ComponentType<GameByIdDeleteSlotProps>;
+	Update: ComponentType<UpdateBoardSlotProps>;
+	Delete: ComponentType<DeleteBoardSlotProps>;
 }

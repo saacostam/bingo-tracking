@@ -1,8 +1,14 @@
 import { waitForElementToBeRemoved } from "@testing-library/dom";
 import { gameByIdDriver } from "@/features/game/by-id/test";
-import { GameById } from "@/features/game/by-id/ui";
+import { GameById, type IBoardSlots } from "@/features/game/by-id/ui";
 import { gameMockFactory } from "@/features/game/core/test";
 import { mockDi, renderWithProviders } from "@/tests";
+
+const boardSlots: IBoardSlots = {
+	Create: vi.fn(),
+	Delete: vi.fn(),
+	Update: vi.fn(),
+};
 
 describe("GameById", () => {
 	const id = "mock-game-id";
@@ -13,15 +19,7 @@ describe("GameById", () => {
 
 			di.clients.game.getGameById.mockRejectedValue(new Error("mock-error"));
 
-			renderWithProviders(
-				<GameById
-					id={id}
-					CreateSlot={vi.fn()}
-					DeleteSlot={vi.fn()}
-					UpdateSlot={vi.fn()}
-				/>,
-				di,
-			);
+			renderWithProviders(<GameById id={id} boardSlots={boardSlots} />, di);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -44,15 +42,7 @@ describe("GameById", () => {
 				() => new Promise(() => {}),
 			);
 
-			renderWithProviders(
-				<GameById
-					id={id}
-					CreateSlot={vi.fn()}
-					DeleteSlot={vi.fn()}
-					UpdateSlot={vi.fn()}
-				/>,
-				di,
-			);
+			renderWithProviders(<GameById id={id} boardSlots={boardSlots} />, di);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -74,15 +64,7 @@ describe("GameById", () => {
 			});
 			di.adapters.date.format.mockReturnValue(mockDate);
 
-			renderWithProviders(
-				<GameById
-					id={id}
-					CreateSlot={vi.fn()}
-					DeleteSlot={vi.fn()}
-					UpdateSlot={vi.fn()}
-				/>,
-				di,
-			);
+			renderWithProviders(<GameById id={id} boardSlots={boardSlots} />, di);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			await waitForElementToBeRemoved(skeleton);
@@ -122,15 +104,7 @@ describe("GameById", () => {
 			});
 			di.adapters.date.format.mockReturnValue(mockDate);
 
-			renderWithProviders(
-				<GameById
-					id={id}
-					CreateSlot={vi.fn()}
-					DeleteSlot={vi.fn()}
-					UpdateSlot={vi.fn()}
-				/>,
-				di,
-			);
+			renderWithProviders(<GameById id={id} boardSlots={boardSlots} />, di);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			await waitForElementToBeRemoved(skeleton);

@@ -1,13 +1,13 @@
 import { Anchor, Breadcrumbs, Flex, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import { GameById, type GameByIdSlots } from "@/features/game/by-id/ui";
+import { GameById, type IBoardSlots } from "@/features/game/by-id/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { SuspenseLoader } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
-const gameByIdSlot: GameByIdSlots = {
+const boardSlots: IBoardSlots = {
 	Create: () => null,
 	Delete: () => null,
 	Update: () => null,
@@ -15,21 +15,18 @@ const gameByIdSlot: GameByIdSlots = {
 
 export default function GameByIdScreen() {
 	return (
-		<GameByIdScreenController
-			GameById={GameById}
-			gameByIdSlots={gameByIdSlot}
-		/>
+		<GameByIdScreenController GameById={GameById} boardSlots={boardSlots} />
 	);
 }
 
 interface GameByIdScreenController {
 	GameById: typeof GameById;
-	gameByIdSlots: GameByIdSlots;
+	boardSlots: IBoardSlots;
 }
 
 export function GameByIdScreenController({
 	GameById,
-	gameByIdSlots,
+	boardSlots,
 }: GameByIdScreenController) {
 	const { lang } = useAdapters();
 
@@ -54,13 +51,7 @@ export function GameByIdScreenController({
 					{lang.get(ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS)}
 				</Text>
 			</Breadcrumbs>
-			<GameById
-				key={id}
-				id={id}
-				CreateSlot={gameByIdSlots.Create}
-				DeleteSlot={gameByIdSlots.Delete}
-				UpdateSlot={gameByIdSlots.Update}
-			/>
+			<GameById key={id} id={id} boardSlots={boardSlots} />
 		</Flex>
 	);
 }

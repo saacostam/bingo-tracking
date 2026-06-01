@@ -5,24 +5,16 @@ import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
-import type { GameByIdSlots } from "./GameById.props";
+import type { IBoardSlots } from "./GameById.props";
 import { GameByIdContent } from "./GameByIdContent";
 import { GameByIdSkeleton } from "./GameByIdSkeleton";
 
 export interface GameByIdProps {
 	id: string;
-
-	CreateSlot: GameByIdSlots["Create"];
-	DeleteSlot: GameByIdSlots["Delete"];
-	UpdateSlot: GameByIdSlots["Update"];
+	boardSlots: IBoardSlots;
 }
 
-export function GameById({
-	id,
-	CreateSlot,
-	DeleteSlot,
-	UpdateSlot,
-}: GameByIdProps) {
+export function GameById({ id, boardSlots }: GameByIdProps) {
 	const [view, setView] = useState<
 		| { type: "browse" }
 		| { type: "create" }
@@ -61,13 +53,13 @@ export function GameById({
 
 			{/* Modals */}
 			<Modal opened={view.type === "create"} onClose={onClose} title="Create">
-				<CreateSlot />
+				<boardSlots.Create />
 			</Modal>
 			<Modal opened={view.type === "delete"} onClose={onClose} title="Delete">
-				{view.type === "delete" && <DeleteSlot id={view.payload.id} />}
+				{view.type === "delete" && <boardSlots.Delete id={view.payload.id} />}
 			</Modal>
 			<Modal opened={view.type === "update"} onClose={onClose} title="Update">
-				{view.type === "update" && <UpdateSlot id={view.payload.id} />}
+				{view.type === "update" && <boardSlots.Update id={view.payload.id} />}
 			</Modal>
 		</>
 	);

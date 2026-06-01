@@ -35,7 +35,7 @@ describe("GameByIdScreenController", () => {
 			renderWithProviders(
 				<GameByIdScreenController
 					GameById={mockGameById}
-					gameByIdSlots={{
+					boardSlots={{
 						Create: vi.fn(),
 						Delete: vi.fn(),
 						Update: vi.fn(),
@@ -68,7 +68,7 @@ describe("GameByIdScreenController", () => {
 		renderWithProviders(
 			<GameByIdScreenController
 				GameById={mockGameById}
-				gameByIdSlots={{
+				boardSlots={{
 					Create: mockCreateSlot,
 					Delete: mockDeleteSlot,
 					Update: mockUpdateSlot,
@@ -79,9 +79,11 @@ describe("GameByIdScreenController", () => {
 
 		const gameByIdProps: GameByIdProps = {
 			id: mockId,
-			CreateSlot: mockCreateSlot,
-			DeleteSlot: mockDeleteSlot,
-			UpdateSlot: mockUpdateSlot,
+			boardSlots: {
+				Create: mockCreateSlot,
+				Delete: mockDeleteSlot,
+				Update: mockUpdateSlot,
+			},
 		};
 		expect(mockGameById).toHaveBeenCalledWith(gameByIdProps, undefined);
 		expect(mockNavigate).not.toHaveBeenCalled();
