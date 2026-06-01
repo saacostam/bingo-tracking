@@ -1,11 +1,12 @@
 import { Anchor, Breadcrumbs, Flex, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+import { GameById } from "@/features/game/by-id/ui";
 import { SuspenseLoader } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
 export default function GameByIdScreen() {
-	return <GameByIdScreenController GameById={() => null} />;
+	return <GameByIdScreenController GameById={GameById} />;
 }
 
 interface GameByIdScreenController {
@@ -29,14 +30,14 @@ export function GameByIdScreenController({
 	if (!id) return <SuspenseLoader />;
 
 	return (
-		<Flex direction="column" gap="xl">
+		<Flex direction="column" gap="lg">
 			<Breadcrumbs>
 				<Anchor component={Link} to={genRoute({ name: RouteName.HOME })}>
 					Dashboard
 				</Anchor>
 				<Text c="var(--mantine-color-anchor)">Game</Text>
 			</Breadcrumbs>
-			<GameById id={id} />
+			<GameById key={id} id={id} />
 		</Flex>
 	);
 }
