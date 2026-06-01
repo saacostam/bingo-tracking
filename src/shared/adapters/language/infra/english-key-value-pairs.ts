@@ -15,6 +15,9 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"The boards created for this game",
 	[ILanguageAdapterKey.GAME_BY_ID_QUERY_GAME_ERROR_MSG]:
 		"Unable to retrieve game information",
+	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_TITLE]: "No Boards Found",
+	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_DESCRIPTION]:
+		"There are currently no boards available",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",

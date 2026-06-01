@@ -47,7 +47,7 @@ describe("GameById", () => {
 			).not.toBeInTheDocument();
 		});
 
-		it("should render returned game", async () => {
+		it("should render returned game w/ boards", async () => {
 			const di = mockDi();
 
 			const game = gameMockFactory.createGameWithBoards();
@@ -66,8 +66,7 @@ describe("GameById", () => {
 			const content = await gameByIdDriver.findByTestId("content");
 			expect(content).toBeVisible();
 
-			expect(di.clients.game.getGameById).toHaveBeenCalledTimes(1);
-			expect(di.clients.game.getGameById).toHaveBeenCalledWith({
+			expect(di.clients.game.getGameById).toHaveBeenCalledExactlyOnceWith({
 				id,
 			});
 
@@ -81,6 +80,46 @@ describe("GameById", () => {
 
 			const boards = gameByIdDriver.getAllWithinByTestId(content, "item");
 			expect(boards).toHaveLength(game.boards.length);
+
+			expect(
+				gameByIdDriver.queryByTestId("queryError"),
+			).not.toBeInTheDocument();
+			expect(gameByIdDriver.queryByTestId("skeleton")).not.toBeInTheDocument();
+		});
+
+		it("should render returned game w/ no boards", async () => {
+			const di = mockDi();
+
+			const game = gameMockFactory.createGameWithBoards({ boards: [] });
+			const mockDate = "mock-date";
+
+			di.clients.game.getGameById.mockResolvedValue({
+				game,
+			});
+			di.adapters.date.format.mockReturnValue(mockDate);
+
+			renderWithProviders(<GameById id={id} />, di);
+
+			const skeleton = await gameByIdDriver.findByTestId("skeleton");
+			await waitForElementToBeRemoved(skeleton);
+
+			const content = await gameByIdDriver.findByTestId("content");
+			expect(content).toBeVisible();
+
+			expect(di.clients.game.getGameById).toHaveBeenCalledExactlyOnceWith({
+				id,
+			});
+
+			const emptyQuery = gameByIdDriver.queryWithinByTestId(
+				content,
+				"emptyQuery",
+			);
+			expect(emptyQuery).toBeInTheDocument();
+
+			expect(di.adapters.date.format).toHaveBeenCalledWith({
+				type: "utc-ms",
+				value: game.createdAt,
+			});
 
 			expect(
 				gameByIdDriver.queryByTestId("queryError"),

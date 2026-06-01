@@ -15,6 +15,10 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Los cartones creados para este juego",
 	[ILanguageAdapterKey.GAME_BY_ID_QUERY_GAME_ERROR_MSG]:
 		"No se pudo obtener la información del juego",
+	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_TITLE]:
+		"No se encontraron cartones",
+	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_DESCRIPTION]:
+		"Actualmente no hay cartones disponibles",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Idiomas Disponibles",

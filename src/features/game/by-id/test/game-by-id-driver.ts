@@ -4,6 +4,9 @@ const gameByIdSelector = {
 	content: {
 		default: "game-by-id-content",
 	},
+	emptyQuery: {
+		default: "empty-query",
+	},
 	item: {
 		default: "board-item",
 	},
