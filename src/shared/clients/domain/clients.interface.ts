@@ -1,4 +1,4 @@
-import type { IGameClient } from "@/features/games/core/domain";
+import type { IGameClient } from "@/features/game/core/domain";
 import type { ILoginClient } from "@/features/login/domain";
 import type { ITodoClient } from "@/features/todo/domain";
 

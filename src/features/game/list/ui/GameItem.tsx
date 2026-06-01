@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, Flex, GridCol, Text, Title } from "@mantine/core";
 import { Link } from "react-router";
-import { useGameColor } from "@/features/games/core/app";
-import type { IGame } from "@/features/games/core/domain";
+import { useGameColor } from "@/features/game/core/app";
+import type { IGame } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { PuzzlePieceIcon } from "@/shared/icons";
 import { genRoute, RouteName } from "@/shared/router/app";

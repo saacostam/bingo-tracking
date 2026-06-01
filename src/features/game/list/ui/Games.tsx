@@ -1,4 +1,4 @@
-import { useQueryGames } from "@/features/games/core/app";
+import { useQueryGames } from "@/features/game/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";

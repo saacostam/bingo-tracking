@@ -1,4 +1,4 @@
-import type { IGame } from "@/features/games/core/domain";
+import type { IGame } from "@/features/game/core/domain";
 
 class GameMockFactory {
 	_id = 0;

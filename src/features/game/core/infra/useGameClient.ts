@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import type { IGame, IGameClient } from "@/features/games/core/domain";
+import type { IGame, IGameClient } from "@/features/game/core/domain";
 import { wait } from "@/shared/utils/time";
 
 const now = Date.now();
