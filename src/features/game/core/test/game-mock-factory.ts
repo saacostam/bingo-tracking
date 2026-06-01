@@ -1,4 +1,5 @@
-import type { IGame } from "@/features/game/core/domain";
+import { boardMockFactory } from "@/features/board/core/test";
+import type { IGame, IWithBoards } from "@/features/game/core/domain";
 
 class GameMockFactory {
 	_id = 0;
@@ -15,6 +16,16 @@ class GameMockFactory {
 			id: String(id),
 			name: `name-${id}`,
 			createdAt: id,
+			...overrides,
+		};
+	}
+
+	createGameWithBoards(
+		overrides?: Partial<IWithBoards<IGame>>,
+	): IWithBoards<IGame> {
+		return {
+			...this.createGame(),
+			boards: [boardMockFactory.createBoard(), boardMockFactory.createBoard()],
 			...overrides,
 		};
 	}
