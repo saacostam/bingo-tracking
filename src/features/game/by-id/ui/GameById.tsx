@@ -24,9 +24,9 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 		type: "browse",
 	});
 
-	const onClose = useCallback(() => {
-		setView({ type: "browse" });
-	}, []);
+	const onClose = useCallback(() => setView({ type: "browse" }), []);
+
+	const onCreateBoard = useCallback(() => setView({ type: "create" }), []);
 
 	const { lang } = useAdapters();
 
@@ -47,7 +47,10 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 				/>
 			)}
 			{queryGameById.isSuccess && (
-				<GameByIdContent game={queryGameById.data.game} />
+				<GameByIdContent
+					game={queryGameById.data.game}
+					onCreateBoard={onCreateBoard}
+				/>
 			)}
 			{queryGameById.isPending && <GameByIdSkeleton />}
 

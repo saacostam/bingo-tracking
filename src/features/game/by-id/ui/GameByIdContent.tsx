@@ -1,5 +1,6 @@
 import {
 	Box,
+	Button,
 	Divider,
 	Flex,
 	Grid,
@@ -13,12 +14,14 @@ import type { IGame, IWithBoards } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
+import { PlusIcon } from "@/shared/icons";
 
 export interface GameByIdContentProps {
 	game: IWithBoards<IGame>;
+	onCreateBoard: () => void;
 }
 
-export function GameByIdContent({ game }: GameByIdContentProps) {
+export function GameByIdContent({ game, onCreateBoard }: GameByIdContentProps) {
 	const { date, lang } = useAdapters();
 
 	return (
@@ -31,14 +34,22 @@ export function GameByIdContent({ game }: GameByIdContentProps) {
 			</Box>
 			<Divider />
 			<Box>
-				<Box mb="md">
-					<Title size="h3">
-						{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_HEADER)}
-					</Title>
-					<Text c="dimmed" size="sm">
-						{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_DESCRIPTION)}
-					</Text>
-				</Box>
+				<Flex direction="row" justify="space-between" mb="md">
+					<Box>
+						<Title size="h3">
+							{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_HEADER)}
+						</Title>
+						<Text c="dimmed" size="sm">
+							{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_DESCRIPTION)}
+						</Text>
+					</Box>
+					<Button
+						leftSection={<PlusIcon height="1rem" width="1rem" />}
+						onClick={onCreateBoard}
+					>
+						Create
+					</Button>
+				</Flex>
 				{game.boards.length === 0 ? (
 					<Paper p="md" withBorder>
 						<EmptyQuery
