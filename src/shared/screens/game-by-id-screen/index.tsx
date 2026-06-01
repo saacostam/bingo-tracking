@@ -2,6 +2,8 @@ import { Anchor, Breadcrumbs, Flex, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { GameById } from "@/features/game/by-id/ui";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { SuspenseLoader } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
@@ -18,6 +20,8 @@ interface GameByIdScreenController {
 export function GameByIdScreenController({
 	GameById,
 }: GameByIdScreenController) {
+	const { lang } = useAdapters();
+
 	const { id } = useParams();
 	const nav = useNavigate();
 
@@ -33,9 +37,11 @@ export function GameByIdScreenController({
 		<Flex direction="column" gap="lg">
 			<Breadcrumbs>
 				<Anchor component={Link} to={genRoute({ name: RouteName.HOME })}>
-					Dashboard
+					{lang.get(ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_GAMES)}
 				</Anchor>
-				<Text c="var(--mantine-color-anchor)">Game</Text>
+				<Text c="var(--mantine-color-anchor)">
+					{lang.get(ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS)}
+				</Text>
 			</Breadcrumbs>
 			<GameById key={id} id={id} />
 		</Flex>
