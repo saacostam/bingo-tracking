@@ -9,7 +9,7 @@ export function useQueryGameById({ id }: UseQueryGameByIdArgs) {
 	const { game } = useClients();
 
 	return useMetaQuery({
-		queryKey: [QueryKeys.GET_GAME_BY_ID],
+		queryKey: [QueryKeys.GET_GAME_BY_ID, id],
 		queryFn: () => game.getGameById({ id }),
 	});
 }
