@@ -7,6 +7,9 @@ export const theme = {
 					"data-testid": "modal-close-button",
 				},
 				"data-testid": "modal",
+				transitionProps: {
+					duration: 0,
+				},
 			},
 		},
 	},
