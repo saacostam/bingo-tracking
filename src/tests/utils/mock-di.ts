@@ -15,6 +15,7 @@ export function mockDi(overrides?: {
 	const clients = {
 		game: {
 			getGames: vi.fn(),
+			getGameById: vi.fn(),
 		},
 		todoClient: {
 			createTodo: vi.fn(),
