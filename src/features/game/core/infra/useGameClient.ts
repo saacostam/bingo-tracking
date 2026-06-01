@@ -14,7 +14,19 @@ const games: IWithBoards<IGame>[] = [
 		id: "1",
 		name: "Bingo 2024-I",
 		createdAt: now,
-		boards: [],
+		boards: [
+			{
+				id: "1",
+				name: "Board I",
+				grid: [
+					[1, 2, 3, 4, 5],
+					[1, 2, 3, 4, 5],
+					[1, 2, 3, 4],
+					[1, 2, 3, 4, 5],
+					[1, 2, 3, 4, 5],
+				],
+			},
+		],
 	},
 	{
 		id: "2",
