@@ -13,7 +13,15 @@ describe("GameById", () => {
 
 			di.clients.game.getGameById.mockRejectedValue(new Error("mock-error"));
 
-			renderWithProviders(<GameById id={id} />, di);
+			renderWithProviders(
+				<GameById
+					id={id}
+					CreateSlot={vi.fn()}
+					DeleteSlot={vi.fn()}
+					UpdateSlot={vi.fn()}
+				/>,
+				di,
+			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -36,7 +44,15 @@ describe("GameById", () => {
 				() => new Promise(() => {}),
 			);
 
-			renderWithProviders(<GameById id={id} />, di);
+			renderWithProviders(
+				<GameById
+					id={id}
+					CreateSlot={vi.fn()}
+					DeleteSlot={vi.fn()}
+					UpdateSlot={vi.fn()}
+				/>,
+				di,
+			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -58,7 +74,15 @@ describe("GameById", () => {
 			});
 			di.adapters.date.format.mockReturnValue(mockDate);
 
-			renderWithProviders(<GameById id={id} />, di);
+			renderWithProviders(
+				<GameById
+					id={id}
+					CreateSlot={vi.fn()}
+					DeleteSlot={vi.fn()}
+					UpdateSlot={vi.fn()}
+				/>,
+				di,
+			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			await waitForElementToBeRemoved(skeleton);
@@ -98,7 +122,15 @@ describe("GameById", () => {
 			});
 			di.adapters.date.format.mockReturnValue(mockDate);
 
-			renderWithProviders(<GameById id={id} />, di);
+			renderWithProviders(
+				<GameById
+					id={id}
+					CreateSlot={vi.fn()}
+					DeleteSlot={vi.fn()}
+					UpdateSlot={vi.fn()}
+				/>,
+				di,
+			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
 			await waitForElementToBeRemoved(skeleton);

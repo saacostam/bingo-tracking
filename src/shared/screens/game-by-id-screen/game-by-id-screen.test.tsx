@@ -4,6 +4,7 @@ import { mockNavigate, mockUseParams } from "@/tests/mocks";
 import { GameByIdScreenController } from "@/shared/screens/game-by-id-screen";
 import { mockDi, renderWithProviders } from "@/tests";
 import { genRoute, RouteName } from "@/shared/router/app";
+import type { GameByIdProps } from "@/features/game/by-id/ui";
 
 describe("GameByIdScreenController", () => {
 	beforeEach(() => {
@@ -32,7 +33,14 @@ describe("GameByIdScreenController", () => {
 			mockUseParams.mockImplementation(() => ({ id: id as string }));
 
 			renderWithProviders(
-				<GameByIdScreenController GameById={mockGameById} />,
+				<GameByIdScreenController
+					GameById={mockGameById}
+					gameByIdSlots={{
+						Create: vi.fn(),
+						Delete: vi.fn(),
+						Update: vi.fn(),
+					}}
+				/>,
 				di,
 			);
 
@@ -51,20 +59,31 @@ describe("GameByIdScreenController", () => {
 		const mockId = "mock-id";
 
 		const mockGameById = vi.fn();
+		const mockCreateSlot = vi.fn();
+		const mockDeleteSlot = vi.fn();
+		const mockUpdateSlot = vi.fn();
 
 		mockUseParams.mockImplementation(() => ({ id: mockId }));
 
 		renderWithProviders(
-			<GameByIdScreenController GameById={mockGameById} />,
+			<GameByIdScreenController
+				GameById={mockGameById}
+				gameByIdSlots={{
+					Create: mockCreateSlot,
+					Delete: mockDeleteSlot,
+					Update: mockUpdateSlot,
+				}}
+			/>,
 			di,
 		);
 
-		expect(mockGameById).toHaveBeenCalledWith(
-			{
-				id: mockId,
-			},
-			undefined,
-		);
+		const gameByIdProps: GameByIdProps = {
+			id: mockId,
+			CreateSlot: mockCreateSlot,
+			DeleteSlot: mockDeleteSlot,
+			UpdateSlot: mockUpdateSlot,
+		};
+		expect(mockGameById).toHaveBeenCalledWith(gameByIdProps, undefined);
 		expect(mockNavigate).not.toHaveBeenCalled();
 	});
 });
