@@ -82,6 +82,7 @@ export function GameByIdContent({
 												<ActionIcon
 													color="red"
 													onClick={() => onDeleteBoard(board.id)}
+													variant="light"
 												>
 													<TrashIcon height="1rem" width="1rem" />
 												</ActionIcon>

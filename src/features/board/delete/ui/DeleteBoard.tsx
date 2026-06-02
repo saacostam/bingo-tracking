@@ -45,11 +45,7 @@ export function DeleteBoard({
 				<Button onClick={onCancel} variant="outline">
 					{lang.get(ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL)}
 				</Button>
-				<Button
-					color="red"
-					loading={deleteBoardMutation.isPending}
-					onClick={onConfirm}
-				>
+				<Button loading={deleteBoardMutation.isPending} onClick={onConfirm}>
 					{lang.get(ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL)}
 				</Button>
 			</SimpleGrid>
