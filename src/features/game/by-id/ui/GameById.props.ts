@@ -1,10 +1,8 @@
 import type { ComponentType } from "react";
 import type { CreateBoardProps } from "@/features/board/create/ui";
+import type { DeleteBoardProps } from "@/features/board/delete/ui";
 
 export interface UpdateBoardSlotProps {
-	id: string;
-}
-export interface DeleteBoardSlotProps {
 	id: string;
 }
 
@@ -18,5 +16,5 @@ export interface DeleteBoardSlotProps {
 export interface IBoardSlots {
 	Create: ComponentType<CreateBoardProps>;
 	Update: ComponentType<UpdateBoardSlotProps>;
-	Delete: ComponentType<DeleteBoardSlotProps>;
+	Delete: ComponentType<DeleteBoardProps>;
 }

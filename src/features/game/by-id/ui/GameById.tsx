@@ -32,6 +32,10 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 		() => setView({ type: "create", payload: { gameId: id } }),
 		[id],
 	);
+	const onDeleteBoard = useCallback(
+		(boardId: string) => setView({ type: "delete", payload: { id: boardId } }),
+		[],
+	);
 
 	const queryGameById = useQueryGameById({
 		id,
@@ -48,13 +52,31 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 			}),
 		[notificationAdapter.notify],
 	);
-
 	const onCreateBoardSuccess = useCallback(
 		() =>
 			notificationAdapter.notify({
 				type: "success",
 				title: "Created",
 				msg: "Board was created",
+			}),
+		[notificationAdapter.notify],
+	);
+
+	const onDeleteBoardError = useCallback(
+		() =>
+			notificationAdapter.notify({
+				type: "error",
+				title: "Error",
+				msg: "Failed to delete board",
+			}),
+		[notificationAdapter.notify],
+	);
+	const onDeleteBoardSuccess = useCallback(
+		() =>
+			notificationAdapter.notify({
+				type: "success",
+				title: "Deleted",
+				msg: "Board was deleted",
 			}),
 		[notificationAdapter.notify],
 	);
@@ -73,6 +95,7 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 				<GameByIdContent
 					game={queryGameById.data.game}
 					onCreateBoard={onCreateBoard}
+					onDeleteBoard={onDeleteBoard}
 				/>
 			)}
 			{queryGameById.isPending && <GameByIdSkeleton />}
@@ -92,8 +115,20 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 					/>
 				)}
 			</Modal>
-			<Modal opened={view.type === "delete"} onClose={onClose} title="Delete">
-				{view.type === "delete" && <boardSlots.Delete id={view.payload.id} />}
+			<Modal
+				opened={view.type === "delete"}
+				onClose={onClose}
+				title={lang.get(ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE)}
+			>
+				{view.type === "delete" && (
+					<boardSlots.Delete
+						id={view.payload.id}
+						onCancel={onClose}
+						onError={onDeleteBoardError}
+						onSuccess={onDeleteBoardSuccess}
+						onSettled={onClose}
+					/>
+				)}
 			</Modal>
 			<Modal opened={view.type === "update"} onClose={onClose} title="Update">
 				{view.type === "update" && <boardSlots.Update id={view.payload.id} />}

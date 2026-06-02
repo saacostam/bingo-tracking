@@ -1,4 +1,5 @@
 import {
+	ActionIcon,
 	Box,
 	Button,
 	Divider,
@@ -8,20 +9,26 @@ import {
 	Paper,
 	Text,
 	Title,
+	Tooltip,
 } from "@mantine/core";
 import { Board } from "@/features/board/core/ui";
 import type { IGame, IWithBoards } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
-import { PlusIcon } from "@/shared/icons";
+import { PlusIcon, TrashIcon } from "@/shared/icons";
 
 export interface GameByIdContentProps {
 	game: IWithBoards<IGame>;
 	onCreateBoard: () => void;
+	onDeleteBoard: (boardId: string) => void;
 }
 
-export function GameByIdContent({ game, onCreateBoard }: GameByIdContentProps) {
+export function GameByIdContent({
+	game,
+	onCreateBoard,
+	onDeleteBoard,
+}: GameByIdContentProps) {
 	const { date, lang } = useAdapters();
 
 	return (
@@ -63,7 +70,25 @@ export function GameByIdContent({ game, onCreateBoard }: GameByIdContentProps) {
 					<Grid gutter="md">
 						{game.boards.map((board) => (
 							<GridCol key={board.id} span={{ base: 12, xs: 6, md: 4 }}>
-								<Board board={board} />
+								<Board
+									board={board}
+									controls={
+										<Flex direction="row" justify="end">
+											<Tooltip
+												label={lang.get(
+													ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP,
+												)}
+											>
+												<ActionIcon
+													color="red"
+													onClick={() => onDeleteBoard(board.id)}
+												>
+													<TrashIcon height="1rem" width="1rem" />
+												</ActionIcon>
+											</Tooltip>
+										</Flex>
+									}
+								/>
 							</GridCol>
 						))}
 					</Grid>
