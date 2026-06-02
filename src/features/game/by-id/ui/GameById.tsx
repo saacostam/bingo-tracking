@@ -1,6 +1,8 @@
 import { Modal } from "@mantine/core";
-import { useCallback } from "react";
-import { useGameByIdModals } from "@/features/game/by-id/app";
+import {
+	useGameByIdBoardMutationNotifications,
+	useGameByIdModals,
+} from "@/features/game/by-id/app";
 import { useQueryGameById } from "@/features/game/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
@@ -16,7 +18,7 @@ export interface GameByIdProps {
 }
 
 export function GameById({ id, boardSlots }: GameByIdProps) {
-	const { lang, notificationAdapter } = useAdapters();
+	const { lang } = useAdapters();
 
 	const {
 		modal: view,
@@ -27,49 +29,12 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 		gameId: id,
 	});
 
+	const { create, remove } = useGameByIdBoardMutationNotifications();
+
 	const queryGameById = useQueryGameById({
 		id,
 	}).useQuery();
-
 	const retry = useRetry(queryGameById.refetch, queryGameById.isPending);
-
-	const onCreateBoardError = useCallback(
-		() =>
-			notificationAdapter.notify({
-				type: "error",
-				title: "Error",
-				msg: "Failed to create board",
-			}),
-		[notificationAdapter.notify],
-	);
-	const onCreateBoardSuccess = useCallback(
-		() =>
-			notificationAdapter.notify({
-				type: "success",
-				title: "Created",
-				msg: "Board was created",
-			}),
-		[notificationAdapter.notify],
-	);
-
-	const onDeleteBoardError = useCallback(
-		() =>
-			notificationAdapter.notify({
-				type: "error",
-				title: "Error",
-				msg: "Failed to delete board",
-			}),
-		[notificationAdapter.notify],
-	);
-	const onDeleteBoardSuccess = useCallback(
-		() =>
-			notificationAdapter.notify({
-				type: "success",
-				title: "Deleted",
-				msg: "Board was deleted",
-			}),
-		[notificationAdapter.notify],
-	);
 
 	return (
 		<>
@@ -99,8 +64,8 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 				{view.type === "create" && (
 					<boardSlots.Create
 						gameId={view.payload.gameId}
-						onError={onCreateBoardError}
-						onSuccess={onCreateBoardSuccess}
+						onError={create.onError}
+						onSuccess={create.onSuccess}
 						onSettled={onClose}
 					/>
 				)}
@@ -114,8 +79,8 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 					<boardSlots.Delete
 						id={view.payload.id}
 						onCancel={onClose}
-						onError={onDeleteBoardError}
-						onSuccess={onDeleteBoardSuccess}
+						onError={remove.onError}
+						onSuccess={remove.onSuccess}
 						onSettled={onClose}
 					/>
 				)}
