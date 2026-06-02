@@ -1,5 +1,6 @@
 import { Modal } from "@mantine/core";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { useGameByIdModals } from "@/features/game/by-id/app";
 import { useQueryGameById } from "@/features/game/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
@@ -17,25 +18,14 @@ export interface GameByIdProps {
 export function GameById({ id, boardSlots }: GameByIdProps) {
 	const { lang, notificationAdapter } = useAdapters();
 
-	const [view, setView] = useState<
-		| { type: "browse" }
-		| { type: "create"; payload: { gameId: string } }
-		| { type: "delete"; payload: { id: string } }
-		| { type: "update"; payload: { id: string } }
-	>({
-		type: "browse",
+	const {
+		modal: view,
+		onClose,
+		onCreateBoard,
+		onDeleteBoard,
+	} = useGameByIdModals({
+		gameId: id,
 	});
-
-	const onClose = useCallback(() => setView({ type: "browse" }), []);
-
-	const onCreateBoard = useCallback(
-		() => setView({ type: "create", payload: { gameId: id } }),
-		[id],
-	);
-	const onDeleteBoard = useCallback(
-		(boardId: string) => setView({ type: "delete", payload: { id: boardId } }),
-		[],
-	);
 
 	const queryGameById = useQueryGameById({
 		id,
