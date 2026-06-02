@@ -7,6 +7,9 @@ export enum QueryKeys {
 }
 
 export enum MutationKeys {
+	// BOARD
+	CREATE_BOARD = "Create Board",
+
 	// TODO
 	CREATE_TODO = "Create Todo",
 	DELETE_TODO = "Delete Todo",
