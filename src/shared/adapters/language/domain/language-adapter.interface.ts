@@ -13,6 +13,7 @@ export interface ILanguageAdapter {
 export enum ILanguageAdapterKey {
 	// CREATE GAME
 	CREATE_GAME_MODAL_TITLE = "CREATE_GAME_MODAL_TITLE",
+	CREATE_GAME_SUBMIT_MODAL = "CREATE_GAME_SUBMIT_MODAL",
 
 	// GAMES
 	GAMES_HEADER = "GAMES_HEADER",

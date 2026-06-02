@@ -3,6 +3,7 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// CREATE GAME
 	[ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE]: "Crear",
+	[ILanguageAdapterKey.CREATE_GAME_SUBMIT_MODAL]: "Crear",
 
 	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Juegos",
