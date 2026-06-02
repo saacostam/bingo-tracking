@@ -11,6 +11,9 @@ export interface ILanguageAdapter {
 }
 
 export enum ILanguageAdapterKey {
+	// CREATE GAME
+	CREATE_GAME_MODAL_TITLE = "CREATE_GAME_MODAL_TITLE",
+
 	// GAMES
 	GAMES_HEADER = "GAMES_HEADER",
 	GAMES_QUERY_GAMES_ERROR_MSG = "GAMES_QUERY_GAMES_ERROR_MSG",
