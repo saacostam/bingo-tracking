@@ -18,15 +18,15 @@ export interface UseGameByIdModalsArgs {
  */
 export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 	const [modal, setModal] = useState<
-		| { type: "browse" }
+		| { type: "idle" }
 		| { type: "create"; payload: { gameId: string } }
 		| { type: "delete"; payload: { id: string } }
 		| { type: "update"; payload: { id: string } }
 	>({
-		type: "browse",
+		type: "idle",
 	});
 
-	const onClose = useCallback(() => setModal({ type: "browse" }), []);
+	const onClose = useCallback(() => setModal({ type: "idle" }), []);
 
 	const onCreateBoard = useCallback(
 		() => setModal({ type: "create", payload: { gameId } }),
