@@ -34,6 +34,10 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// LOGOUT
 	[ILanguageAdapterKey.LOGOUT_BUTTON_CTA]: "Logout",
 
+	// MANAGE GAME
+	[ILanguageAdapterKey.MANAGE_GAME_NAME_FIELD_LABEL]: "Name",
+	[ILanguageAdapterKey.MANAGE_GAME_GRID_FIELD_LABEL]: "Grid",
+
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Retry",

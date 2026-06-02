@@ -35,6 +35,10 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// LOGOUT
 	[ILanguageAdapterKey.LOGOUT_BUTTON_CTA]: "Salir",
 
+	// MANAGE GAME
+	[ILanguageAdapterKey.MANAGE_GAME_NAME_FIELD_LABEL]: "Nombre",
+	[ILanguageAdapterKey.MANAGE_GAME_GRID_FIELD_LABEL]: "Cartón",
+
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Reintentar",
