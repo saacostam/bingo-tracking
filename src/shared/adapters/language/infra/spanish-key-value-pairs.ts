@@ -5,6 +5,13 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE]: "Crear",
 	[ILanguageAdapterKey.CREATE_GAME_SUBMIT_FORM]: "Crear",
 
+	// DELETE BOARD
+	[ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE]: "Borrar",
+	[ILanguageAdapterKey.DELETE_BOARD_MODAL_CONFIRMATION]:
+		"¿Seguro que desea eliminar este tablero?",
+	[ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL]: "Borrar",
+	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancelar",
+
 	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Juegos",
 	[ILanguageAdapterKey.GAMES_QUERY_GAMES_ERROR_MSG]:
@@ -23,7 +30,9 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"No se encontraron cartones",
 	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_DESCRIPTION]:
 		"Actualmente no hay cartones disponibles",
+
 	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL]: "Crear",
+	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP]: "Borrar",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Idiomas Disponibles",
