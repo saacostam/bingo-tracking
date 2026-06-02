@@ -7,3 +7,4 @@ export * from "./plus.icon";
 export * from "./puzzle-piece.icon";
 export * from "./sun.icon";
 export * from "./table-cells.icon";
+export * from "./trash.icon";
