@@ -12,12 +12,15 @@ export function useMutationDeleteBoard() {
 		mutationKey: [MutationKeys.DELETE_BOARD],
 		mutationFn: (req: IBoardClientPayload["Delete"]["Req"]) =>
 			board.delete(req),
-		onSettled: (_, __) => {
+		onSettled: (_, __, { boardId }) => {
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_GAME_BY_ID],
 			});
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_GAMES],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QueryKeys.GET_BOARD_BY_ID, boardId],
 			});
 		},
 	});

@@ -12,12 +12,15 @@ export function useMutationCreateBoard() {
 		mutationKey: [MutationKeys.CREATE_BOARD],
 		mutationFn: (req: IBoardClientPayload["Create"]["Req"]) =>
 			board.create(req),
-		onSettled: (_, __, { gameId }) => {
+		onSettled: (res, __, { gameId }) => {
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_GAME_BY_ID, gameId],
 			});
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_GAMES],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QueryKeys.GET_BOARD_BY_ID, res?.id],
 			});
 		},
 	});
