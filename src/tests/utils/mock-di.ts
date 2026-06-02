@@ -16,6 +16,7 @@ export function mockDi(overrides?: {
 		board: {
 			create: vi.fn(),
 			delete: vi.fn(),
+			getById: vi.fn(),
 		},
 		game: {
 			getGames: vi.fn(),

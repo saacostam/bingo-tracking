@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { v4 } from "uuid";
 import type { IBoardClient } from "@/features/board/core/domain";
 import { DATA } from "@/shared/clients/infra";
+import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
 
 export const createBoardFactory = (): IBoardClient => ({
@@ -38,6 +39,23 @@ export const createBoardFactory = (): IBoardClient => ({
 				...g,
 				boards: g.boards.filter((b) => b.id !== boardId),
 			};
+		});
+	},
+	getById: async ({ boardId }) => {
+		for (const game of DATA.GAMES) {
+			for (const board of game.boards) {
+				if (board.id === boardId) {
+					return {
+						board,
+					};
+				}
+			}
+		}
+
+		throw new DomainError({
+			type: DomainErrorType.NOT_FOUND,
+			msg: "Board not found",
+			userMsg: "Board not found",
 		});
 	},
 });

@@ -5,6 +5,9 @@ export interface IBoardClient {
 		req: IBoardClientPayload["Create"]["Req"],
 	): Promise<IBoardClientPayload["Create"]["Res"]>;
 	delete(req: IBoardClientPayload["Delete"]["Req"]): Promise<void>;
+	getById(
+		req: IBoardClientPayload["GetById"]["Req"],
+	): Promise<IBoardClientPayload["GetById"]["Res"]>;
 }
 
 export interface IBoardClientPayload {
@@ -21,6 +24,14 @@ export interface IBoardClientPayload {
 	Delete: {
 		Req: {
 			boardId: string;
+		};
+	};
+	GetById: {
+		Req: {
+			boardId: string;
+		};
+		Res: {
+			board: IBoard;
 		};
 	};
 }
