@@ -1,12 +1,14 @@
 import { Divider, Flex, Paper, Title } from "@mantine/core";
+import type { ReactNode } from "react";
 import type { IBoard } from "@/features/board/core/domain";
 import { BoardGrid } from "./BoardGrid";
 
 export interface BoardProps {
 	board: IBoard;
+	controls?: ReactNode;
 }
 
-export function Board({ board }: BoardProps) {
+export function Board({ board, controls }: BoardProps) {
 	return (
 		<Paper key={board.id} data-testid="board-item" h="100%" p="sm" withBorder>
 			<Flex direction="column" gap="sm">
@@ -17,6 +19,12 @@ export function Board({ board }: BoardProps) {
 				<Flex justify="center">
 					<BoardGrid grid={board.grid} />
 				</Flex>
+				{controls && (
+					<>
+						<Divider />
+						{controls}
+					</>
+				)}
 			</Flex>
 		</Paper>
 	);
