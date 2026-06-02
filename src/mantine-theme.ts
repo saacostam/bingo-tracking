@@ -10,6 +10,12 @@ export const theme = {
 				transitionProps: {
 					duration: 0,
 				},
+				styles: {
+					title: {
+						fontWeight: "bold",
+						fontSize: "1.2rem",
+					},
+				},
 			},
 		},
 	},
