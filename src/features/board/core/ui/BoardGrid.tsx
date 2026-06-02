@@ -40,5 +40,5 @@ function BoardGridItem({
 }
 
 const mapCell = (cell: IBoardCell) => (
-	<BoardGridItem key={cell}>{cell}</BoardGridItem>
+	<BoardGridItem key={cell}>{String(cell)}</BoardGridItem>
 );
