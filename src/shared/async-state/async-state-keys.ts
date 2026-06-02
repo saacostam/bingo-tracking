@@ -13,6 +13,7 @@ export enum MutationKeys {
 	// BOARD
 	CREATE_BOARD = "Create Board",
 	DELETE_BOARD = "Delete Board",
+	UPDATE_BOARD = "Update Board",
 
 	// TODO
 	CREATE_TODO = "Create Todo",
