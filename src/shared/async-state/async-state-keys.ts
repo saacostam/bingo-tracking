@@ -1,4 +1,7 @@
 export enum QueryKeys {
+	// BOARDS
+	GET_BOARD_BY_ID = "Get Board by Id",
+
 	// GAMES
 	GET_GAME_BY_ID = "Get Game by Id",
 	GET_GAMES = "Get Games",
