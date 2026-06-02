@@ -15,9 +15,11 @@ export interface GameByIdProps {
 }
 
 export function GameById({ id, boardSlots }: GameByIdProps) {
+	const { lang, notificationAdapter } = useAdapters();
+
 	const [view, setView] = useState<
 		| { type: "browse" }
-		| { type: "create" }
+		| { type: "create"; payload: { gameId: string } }
 		| { type: "delete"; payload: { id: string } }
 		| { type: "update"; payload: { id: string } }
 	>({
@@ -26,15 +28,36 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 
 	const onClose = useCallback(() => setView({ type: "browse" }), []);
 
-	const onCreateBoard = useCallback(() => setView({ type: "create" }), []);
-
-	const { lang } = useAdapters();
+	const onCreateBoard = useCallback(
+		() => setView({ type: "create", payload: { gameId: id } }),
+		[id],
+	);
 
 	const queryGameById = useQueryGameById({
 		id,
 	}).useQuery();
 
 	const retry = useRetry(queryGameById.refetch, queryGameById.isPending);
+
+	const onCreateBoardError = useCallback(
+		() =>
+			notificationAdapter.notify({
+				type: "error",
+				title: "Error",
+				msg: "Failed to create board",
+			}),
+		[notificationAdapter.notify],
+	);
+
+	const onCreateBoardSuccess = useCallback(
+		() =>
+			notificationAdapter.notify({
+				type: "success",
+				title: "Created",
+				msg: "Board was created",
+			}),
+		[notificationAdapter.notify],
+	);
 
 	return (
 		<>
@@ -55,8 +78,19 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 			{queryGameById.isPending && <GameByIdSkeleton />}
 
 			{/* Modals */}
-			<Modal opened={view.type === "create"} onClose={onClose} title="Create">
-				<boardSlots.Create />
+			<Modal
+				opened={view.type === "create"}
+				onClose={onClose}
+				title={lang.get(ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE)}
+			>
+				{view.type === "create" && (
+					<boardSlots.Create
+						gameId={view.payload.gameId}
+						onError={onCreateBoardError}
+						onSuccess={onCreateBoardSuccess}
+						onSettled={onClose}
+					/>
+				)}
 			</Modal>
 			<Modal opened={view.type === "delete"} onClose={onClose} title="Delete">
 				{view.type === "delete" && <boardSlots.Delete id={view.payload.id} />}

@@ -1,33 +1,38 @@
 import { Anchor, Breadcrumbs, Flex, Text } from "@mantine/core";
-import { useEffect } from "react";
+import { type ComponentType, useEffect, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+import { CreateBoard } from "@/features/board/create/ui";
 import { GameById, type IBoardSlots } from "@/features/game/by-id/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { SuspenseLoader } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
-const boardSlots: IBoardSlots = {
-	Create: () => null,
-	Delete: () => null,
-	Update: () => null,
+const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
+	props,
+) => {
+	const boardSlots: IBoardSlots = useMemo(
+		() => ({
+			Create: CreateBoard,
+			Delete: () => null,
+			Update: () => null,
+		}),
+		[],
+	);
+	return <GameById {...props} boardSlots={boardSlots} />;
 };
 
 export default function GameByIdScreen() {
-	return (
-		<GameByIdScreenController GameById={GameById} boardSlots={boardSlots} />
-	);
+	return <GameByIdScreenController GameById={GameByIdWithBoardsSlots} />;
 }
 
-interface GameByIdScreenController {
-	GameById: typeof GameById;
-	boardSlots: IBoardSlots;
+interface GameByIdScreenControllerProps {
+	GameById: ComponentType<{ id: string }>;
 }
 
 export function GameByIdScreenController({
 	GameById,
-	boardSlots,
-}: GameByIdScreenController) {
+}: GameByIdScreenControllerProps) {
 	const { lang } = useAdapters();
 
 	const { id } = useParams();
@@ -51,7 +56,7 @@ export function GameByIdScreenController({
 					{lang.get(ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS)}
 				</Text>
 			</Breadcrumbs>
-			<GameById key={id} id={id} boardSlots={boardSlots} />
+			<GameById key={id} id={id} />
 		</Flex>
 	);
 }
