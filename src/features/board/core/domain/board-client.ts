@@ -8,6 +8,7 @@ export interface IBoardClient {
 	getById(
 		req: IBoardClientPayload["GetById"]["Req"],
 	): Promise<IBoardClientPayload["GetById"]["Res"]>;
+	update(req: IBoardClientPayload["Update"]["Req"]): Promise<void>;
 }
 
 export interface IBoardClientPayload {
@@ -32,6 +33,12 @@ export interface IBoardClientPayload {
 		};
 		Res: {
 			board: IBoard;
+		};
+	};
+	Update: {
+		Req: {
+			boardId: string;
+			board: Omit<IBoard, "id">;
 		};
 	};
 }

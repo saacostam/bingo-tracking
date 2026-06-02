@@ -58,6 +58,26 @@ export const createBoardFactory = (): IBoardClient => ({
 			userMsg: "Board not found",
 		});
 	},
+	update: async ({ boardId, board }) => {
+		for (const game of DATA.GAMES) {
+			for (let i = 0; i < game.boards.length; i++) {
+				if (game.boards[i].id === boardId) {
+					game.boards[i] = {
+						...game.boards[i],
+						...board,
+					};
+
+					return;
+				}
+			}
+		}
+
+		throw new DomainError({
+			type: DomainErrorType.NOT_FOUND,
+			msg: "Board not found",
+			userMsg: "Board not found",
+		});
+	},
 });
 
 export function useBoardClient(): IBoardClient {
