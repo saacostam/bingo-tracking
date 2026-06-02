@@ -1,4 +1,5 @@
 import { type PropsWithChildren, useMemo } from "react";
+import { useBoardClient } from "@/features/board/core/infra";
 import { useGameClient } from "@/features/game/core/infra";
 import { useLoginClient } from "@/features/login/infra";
 import { useTodoClient } from "@/features/todo/infra";
@@ -16,17 +17,19 @@ import type { IClients } from "../domain";
  * @returns {JSX.Element} A context provider wrapping the children with available clients.
  */
 export function ClientsProvider({ children }: PropsWithChildren) {
+	const boardClient = useBoardClient();
 	const gameClient = useGameClient();
 	const loginClient = useLoginClient();
 	const todoClient = useTodoClient();
 
 	const clients: IClients = useMemo(
 		() => ({
+			board: boardClient,
 			game: gameClient,
 			loginClient,
 			todoClient,
 		}),
-		[gameClient, loginClient, todoClient],
+		[boardClient, gameClient, loginClient, todoClient],
 	);
 
 	return (

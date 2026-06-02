@@ -13,6 +13,9 @@ export function mockDi(overrides?: {
 	};
 }) {
 	const clients = {
+		board: {
+			create: vi.fn(),
+		},
 		game: {
 			getGames: vi.fn(),
 			getGameById: vi.fn(),
