@@ -22,6 +22,7 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_TITLE]: "No Boards Found",
 	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_DESCRIPTION]:
 		"There are currently no boards available",
+	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL]: "Create",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",

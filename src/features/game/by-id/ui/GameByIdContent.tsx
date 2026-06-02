@@ -47,7 +47,7 @@ export function GameByIdContent({ game, onCreateBoard }: GameByIdContentProps) {
 						leftSection={<PlusIcon height="1rem" width="1rem" />}
 						onClick={onCreateBoard}
 					>
-						Create
+						{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL)}
 					</Button>
 				</Flex>
 				{game.boards.length === 0 ? (
