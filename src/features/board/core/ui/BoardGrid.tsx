@@ -39,6 +39,6 @@ function BoardGridItem({
 	return <Avatar color={accent ? "yellow" : "indigo"}>{children}</Avatar>;
 }
 
-const mapCell = (cell: IBoardCell) => (
-	<BoardGridItem key={cell}>{String(cell)}</BoardGridItem>
+const mapCell = (cell: IBoardCell, index: number) => (
+	<BoardGridItem key={+index}>{String(cell)}</BoardGridItem>
 );
