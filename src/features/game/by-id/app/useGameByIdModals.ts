@@ -37,13 +37,19 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 		[],
 	);
 
+	const onUpdateBoard = useCallback(
+		(boardId: string) => setModal({ type: "update", payload: { id: boardId } }),
+		[],
+	);
+
 	return useMemo(
 		() => ({
 			modal,
 			onClose,
 			onCreateBoard,
 			onDeleteBoard,
+			onUpdateBoard,
 		}),
-		[modal, onClose, onCreateBoard, onDeleteBoard],
+		[modal, onClose, onCreateBoard, onDeleteBoard, onUpdateBoard],
 	);
 }

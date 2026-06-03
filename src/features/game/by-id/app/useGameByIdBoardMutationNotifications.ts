@@ -60,11 +60,37 @@ export function useGameByIdBoardMutationNotifications() {
 		[deleteSuccess, deleteError],
 	);
 
+	// Update Board
+	const updateSuccess = useCallback(() => {
+		notificationAdapter.notify({
+			type: "success",
+			title: "Updated",
+			msg: "Board was updated",
+		});
+	}, [notificationAdapter.notify]);
+
+	const updateError = useCallback(() => {
+		notificationAdapter.notify({
+			type: "error",
+			title: "Error",
+			msg: "Failed to update board",
+		});
+	}, [notificationAdapter.notify]);
+
+	const update = useMemo(
+		() => ({
+			onSuccess: updateSuccess,
+			onError: updateError,
+		}),
+		[updateSuccess, updateError],
+	);
+
 	return useMemo(
 		() => ({
 			create,
 			remove,
+			update,
 		}),
-		[create, remove],
+		[create, remove, update],
 	);
 }

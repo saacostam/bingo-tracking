@@ -25,11 +25,12 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 		onClose,
 		onCreateBoard,
 		onDeleteBoard,
+		onUpdateBoard,
 	} = useGameByIdModals({
 		gameId: id,
 	});
 
-	const { create, remove } = useGameByIdBoardMutationNotifications();
+	const { create, remove, update } = useGameByIdBoardMutationNotifications();
 
 	const queryGameById = useQueryGameById({
 		id,
@@ -51,6 +52,7 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 					game={queryGameById.data.game}
 					onCreateBoard={onCreateBoard}
 					onDeleteBoard={onDeleteBoard}
+					onUpdateBoard={onUpdateBoard}
 				/>
 			)}
 			{queryGameById.isPending && <GameByIdSkeleton />}
@@ -85,8 +87,19 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 					/>
 				)}
 			</Modal>
-			<Modal opened={view.type === "update"} onClose={onClose} title="Update">
-				{view.type === "update" && <boardSlots.Update id={view.payload.id} />}
+			<Modal
+				opened={view.type === "update"}
+				onClose={onClose}
+				title={lang.get(ILanguageAdapterKey.UPDATE_BOARD_MODAL_TITLE)}
+			>
+				{view.type === "update" && (
+					<boardSlots.Update
+						id={view.payload.id}
+						onError={update.onError}
+						onSuccess={update.onSuccess}
+						onSettled={onClose}
+					/>
+				)}
 			</Modal>
 		</>
 	);

@@ -16,18 +16,20 @@ import type { IGame, IWithBoards } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
-import { PlusIcon, TrashIcon } from "@/shared/icons";
+import { PencilIcon, PlusIcon, TrashIcon } from "@/shared/icons";
 
 export interface GameByIdContentProps {
 	game: IWithBoards<IGame>;
 	onCreateBoard: () => void;
 	onDeleteBoard: (boardId: string) => void;
+	onUpdateBoard: (boardId: string) => void;
 }
 
 export function GameByIdContent({
 	game,
 	onCreateBoard,
 	onDeleteBoard,
+	onUpdateBoard,
 }: GameByIdContentProps) {
 	const { date, lang } = useAdapters();
 
@@ -73,7 +75,19 @@ export function GameByIdContent({
 								<Board
 									board={board}
 									controls={
-										<Flex direction="row" justify="end">
+										<Flex direction="row" gap="xs" justify="end">
+											<Tooltip
+												label={lang.get(
+													ILanguageAdapterKey.GAME_BY_ID_UPDATE_BUTTON_TOOLTIP,
+												)}
+											>
+												<ActionIcon
+													onClick={() => onUpdateBoard(board.id)}
+													variant="light"
+												>
+													<PencilIcon height="1rem" width="1rem" />
+												</ActionIcon>
+											</Tooltip>
 											<Tooltip
 												label={lang.get(
 													ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP,
