@@ -59,7 +59,7 @@ export function CreateBoard({
 
 	return (
 		<ManageBoard
-			action={lang.get(ILanguageAdapterKey.CREATE_GAME_SUBMIT_FORM)}
+			action={lang.get(ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM)}
 			form={form}
 			isPending={createBoardMutation.isPending}
 			onSubmit={onSubmit}

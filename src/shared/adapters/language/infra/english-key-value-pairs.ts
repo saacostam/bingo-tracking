@@ -1,9 +1,9 @@
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
-	// CREATE GAME
-	[ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE]: "Create",
-	[ILanguageAdapterKey.CREATE_GAME_SUBMIT_FORM]: "Create",
+	// CREATE BOARD
+	[ILanguageAdapterKey.CREATE_BOARD_MODAL_TITLE]: "Create",
+	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Create",
 
 	// DELETE BOARD
 	[ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE]: "Delete",

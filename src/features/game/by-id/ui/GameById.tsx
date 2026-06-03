@@ -61,7 +61,7 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 			<Modal
 				opened={view.type === "create"}
 				onClose={onClose}
-				title={lang.get(ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE)}
+				title={lang.get(ILanguageAdapterKey.CREATE_BOARD_MODAL_TITLE)}
 			>
 				{view.type === "create" && (
 					<boardSlots.Create
