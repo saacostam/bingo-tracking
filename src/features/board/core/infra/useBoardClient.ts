@@ -42,6 +42,8 @@ export const createBoardFactory = (): IBoardClient => ({
 		});
 	},
 	getById: async ({ boardId }) => {
+		await wait(200);
+
 		for (const game of DATA.GAMES) {
 			for (const board of game.boards) {
 				if (board.id === boardId) {
@@ -59,6 +61,8 @@ export const createBoardFactory = (): IBoardClient => ({
 		});
 	},
 	update: async ({ boardId, board }) => {
+		await wait(200);
+
 		for (const game of DATA.GAMES) {
 			for (let i = 0; i < game.boards.length; i++) {
 				if (game.boards[i].id === boardId) {
