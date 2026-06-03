@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { v4 } from "uuid";
-import type { IBoardClient } from "@/features/board/core/domain";
+import type { IBoard, IBoardClient } from "@/features/board/core/domain";
 import { DATA } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
@@ -59,6 +59,17 @@ export const createBoardFactory = (): IBoardClient => ({
 			msg: "Board not found",
 			userMsg: "Board not found",
 		});
+	},
+	readFromFile: async () => {
+		const randomCell = () => Math.floor(Math.random() * 100);
+
+		const rowLengths = [5, 5, 4, 5, 5];
+
+		return {
+			grid: rowLengths.map((length) =>
+				Array.from({ length }, randomCell),
+			) as IBoard["grid"],
+		};
 	},
 	update: async ({ boardId, board }) => {
 		await wait(200);

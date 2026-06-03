@@ -8,6 +8,9 @@ export interface IBoardClient {
 	getById(
 		req: IBoardClientPayload["GetById"]["Req"],
 	): Promise<IBoardClientPayload["GetById"]["Res"]>;
+	readFromFile(
+		req: IBoardClientPayload["ReadFromFile"]["Req"],
+	): Promise<IBoardClientPayload["ReadFromFile"]["Res"]>;
 	update(req: IBoardClientPayload["Update"]["Req"]): Promise<void>;
 }
 
@@ -33,6 +36,14 @@ export interface IBoardClientPayload {
 		};
 		Res: {
 			board: IBoard;
+		};
+	};
+	ReadFromFile: {
+		Req: {
+			file: File;
+		};
+		Res: {
+			grid: IBoard["grid"];
 		};
 	};
 	Update: {

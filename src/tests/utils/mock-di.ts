@@ -17,6 +17,7 @@ export function mockDi(overrides?: {
 			create: vi.fn(),
 			delete: vi.fn(),
 			getById: vi.fn(),
+			readFromFile: vi.fn(),
 			update: vi.fn(),
 		},
 		game: {
