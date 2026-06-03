@@ -32,6 +32,7 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL]: "Create",
 	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP]: "Delete",
+	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BUTTON_TOOLTIP]: "Edit",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
@@ -59,4 +60,10 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// SCREEN: GAME BY ID
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_GAMES]: "Games",
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS]: "Details",
+
+	// UPDATE BOARD
+	[ILanguageAdapterKey.UPDATE_BOARD_MODAL_TITLE]: "Edit",
+	[ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM]: "Save",
+	[ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG]:
+		"Unable to retrieve board information",
 };
