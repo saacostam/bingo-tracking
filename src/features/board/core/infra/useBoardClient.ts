@@ -61,6 +61,8 @@ export const createBoardFactory = (): IBoardClient => ({
 		});
 	},
 	readFromFile: async () => {
+		await wait(1000);
+
 		const randomCell = () => Math.floor(Math.random() * 100);
 
 		const rowLengths = [5, 5, 4, 5, 5];
