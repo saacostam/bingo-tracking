@@ -26,6 +26,8 @@ export function ReadFromFileEmptyState({
 
 				<FileInput
 					value={file}
+					capture="environment"
+					multiple={false}
 					onChange={setFile}
 					accept="image/*"
 					placeholder={lang.get(
