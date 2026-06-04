@@ -2,6 +2,8 @@ import { Flex } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import { useMutationReadBoardFromFile } from "@/features/board/core/app";
 import type { IBoard } from "@/features/board/core/domain";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
 import { ReadFromFileContent } from "./ReadFromFileContent";
@@ -13,6 +15,8 @@ export interface ReadFromFileProps {
 }
 
 export function ReadFromFile({ onUpdateGrid }: ReadFromFileProps) {
+	const { lang } = useAdapters();
+
 	const [file, setFile] = useState<File | null>(null);
 
 	const readBoardFromFile = useMutationReadBoardFromFile();
@@ -43,7 +47,7 @@ export function ReadFromFile({ onUpdateGrid }: ReadFromFileProps) {
 			) : readBoardFromFile.isError ? (
 				<QueryError
 					error={readBoardFromFile.error}
-					msg="Unable to read image"
+					msg={lang.get(ILanguageAdapterKey.READ_FROM_FILE_MUTATION_ERROR_MSG)}
 					retry={retry}
 					where="ReadFromFile.readBoardFromFile.isError"
 				/>

@@ -1,6 +1,8 @@
 import { Button, Divider, Flex, Grid, Paper, Text } from "@mantine/core";
 import type { IBoard } from "@/features/board/core/domain";
 import { BoardGrid } from "@/features/board/core/ui/BoardGrid";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface ReadFromFileContentProps {
 	grid: IBoard["grid"];
@@ -13,16 +15,18 @@ export function ReadFromFileContent({
 	onUpdateGrid,
 	reset,
 }: ReadFromFileContentProps) {
+	const { lang } = useAdapters();
+
 	return (
 		<Paper p="md" withBorder>
 			<Flex direction="column" gap="md">
 				<Flex direction="column" gap={4}>
 					<Text size="md" fw="bold">
-						Confirm detected board
+						{lang.get(ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TITLE)}
 					</Text>
 
 					<Text size="sm" c="dimmed">
-						Review the extracted grid before applying changes.
+						{lang.get(ILanguageAdapterKey.READ_FROM_FILE_CONTENT_DESCRIPTION)}
 					</Text>
 				</Flex>
 
@@ -35,7 +39,9 @@ export function ReadFromFileContent({
 				<Grid gutter="md">
 					<Grid.Col span={{ base: 12, xs: 6 }}>
 						<Button fullWidth variant="outline" onClick={reset}>
-							Try again
+							{lang.get(
+								ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TRY_AGAIN_BUTTON_LABEL,
+							)}
 						</Button>
 					</Grid.Col>
 
@@ -47,7 +53,9 @@ export function ReadFromFileContent({
 								onUpdateGrid(grid);
 							}}
 						>
-							Accept board
+							{lang.get(
+								ILanguageAdapterKey.READ_FROM_FILE_CONTENT_ACCEPT_BUTTON_LABEL,
+							)}
 						</Button>
 					</Grid.Col>
 				</Grid>

@@ -1,4 +1,6 @@
 import { FileInput, Flex, Paper, Text } from "@mantine/core";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface ReadFromFileEmptyStateProps {
 	file: File | null;
@@ -9,23 +11,26 @@ export function ReadFromFileEmptyState({
 	file,
 	setFile,
 }: ReadFromFileEmptyStateProps) {
+	const { lang } = useAdapters();
+
 	return (
 		<Paper p="xl" withBorder>
 			<Flex direction="column" gap="md" align="center">
 				<Text size="lg" fw="bold">
-					Read board from image
+					{lang.get(ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_TITLE)}
 				</Text>
 
 				<Text size="sm" c="dimmed" ta="center">
-					Upload an image and the board will be detected automatically for
-					review.
+					{lang.get(ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_DESCRIPTION)}
 				</Text>
 
 				<FileInput
 					value={file}
 					onChange={setFile}
 					accept="image/*"
-					placeholder="Select image"
+					placeholder={lang.get(
+						ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_INPUT_PLACEHOLDER,
+					)}
 					style={{ width: "100%" }}
 				/>
 			</Flex>
