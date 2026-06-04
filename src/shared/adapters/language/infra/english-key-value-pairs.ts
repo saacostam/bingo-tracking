@@ -57,6 +57,29 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Retry",
 
+	// READ FROM FILE
+	[ILanguageAdapterKey.READ_FROM_FILE_MUTATION_ERROR_MSG]:
+		"Unable to read image",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_TITLE]:
+		"Read board from image",
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_DESCRIPTION]:
+		"Upload an image and the board will be detected automatically for review.",
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_INPUT_PLACEHOLDER]:
+		"Select image",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TITLE]: "Confirm detected board",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_DESCRIPTION]:
+		"Review the extracted grid before applying changes.",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TRY_AGAIN_BUTTON_LABEL]:
+		"Try again",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_ACCEPT_BUTTON_LABEL]:
+		"Accept board",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_TITLE]: "Detecting board",
+	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_DESCRIPTION]:
+		"Analyzing image and extracting grid structure…",
+
 	// SCREEN: GAME BY ID
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_GAMES]: "Games",
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS]: "Details",

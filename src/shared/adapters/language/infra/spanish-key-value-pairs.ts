@@ -58,6 +58,31 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Reintentar",
 
+	// READ FROM FILE
+	[ILanguageAdapterKey.READ_FROM_FILE_MUTATION_ERROR_MSG]:
+		"Error al leer la imagen",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_TITLE]:
+		"Leer tablero a partir de una imagen",
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_DESCRIPTION]:
+		"Sube una imagen y el tablero se detectará automáticamente para su revisión.",
+	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_INPUT_PLACEHOLDER]:
+		"Seleccionar imagen",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TITLE]:
+		"Confirmar tablero detectado",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_DESCRIPTION]:
+		"Revisa la cuadrícula extraída antes de aplicar los cambios.",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TRY_AGAIN_BUTTON_LABEL]:
+		"Intentar de nuevo",
+	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_ACCEPT_BUTTON_LABEL]:
+		"Aceptar tablero",
+
+	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_TITLE]:
+		"Detectando tablero",
+	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_DESCRIPTION]:
+		"Analizando la imagen y extrayendo la estructura de la cuadrícula…",
+
 	// SCREEN: GAME BY ID
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_GAMES]: "Juegos",
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_DETAILS]: "Detalles",
