@@ -32,8 +32,8 @@ export const createBoardFactory = (): IBoardClient => ({
 		await wait(200);
 
 		DATA.GAMES = DATA.GAMES.map((g) => {
-			const board = g.boards.find((b) => b.id === boardId);
-			if (!board) return g;
+			const hasBoard = g.boards.some((b) => b.id === boardId);
+			if (!hasBoard) return g;
 
 			return {
 				...g,
@@ -44,13 +44,11 @@ export const createBoardFactory = (): IBoardClient => ({
 	getById: async ({ boardId }) => {
 		await wait(200);
 
-		for (const game of DATA.GAMES) {
-			for (const board of game.boards) {
-				if (board.id === boardId) {
-					return {
-						board,
-					};
-				}
+		for (const g of DATA.GAMES) {
+			const board = g.boards.find((b) => b.id === boardId);
+
+			if (board) {
+				return { board };
 			}
 		}
 
@@ -76,24 +74,29 @@ export const createBoardFactory = (): IBoardClient => ({
 	update: async ({ boardId, board }) => {
 		await wait(200);
 
-		for (const game of DATA.GAMES) {
-			for (let i = 0; i < game.boards.length; i++) {
-				if (game.boards[i].id === boardId) {
-					game.boards[i] = {
-						...game.boards[i],
-						...board,
-					};
+		let exists = false;
 
-					return;
-				}
-			}
-		}
+		DATA.GAMES = DATA.GAMES.map((g) => {
+			const hasBoard = g.boards.some((b) => b.id === boardId);
+			if (!hasBoard) return g;
 
-		throw new DomainError({
-			type: DomainErrorType.NOT_FOUND,
-			msg: "Board not found",
-			userMsg: "Board not found",
+			exists = true;
+
+			return {
+				...g,
+				boards: g.boards.map((b) =>
+					b.id === boardId ? { ...b, ...board } : b,
+				),
+			};
 		});
+
+		if (!exists) {
+			throw new DomainError({
+				type: DomainErrorType.NOT_FOUND,
+				msg: "Board not found",
+				userMsg: "Board not found",
+			});
+		}
 	},
 });
 
