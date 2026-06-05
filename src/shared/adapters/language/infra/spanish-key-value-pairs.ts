@@ -3,19 +3,27 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// CREATE BOARD
 	[ILanguageAdapterKey.CREATE_BOARD_MODAL_TITLE]: "Crear",
+	[ILanguageAdapterKey.CREATE_BOARD_NOTIFICATION_ERROR]:
+		"No se pudo crear el cartón.",
+	[ILanguageAdapterKey.CREATE_BOARD_NOTIFICATION_SUCCESS]:
+		"Cartón creado correctamente.",
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Crear",
 
 	// DELETE BOARD
-	[ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE]: "Borrar",
-	[ILanguageAdapterKey.DELETE_BOARD_MODAL_CONFIRMATION]:
-		"¿Seguro que desea eliminar este tablero?",
-	[ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL]: "Borrar",
 	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancelar",
+	[ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL]: "Eliminar",
+	[ILanguageAdapterKey.DELETE_BOARD_MODAL_CONFIRMATION]:
+		"¿Seguro que desea eliminar este cartón?",
+	[ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE]: "Eliminar",
+	[ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_ERROR]:
+		"No se pudo eliminar el cartón.",
+	[ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_SUCCESS]:
+		"Cartón eliminado correctamente.",
 
 	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Juegos",
 	[ILanguageAdapterKey.GAMES_QUERY_GAMES_ERROR_MSG]:
-		"No se pudieron cargar los datos de los juegos.",
+		"No se pudo cargar la información de los juegos.",
 	[ILanguageAdapterKey.GAMES_NO_GAMES_TITLE]: "No se encontraron juegos",
 	[ILanguageAdapterKey.GAMES_NO_GAMES_DESCRIPTION]:
 		"Actualmente no hay juegos disponibles",
@@ -32,14 +40,20 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Actualmente no hay cartones disponibles",
 
 	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL]: "Crear",
-	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP]: "Borrar",
+	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP]: "Eliminar",
 	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BUTTON_TOOLTIP]: "Editar",
 
+	// GENERIC
+	[ILanguageAdapterKey.GENERIC_NOTIFICATION_CREATED_TITLE]: "Creado",
+	[ILanguageAdapterKey.GENERIC_NOTIFICATION_DELETED_TITLE]: "Eliminado",
+	[ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE]: "Error",
+	[ILanguageAdapterKey.GENERIC_NOTIFICATION_UPDATED_TITLE]: "Actualizado",
+
 	// LANGUAGE
-	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Idiomas Disponibles",
+	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Idiomas disponibles",
 
 	// LOGIN
-	[ILanguageAdapterKey.LOGIN_HEADER]: "Iniciar Sesión",
+	[ILanguageAdapterKey.LOGIN_HEADER]: "Iniciar sesión",
 	[ILanguageAdapterKey.LOGIN_DESCRIPTION]: "¡Lorem ipsum dolor sit amet!",
 	[ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL]: "Usuario",
 	[ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL]: "Contraseña",
@@ -63,25 +77,24 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Error al leer la imagen",
 
 	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_TITLE]:
-		"Leer tablero a partir de una imagen",
+		"Importar cartón desde una imagen",
 	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_DESCRIPTION]:
-		"Sube una imagen y el tablero se detectará automáticamente para su revisión.",
+		"Sube una imagen y el cartón se detectará automáticamente para su revisión.",
 	[ILanguageAdapterKey.READ_FROM_FILE_EMPTY_STATE_INPUT_PLACEHOLDER]:
 		"Seleccionar imagen",
 
 	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TITLE]:
-		"Confirmar tablero detectado",
+		"Confirmar cartón detectado",
 	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_DESCRIPTION]:
-		"Revisa la cuadrícula extraída antes de aplicar los cambios.",
+		"Revisa el cartón extraído antes de aplicar los cambios.",
 	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_TRY_AGAIN_BUTTON_LABEL]:
-		"Intentar de nuevo",
+		"Reintentar",
 	[ILanguageAdapterKey.READ_FROM_FILE_CONTENT_ACCEPT_BUTTON_LABEL]:
-		"Aceptar tablero",
+		"Aceptar cartón",
 
-	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_TITLE]:
-		"Detectando tablero",
+	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_TITLE]: "Detectando cartón",
 	[ILanguageAdapterKey.READ_FROM_FILE_LOADING_STATE_DESCRIPTION]:
-		"Analizando la imagen y extrayendo la estructura de la cuadrícula…",
+		"Analizando la imagen y detectando la estructura del cartón…",
 
 	// SCREEN: GAME BY ID
 	[ILanguageAdapterKey.SCREEN_GAME_BY_ID_BREADCRUMBS_GAMES]: "Juegos",
@@ -89,7 +102,11 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// UPDATE BOARD
 	[ILanguageAdapterKey.UPDATE_BOARD_MODAL_TITLE]: "Editar",
-	[ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM]: "Guardar",
+	[ILanguageAdapterKey.UPDATE_BOARD_NOTIFICATION_ERROR]:
+		"No se pudo actualizar el cartón.",
+	[ILanguageAdapterKey.UPDATE_BOARD_NOTIFICATION_SUCCESS]:
+		"Cartón actualizado correctamente.",
 	[ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG]:
-		"No se pudo obtener la información del tablero",
+		"No se pudo obtener la información del cartón",
+	[ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM]: "Guardar",
 };
