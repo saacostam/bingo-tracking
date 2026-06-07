@@ -1,9 +1,13 @@
-import type { IGame, IWithBoards } from "@/features/game/core/domain";
+import type {
+	IGame,
+	IWithBoards,
+	IWithPlays,
+} from "@/features/game/core/domain";
 
 const now = Date.now();
 
 export const DATA: {
-	GAMES: IWithBoards<IGame>[];
+	GAMES: IWithPlays<IWithBoards<IGame>>[];
 } = {
 	GAMES: [
 		{
@@ -23,18 +27,21 @@ export const DATA: {
 					],
 				},
 			],
+			plays: [],
 		},
 		{
 			id: "2",
 			name: "Bingo 2024-II",
 			createdAt: now + 1,
 			boards: [],
+			plays: [],
 		},
 		{
 			id: "3",
 			name: "Bingo 2025-II",
 			createdAt: now + 2,
 			boards: [],
+			plays: [],
 		},
 	],
 };

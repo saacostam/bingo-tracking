@@ -1,4 +1,5 @@
 import type { IBoard } from "@/features/board/core/domain";
+import type { IPlay } from "@/features/play/domain";
 
 export interface IGame {
 	id: string;
@@ -8,4 +9,8 @@ export interface IGame {
 
 export type IWithBoards<G> = G & {
 	boards: IBoard[];
+};
+
+export type IWithPlays<G> = G & {
+	plays: IPlay[];
 };
