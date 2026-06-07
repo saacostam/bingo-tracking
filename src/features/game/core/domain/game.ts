@@ -1,5 +1,5 @@
 import type { IBoard } from "@/features/board/core/domain";
-import type { IPlay } from "@/features/play/domain";
+import type { IPlay } from "@/features/play/core/domain";
 
 export interface IGame {
 	id: string;

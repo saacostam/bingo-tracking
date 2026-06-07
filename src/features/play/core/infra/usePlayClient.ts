@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { IPlayClient } from "@/features/play/domain";
+import type { IPlayClient } from "@/features/play/core/domain";
 import { DATA } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 
