@@ -28,6 +28,7 @@ export function mockDi(overrides?: {
 			login: vi.fn(),
 		},
 		play: {
+			create: vi.fn(),
 			getByGameId: vi.fn(),
 		},
 		todoClient: {
