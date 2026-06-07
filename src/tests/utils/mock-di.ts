@@ -24,14 +24,17 @@ export function mockDi(overrides?: {
 			getGames: vi.fn(),
 			getGameById: vi.fn(),
 		},
+		loginClient: {
+			login: vi.fn(),
+		},
+		play: {
+			getByGameId: vi.fn(),
+		},
 		todoClient: {
 			createTodo: vi.fn(),
 			deleteTodo: vi.fn(),
 			patchTodo: vi.fn(),
 			queryTodos: vi.fn(),
-		},
-		loginClient: {
-			login: vi.fn(),
 		},
 	} satisfies IClients;
 
