@@ -7,6 +7,9 @@ export enum QueryKeys {
 	GET_GAMES = "Get Games",
 
 	QUERY_TODOS = "Query Todos",
+
+	// PLAYS
+	GET_PLAYS_BY_GAME_ID = "Get Plays by Game Id",
 }
 
 export enum MutationKeys {
