@@ -1,6 +1,10 @@
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
+	// BOARD EDITOR FLOW
+	[ILanguageAdapterKey.BOARD_EDITOR_FLOW_MANUAL_TAB_LABEL]: "Manual",
+	[ILanguageAdapterKey.BOARD_EDITOR_FLOW_IMAGE_TAB_LABEL]: "Imagen",
+
 	// CREATE BOARD
 	[ILanguageAdapterKey.CREATE_BOARD_MODAL_TITLE]: "Crear",
 	[ILanguageAdapterKey.CREATE_BOARD_NOTIFICATION_ERROR]:
