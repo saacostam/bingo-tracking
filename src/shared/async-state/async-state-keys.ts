@@ -19,6 +19,9 @@ export enum MutationKeys {
 	READ_BOARD_FROM_FILE = "Read Board Form File",
 	UPDATE_BOARD = "Update Board",
 
+	// PLAYS
+	CREATE_PLAY = "Create Play",
+
 	// TODO
 	CREATE_TODO = "Create Todo",
 	DELETE_TODO = "Delete Todo",
