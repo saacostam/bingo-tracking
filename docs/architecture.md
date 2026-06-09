@@ -292,3 +292,51 @@ This architecture does not aim to:
 - Model rich object-oriented aggregates
 
 The priority is clarity, refactorability, and pragmatic evolution over theoretical purity.
+
+## Composition Roots (09/06/2026)
+
+As applications grow, multiple independent features often need to be assembled into a larger workflow or user experience.
+
+To keep feature modules focused and independently testable, composition concerns may be extracted into dedicated **Composer** components.
+
+A Composer is responsible for:
+
+* Wiring feature components together
+* Injecting UI slots and implementations
+* Coordinating callbacks between features
+* Configuring notifications, modals, and workflows
+* Assembling complete user experiences from smaller feature slices
+
+A Composer does **not**:
+
+* Contain business rules
+* Replace feature-level application logic
+* Own domain concerns
+
+Its responsibility is composition rather than behavior.
+
+---
+
+### Relationship to Dependency Injection
+
+Composers act as local composition roots.
+
+They may inject:
+
+* Feature implementations
+* UI slots
+* Success, error, and lifecycle callbacks
+* Notification handlers
+* Workflow-specific configuration
+
+This keeps feature modules decoupled from application-specific wiring while avoiding unnecessary global abstractions.
+
+---
+
+### Relationship to Features
+
+Features remain independently testable and reusable.
+
+When multiple feature slices must be assembled into a larger workflow, a Composer may be introduced to coordinate feature composition while preserving feature independence.
+
+Composers are feature modules whose primary responsibility is assembly and wiring. They define how independent features collaborate within a specific use case while delegating business logic, state management, and rendering concerns to the composed features themselves.
