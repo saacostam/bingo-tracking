@@ -20,6 +20,7 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 	const [modal, setModal] = useState<
 		| { type: "idle" }
 		| { type: "create-board"; payload: { gameId: string } }
+		| { type: "create-play"; payload: { gameId: string } }
 		| { type: "delete-board"; payload: { id: string } }
 		| { type: "update-board"; payload: { id: string } }
 	>({
@@ -30,6 +31,11 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 
 	const onCreateBoard = useCallback(
 		() => setModal({ type: "create-board", payload: { gameId } }),
+		[gameId],
+	);
+
+	const onCreatePlay = useCallback(
+		() => setModal({ type: "create-play", payload: { gameId } }),
 		[gameId],
 	);
 
@@ -50,9 +56,10 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 			modal,
 			onClose,
 			onCreateBoard,
+			onCreatePlay,
 			onDeleteBoard,
 			onUpdateBoard,
 		}),
-		[modal, onClose, onCreateBoard, onDeleteBoard, onUpdateBoard],
+		[modal, onClose, onCreateBoard, onCreatePlay, onDeleteBoard, onUpdateBoard],
 	);
 }

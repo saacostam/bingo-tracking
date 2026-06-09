@@ -38,6 +38,29 @@ export function useGameByIdBoardMutationNotifications() {
 		[createBoardSuccess, createBoardError],
 	);
 
+	// Create Play
+	const createPlaySuccess = useCallback(() => {
+		notificationAdapter.notify({
+			type: "success",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_CREATED_TITLE),
+			msg: lang.get(ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_SUCCESS),
+		});
+	}, [lang.get, notificationAdapter.notify]);
+	const createPlayError = useCallback(() => {
+		notificationAdapter.notify({
+			type: "error",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
+			msg: lang.get(ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_ERROR),
+		});
+	}, [lang.get, notificationAdapter.notify]);
+	const createPlay = useMemo(
+		() => ({
+			onSuccess: createPlaySuccess,
+			onError: createPlayError,
+		}),
+		[createPlaySuccess, createPlayError],
+	);
+
 	// Delete Board
 	const deleteBoardSuccess = useCallback(() => {
 		notificationAdapter.notify({
@@ -89,9 +112,10 @@ export function useGameByIdBoardMutationNotifications() {
 	return useMemo(
 		() => ({
 			createBoard,
+			createPlay,
 			deleteBoard,
 			updateBoard,
 		}),
-		[createBoard, deleteBoard, updateBoard],
+		[createBoard, createPlay, deleteBoard, updateBoard],
 	);
 }
