@@ -21,6 +21,7 @@ import { PencilIcon, PlusIcon, TrashIcon } from "@/shared/icons";
 export interface GameByIdContentProps {
 	game: IWithBoards<IGame>;
 	onCreateBoard: () => void;
+	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
 	onUpdateBoard: (boardId: string) => void;
 }
@@ -28,6 +29,7 @@ export interface GameByIdContentProps {
 export function GameByIdContent({
 	game,
 	onCreateBoard,
+	onCreatePlay,
 	onDeleteBoard,
 	onUpdateBoard,
 }: GameByIdContentProps) {
@@ -35,15 +37,29 @@ export function GameByIdContent({
 
 	return (
 		<Flex data-testid="game-by-id-content" direction="column" gap="lg">
-			<Box>
-				<Title size="h2">{game.name}</Title>
-				<Text c="dimmed" size="sm">
-					{date.format({ type: "utc-ms", value: game.createdAt })}
-				</Text>
-			</Box>
+			<Flex direction="row" justify="space-between" gap="md" wrap="wrap">
+				<Box>
+					<Title size="h2">{game.name}</Title>
+					<Text c="dimmed" size="sm">
+						{date.format({ type: "utc-ms", value: game.createdAt })}
+					</Text>
+				</Box>
+				<Button
+					leftSection={<PlusIcon height="1rem" width="1rem" />}
+					onClick={onCreatePlay}
+				>
+					{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL)}
+				</Button>
+			</Flex>
 			<Divider />
 			<Box>
-				<Flex direction="row" justify="space-between" mb="md">
+				<Flex
+					direction="row"
+					justify="space-between"
+					gap="md"
+					mb="md"
+					wrap="wrap"
+				>
 					<Box>
 						<Title size="h3">
 							{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_HEADER)}
@@ -56,7 +72,7 @@ export function GameByIdContent({
 						leftSection={<PlusIcon height="1rem" width="1rem" />}
 						onClick={onCreateBoard}
 					>
-						{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL)}
+						{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL)}
 					</Button>
 				</Flex>
 				{game.boards.length === 0 ? (
@@ -78,7 +94,7 @@ export function GameByIdContent({
 										<Flex direction="row" gap="xs" justify="end">
 											<Tooltip
 												label={lang.get(
-													ILanguageAdapterKey.GAME_BY_ID_UPDATE_BUTTON_TOOLTIP,
+													ILanguageAdapterKey.GAME_BY_ID_UPDATE_BOARD_BUTTON_TOOLTIP,
 												)}
 											>
 												<ActionIcon
@@ -90,7 +106,7 @@ export function GameByIdContent({
 											</Tooltip>
 											<Tooltip
 												label={lang.get(
-													ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP,
+													ILanguageAdapterKey.GAME_BY_ID_DELETE_BOARD_BUTTON_TOOLTIP,
 												)}
 											>
 												<ActionIcon

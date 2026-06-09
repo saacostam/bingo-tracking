@@ -8,29 +8,31 @@ import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
-import type { IBoardSlots } from "./GameById.props";
+import type { IBoardSlots, IPlaySlots } from "./GameById.props";
 import { GameByIdContent } from "./GameByIdContent";
 import { GameByIdSkeleton } from "./GameByIdSkeleton";
 
 export interface GameByIdProps {
 	id: string;
 	boardSlots: IBoardSlots;
+	playSlots: IPlaySlots;
 }
 
-export function GameById({ id, boardSlots }: GameByIdProps) {
+export function GameById({ id, boardSlots, playSlots }: GameByIdProps) {
 	const { lang } = useAdapters();
 
 	const {
 		modal: view,
 		onClose,
 		onCreateBoard,
+		onCreatePlay,
 		onDeleteBoard,
 		onUpdateBoard,
 	} = useGameByIdModals({
 		gameId: id,
 	});
 
-	const { createBoard, deleteBoard, updateBoard } =
+	const { createBoard, createPlay, deleteBoard, updateBoard } =
 		useGameByIdBoardMutationNotifications();
 
 	const queryGameById = useQueryGameById({
@@ -52,6 +54,7 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 				<GameByIdContent
 					game={queryGameById.data.game}
 					onCreateBoard={onCreateBoard}
+					onCreatePlay={onCreatePlay}
 					onDeleteBoard={onDeleteBoard}
 					onUpdateBoard={onUpdateBoard}
 				/>
@@ -69,6 +72,20 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 						gameId={view.payload.gameId}
 						onError={createBoard.onError}
 						onSuccess={createBoard.onSuccess}
+						onSettled={onClose}
+					/>
+				)}
+			</Modal>
+			<Modal
+				opened={view.type === "create-play"}
+				onClose={onClose}
+				title={lang.get(ILanguageAdapterKey.CREATE_PLAY_MODAL_TITLE)}
+			>
+				{view.type === "create-play" && (
+					<playSlots.Create
+						gameId={view.payload.gameId}
+						onError={createPlay.onError}
+						onSuccess={createPlay.onSuccess}
 						onSettled={onClose}
 					/>
 				)}

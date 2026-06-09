@@ -55,9 +55,10 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE]: "Error",
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_UPDATED_TITLE]: "Updated",
 
-	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BUTTON_LABEL]: "Create",
-	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BUTTON_TOOLTIP]: "Delete",
-	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BUTTON_TOOLTIP]: "Edit",
+	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL]: "Create",
+	[ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL]: "Start Play",
+	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BOARD_BUTTON_TOOLTIP]: "Delete",
+	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BOARD_BUTTON_TOOLTIP]: "Edit",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",

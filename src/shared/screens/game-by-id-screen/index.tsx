@@ -4,7 +4,12 @@ import { Link, useNavigate, useParams } from "react-router";
 import { CreateBoard } from "@/features/board/create/ui";
 import { DeleteBoard } from "@/features/board/delete/ui";
 import { UpdateBoard } from "@/features/board/update/ui";
-import { GameById, type IBoardSlots } from "@/features/game/by-id/ui";
+import {
+	GameById,
+	type IBoardSlots,
+	type IPlaySlots,
+} from "@/features/game/by-id/ui";
+import { CreatePlay } from "@/features/play/create/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { SuspenseLoader } from "@/shared/components";
@@ -21,7 +26,15 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 		}),
 		[],
 	);
-	return <GameById {...props} boardSlots={boardSlots} />;
+
+	const playSlots: IPlaySlots = useMemo(
+		() => ({
+			Create: CreatePlay,
+		}),
+		[],
+	);
+
+	return <GameById {...props} boardSlots={boardSlots} playSlots={playSlots} />;
 };
 
 export default function GameByIdScreen() {
