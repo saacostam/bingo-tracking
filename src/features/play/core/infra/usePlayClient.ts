@@ -32,7 +32,7 @@ export const createPlayClientFactory = (): IPlayClient => ({
 			id,
 		};
 	},
-	getByGameId: async ({ gameId }) => {
+	getAllByGameId: async ({ gameId }) => {
 		await wait(200);
 
 		const game = DATA.GAMES.find((g) => g.id === gameId);

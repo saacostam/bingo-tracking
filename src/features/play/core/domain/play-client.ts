@@ -4,9 +4,9 @@ export interface IPlayClient {
 	create(
 		req: IPlayClientPayload["Create"]["Req"],
 	): Promise<IPlayClientPayload["Create"]["Res"]>;
-	getByGameId(
-		req: IPlayClientPayload["GetByGameId"]["Req"],
-	): Promise<IPlayClientPayload["GetByGameId"]["Res"]>;
+	getAllByGameId(
+		req: IPlayClientPayload["GetAllByGameId"]["Req"],
+	): Promise<IPlayClientPayload["GetAllByGameId"]["Res"]>;
 }
 
 export interface IPlayClientPayload {
@@ -19,7 +19,7 @@ export interface IPlayClientPayload {
 			id: string;
 		};
 	};
-	GetByGameId: {
+	GetAllByGameId: {
 		Req: {
 			gameId: string;
 		};
