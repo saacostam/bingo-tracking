@@ -13,6 +13,9 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Cartón creado correctamente.",
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Crear",
 
+	// CREATE PLAY
+	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Crear",
+
 	// DELETE BOARD
 	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancelar",
 	[ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL]: "Eliminar",
@@ -71,6 +74,9 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// MANAGE GAME
 	[ILanguageAdapterKey.MANAGE_GAME_NAME_FIELD_LABEL]: "Nombre",
 	[ILanguageAdapterKey.MANAGE_GAME_GRID_FIELD_LABEL]: "Cartón",
+
+	// MANAGE PLAY
+	[ILanguageAdapterKey.MANAGE_PLAY_NAME_FIELD_LABEL]: "Nombre",
 
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",

@@ -13,6 +13,9 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Board created successfully.",
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Create",
 
+	// CREATE PLAY
+	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Create",
+
 	// DELETE BOARD
 	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancel",
 	[ILanguageAdapterKey.DELETE_BOARD_CONFIRM_BUTTON_LABEL]: "Delete",
@@ -70,6 +73,9 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// MANAGE GAME
 	[ILanguageAdapterKey.MANAGE_GAME_NAME_FIELD_LABEL]: "Name",
 	[ILanguageAdapterKey.MANAGE_GAME_GRID_FIELD_LABEL]: "Grid",
+
+	// MANAGE PLAY
+	[ILanguageAdapterKey.MANAGE_PLAY_NAME_FIELD_LABEL]: "Name",
 
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
