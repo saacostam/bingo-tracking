@@ -67,13 +67,13 @@ export function CreatePlay({
 					{...register("name")}
 					error={formState.errors.name?.message}
 				/>
+
+				{rootErrorMessage && <Alert color="pink" title={rootErrorMessage} />}
+
+				<Button loading={createPlayMutation.isPending} type="submit">
+					{lang.get(ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM)}
+				</Button>
 			</Flex>
-
-			{rootErrorMessage && <Alert color="pink" title={rootErrorMessage} />}
-
-			<Button loading={createPlayMutation.isPending} type="submit">
-				{lang.get(ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM)}
-			</Button>
 		</form>
 	);
 }
