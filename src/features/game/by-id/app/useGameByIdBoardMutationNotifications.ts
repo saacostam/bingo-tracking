@@ -16,53 +16,53 @@ export function useGameByIdBoardMutationNotifications() {
 	const { lang, notificationAdapter } = useAdapters();
 
 	// Create Board
-	const createSuccess = useCallback(() => {
+	const createBoardSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_CREATED_TITLE),
 			msg: lang.get(ILanguageAdapterKey.CREATE_BOARD_NOTIFICATION_SUCCESS),
 		});
 	}, [lang.get, notificationAdapter.notify]);
-	const createError = useCallback(() => {
+	const createBoardError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
 			msg: lang.get(ILanguageAdapterKey.CREATE_BOARD_NOTIFICATION_ERROR),
 		});
 	}, [lang.get, notificationAdapter.notify]);
-	const create = useMemo(
+	const createBoard = useMemo(
 		() => ({
-			onSuccess: createSuccess,
-			onError: createError,
+			onSuccess: createBoardSuccess,
+			onError: createBoardError,
 		}),
-		[createSuccess, createError],
+		[createBoardSuccess, createBoardError],
 	);
 
 	// Delete Board
-	const deleteSuccess = useCallback(() => {
+	const deleteBoardSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_DELETED_TITLE),
 			msg: lang.get(ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_SUCCESS),
 		});
 	}, [lang.get, notificationAdapter.notify]);
-	const deleteError = useCallback(() => {
+	const deleteBoardError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
 			msg: lang.get(ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_ERROR),
 		});
 	}, [lang.get, notificationAdapter.notify]);
-	const remove = useMemo(
+	const deleteBoard = useMemo(
 		() => ({
-			onSuccess: deleteSuccess,
-			onError: deleteError,
+			onSuccess: deleteBoardSuccess,
+			onError: deleteBoardError,
 		}),
-		[deleteSuccess, deleteError],
+		[deleteBoardSuccess, deleteBoardError],
 	);
 
 	// Update Board
-	const updateSuccess = useCallback(() => {
+	const updateBoardSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_UPDATED_TITLE),
@@ -70,7 +70,7 @@ export function useGameByIdBoardMutationNotifications() {
 		});
 	}, [lang.get, notificationAdapter.notify]);
 
-	const updateError = useCallback(() => {
+	const updateBoardError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
 			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
@@ -78,20 +78,20 @@ export function useGameByIdBoardMutationNotifications() {
 		});
 	}, [lang.get, notificationAdapter.notify]);
 
-	const update = useMemo(
+	const updateBoard = useMemo(
 		() => ({
-			onSuccess: updateSuccess,
-			onError: updateError,
+			onSuccess: updateBoardSuccess,
+			onError: updateBoardError,
 		}),
-		[updateSuccess, updateError],
+		[updateBoardSuccess, updateBoardError],
 	);
 
 	return useMemo(
 		() => ({
-			create,
-			remove,
-			update,
+			createBoard,
+			deleteBoard,
+			updateBoard,
 		}),
-		[create, remove, update],
+		[createBoard, deleteBoard, updateBoard],
 	);
 }

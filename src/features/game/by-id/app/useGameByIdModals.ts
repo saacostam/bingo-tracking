@@ -19,9 +19,9 @@ export interface UseGameByIdModalsArgs {
 export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 	const [modal, setModal] = useState<
 		| { type: "idle" }
-		| { type: "create"; payload: { gameId: string } }
-		| { type: "delete"; payload: { id: string } }
-		| { type: "update"; payload: { id: string } }
+		| { type: "create-board"; payload: { gameId: string } }
+		| { type: "delete-board"; payload: { id: string } }
+		| { type: "update-board"; payload: { id: string } }
 	>({
 		type: "idle",
 	});
@@ -29,16 +29,19 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 	const onClose = useCallback(() => setModal({ type: "idle" }), []);
 
 	const onCreateBoard = useCallback(
-		() => setModal({ type: "create", payload: { gameId } }),
+		() => setModal({ type: "create-board", payload: { gameId } }),
 		[gameId],
 	);
+
 	const onDeleteBoard = useCallback(
-		(boardId: string) => setModal({ type: "delete", payload: { id: boardId } }),
+		(boardId: string) =>
+			setModal({ type: "delete-board", payload: { id: boardId } }),
 		[],
 	);
 
 	const onUpdateBoard = useCallback(
-		(boardId: string) => setModal({ type: "update", payload: { id: boardId } }),
+		(boardId: string) =>
+			setModal({ type: "update-board", payload: { id: boardId } }),
 		[],
 	);
 

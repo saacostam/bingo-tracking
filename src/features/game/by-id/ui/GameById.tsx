@@ -30,7 +30,8 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 		gameId: id,
 	});
 
-	const { create, remove, update } = useGameByIdBoardMutationNotifications();
+	const { createBoard, deleteBoard, updateBoard } =
+		useGameByIdBoardMutationNotifications();
 
 	const queryGameById = useQueryGameById({
 		id,
@@ -59,44 +60,44 @@ export function GameById({ id, boardSlots }: GameByIdProps) {
 
 			{/* Modals */}
 			<Modal
-				opened={view.type === "create"}
+				opened={view.type === "create-board"}
 				onClose={onClose}
 				title={lang.get(ILanguageAdapterKey.CREATE_BOARD_MODAL_TITLE)}
 			>
-				{view.type === "create" && (
+				{view.type === "create-board" && (
 					<boardSlots.Create
 						gameId={view.payload.gameId}
-						onError={create.onError}
-						onSuccess={create.onSuccess}
+						onError={createBoard.onError}
+						onSuccess={createBoard.onSuccess}
 						onSettled={onClose}
 					/>
 				)}
 			</Modal>
 			<Modal
-				opened={view.type === "delete"}
+				opened={view.type === "delete-board"}
 				onClose={onClose}
 				title={lang.get(ILanguageAdapterKey.DELETE_BOARD_MODAL_TITLE)}
 			>
-				{view.type === "delete" && (
+				{view.type === "delete-board" && (
 					<boardSlots.Delete
 						id={view.payload.id}
 						onCancel={onClose}
-						onError={remove.onError}
-						onSuccess={remove.onSuccess}
+						onError={deleteBoard.onError}
+						onSuccess={deleteBoard.onSuccess}
 						onSettled={onClose}
 					/>
 				)}
 			</Modal>
 			<Modal
-				opened={view.type === "update"}
+				opened={view.type === "update-board"}
 				onClose={onClose}
 				title={lang.get(ILanguageAdapterKey.UPDATE_BOARD_MODAL_TITLE)}
 			>
-				{view.type === "update" && (
+				{view.type === "update-board" && (
 					<boardSlots.Update
 						id={view.payload.id}
-						onError={update.onError}
-						onSuccess={update.onSuccess}
+						onError={updateBoard.onError}
+						onSuccess={updateBoard.onSuccess}
 						onSettled={onClose}
 					/>
 				)}
