@@ -1,7 +1,9 @@
 import type { IPlay } from "./play";
 
 export interface IPlayClient {
-	create(req: IPlayClientPayload["Create"]["Req"]): Promise<void>;
+	create(
+		req: IPlayClientPayload["Create"]["Req"],
+	): Promise<IPlayClientPayload["Create"]["Res"]>;
 	getByGameId(
 		req: IPlayClientPayload["GetByGameId"]["Req"],
 	): Promise<IPlayClientPayload["GetByGameId"]["Res"]>;
@@ -12,6 +14,9 @@ export interface IPlayClientPayload {
 		Req: {
 			gameId: string;
 			name: string;
+		};
+		Res: {
+			id: string;
 		};
 	};
 	GetByGameId: {
