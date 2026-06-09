@@ -14,7 +14,12 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Crear",
 
 	// CREATE PLAY
-	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Crear",
+	[ILanguageAdapterKey.CREATE_PLAY_MODAL_TITLE]: "Iniciar",
+	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_ERROR]:
+		"No se pudo iniciar la partida.",
+	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_SUCCESS]:
+		"Partida iniciada correctamente.",
+	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Iniciar",
 
 	// DELETE BOARD
 	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancelar",

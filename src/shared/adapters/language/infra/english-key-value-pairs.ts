@@ -14,7 +14,11 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Create",
 
 	// CREATE PLAY
-	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Create",
+	[ILanguageAdapterKey.CREATE_PLAY_MODAL_TITLE]: "Start",
+	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_ERROR]: "Unable to start play.",
+	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_SUCCESS]:
+		"Play started successfully.",
+	[ILanguageAdapterKey.CREATE_PLAY_SUBMIT_FORM]: "Start",
 
 	// DELETE BOARD
 	[ILanguageAdapterKey.DELETE_BOARD_CANCEL_BUTTON_LABEL]: "Cancel",
