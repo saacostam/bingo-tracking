@@ -48,6 +48,7 @@ export function GameByIdComposer({
 				onCreatePlay={onCreatePlay}
 				onDeleteBoard={onDeleteBoard}
 				onUpdateBoard={onUpdateBoard}
+				PlaysListSlot={playSlots.List}
 			/>
 
 			{/* Modals */}

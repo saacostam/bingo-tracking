@@ -1,4 +1,6 @@
+import type { ComponentType } from "react";
 import { useQueryGameById } from "@/features/game/core/app";
+import type { PlayListProps } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
@@ -12,6 +14,7 @@ export interface GameByIdProps {
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
 	onUpdateBoard: (boardId: string) => void;
+	PlaysListSlot: ComponentType<PlayListProps>;
 }
 
 export function GameById({
@@ -20,6 +23,7 @@ export function GameById({
 	onCreatePlay,
 	onDeleteBoard,
 	onUpdateBoard,
+	PlaysListSlot,
 }: GameByIdProps) {
 	const { lang } = useAdapters();
 
@@ -45,6 +49,7 @@ export function GameById({
 					onCreatePlay={onCreatePlay}
 					onDeleteBoard={onDeleteBoard}
 					onUpdateBoard={onUpdateBoard}
+					PlaysListSlot={PlaysListSlot}
 				/>
 			)}
 			{queryGameById.isPending && <GameByIdSkeleton />}

@@ -3,6 +3,7 @@ import type { CreateBoardProps } from "@/features/board/create/ui";
 import type { DeleteBoardProps } from "@/features/board/delete/ui";
 import type { UpdateBoardProps } from "@/features/board/update/ui";
 import type { CreatePlayProps } from "@/features/play/create/ui";
+import type { PlayListProps } from "@/features/play/list/ui";
 import type { GameByIdProps } from "./GameById";
 
 /**
@@ -31,4 +32,5 @@ export interface IGameSlots {
  */
 export interface IPlaySlots {
 	Create: ComponentType<CreatePlayProps>;
+	List: ComponentType<PlayListProps>;
 }

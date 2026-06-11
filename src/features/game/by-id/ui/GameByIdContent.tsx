@@ -11,8 +11,10 @@ import {
 	Title,
 	Tooltip,
 } from "@mantine/core";
+import type { ComponentType } from "react";
 import { Board } from "@/features/board/core/ui";
 import type { IGame, IWithBoards } from "@/features/game/core/domain";
+import type { PlayListProps } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
@@ -24,6 +26,7 @@ export interface GameByIdContentProps {
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
 	onUpdateBoard: (boardId: string) => void;
+	PlaysListSlot: ComponentType<PlayListProps>;
 }
 
 export function GameByIdContent({
@@ -32,25 +35,20 @@ export function GameByIdContent({
 	onCreatePlay,
 	onDeleteBoard,
 	onUpdateBoard,
+	PlaysListSlot,
 }: GameByIdContentProps) {
 	const { date, lang } = useAdapters();
 
 	return (
 		<Flex data-testid="game-by-id-content" direction="column" gap="lg">
-			<Flex direction="row" justify="space-between" gap="md" wrap="wrap">
-				<Box>
-					<Title size="h2">{game.name}</Title>
-					<Text c="dimmed" size="sm">
-						{date.format({ type: "utc-ms", value: game.createdAt })}
-					</Text>
-				</Box>
-				<Button
-					leftSection={<PlusIcon height="1rem" width="1rem" />}
-					onClick={onCreatePlay}
-				>
-					{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL)}
-				</Button>
-			</Flex>
+			<Box>
+				<Title size="h2">{game.name}</Title>
+				<Text c="dimmed" size="sm">
+					{date.format({ type: "utc-ms", value: game.createdAt })}
+				</Text>
+			</Box>
+			<Divider />
+			<PlaysListSlot gameId={game.id} onCreatePlay={onCreatePlay} />
 			<Divider />
 			<Box>
 				<Flex

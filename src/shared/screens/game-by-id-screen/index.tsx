@@ -12,6 +12,7 @@ import {
 	type IPlaySlots,
 } from "@/features/game/by-id/ui";
 import { CreatePlay } from "@/features/play/create/ui";
+import { PlaysList } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { SuspenseLoader } from "@/shared/components";
@@ -39,6 +40,7 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 	const playSlots: IPlaySlots = useMemo(
 		() => ({
 			Create: CreatePlay,
+			List: PlaysList,
 		}),
 		[],
 	);
