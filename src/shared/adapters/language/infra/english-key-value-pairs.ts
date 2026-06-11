@@ -82,6 +82,14 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// MANAGE PLAY
 	[ILanguageAdapterKey.MANAGE_PLAY_NAME_FIELD_LABEL]: "Name",
 
+	// PLAYS LIST
+	[ILanguageAdapterKey.PLAYS_LIST_HEADER]: "Plays",
+	[ILanguageAdapterKey.PLAYS_LIST_QUERY_PLAYS_ERROR_MSG]:
+		"Unable to retrieve play information.",
+	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_TITLE]: "No Plays Found",
+	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_DESCRIPTION]:
+		"There are currently no plays available.",
+
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Something went wrong!",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Retry",

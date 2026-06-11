@@ -84,6 +84,14 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	// MANAGE PLAY
 	[ILanguageAdapterKey.MANAGE_PLAY_NAME_FIELD_LABEL]: "Nombre",
 
+	// PLAYS LIST
+	[ILanguageAdapterKey.PLAYS_LIST_HEADER]: "Partidas",
+	[ILanguageAdapterKey.PLAYS_LIST_QUERY_PLAYS_ERROR_MSG]:
+		"No se pudo obtener la información de las partidas.",
+	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_TITLE]: "No se encontraron partidas",
+	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_DESCRIPTION]:
+		"No hay partidas disponibles actualmente.",
+
 	// QUERY_ERROR
 	[ILanguageAdapterKey.QUERY_ERROR_DEFAULT_TITLE]: "Se produjo un error.",
 	[ILanguageAdapterKey.QUERY_ERROR_RETRY_LABEL]: "Reintentar",
