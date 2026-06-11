@@ -6,7 +6,9 @@ import { DeleteBoard } from "@/features/board/delete/ui";
 import { UpdateBoard } from "@/features/board/update/ui";
 import {
 	GameById,
+	GameByIdComposer,
 	type IBoardSlots,
+	type IGameSlots,
 	type IPlaySlots,
 } from "@/features/game/by-id/ui";
 import { CreatePlay } from "@/features/play/create/ui";
@@ -27,6 +29,13 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 		[],
 	);
 
+	const gameSlots: IGameSlots = useMemo(
+		() => ({
+			ById: GameById,
+		}),
+		[],
+	);
+
 	const playSlots: IPlaySlots = useMemo(
 		() => ({
 			Create: CreatePlay,
@@ -34,7 +43,14 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 		[],
 	);
 
-	return <GameById {...props} boardSlots={boardSlots} playSlots={playSlots} />;
+	return (
+		<GameByIdComposer
+			{...props}
+			boardSlots={boardSlots}
+			gameSlots={gameSlots}
+			playSlots={playSlots}
+		/>
+	);
 };
 
 export default function GameByIdScreen() {

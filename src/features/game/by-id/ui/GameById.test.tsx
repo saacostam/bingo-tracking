@@ -1,22 +1,8 @@
 import { waitForElementToBeRemoved } from "@testing-library/dom";
 import { gameByIdDriver } from "@/features/game/by-id/test";
-import {
-	GameById,
-	type IBoardSlots,
-	type IPlaySlots,
-} from "@/features/game/by-id/ui";
 import { gameMockFactory } from "@/features/game/core/test";
 import { mockDi, renderWithProviders } from "@/tests";
-
-const boardSlots: IBoardSlots = {
-	Create: vi.fn(),
-	Delete: vi.fn(),
-	Update: vi.fn(),
-};
-
-const playSlots: IPlaySlots = {
-	Create: vi.fn(),
-};
+import { GameById } from "./GameById";
 
 describe("GameById", () => {
 	const id = "mock-game-id";
@@ -28,7 +14,13 @@ describe("GameById", () => {
 			di.clients.game.getGameById.mockRejectedValue(new Error("mock-error"));
 
 			renderWithProviders(
-				<GameById id={id} boardSlots={boardSlots} playSlots={playSlots} />,
+				<GameById
+					id={id}
+					onCreateBoard={vi.fn()}
+					onCreatePlay={vi.fn()}
+					onDeleteBoard={vi.fn()}
+					onUpdateBoard={vi.fn()}
+				/>,
 				di,
 			);
 
@@ -54,7 +46,13 @@ describe("GameById", () => {
 			);
 
 			renderWithProviders(
-				<GameById id={id} boardSlots={boardSlots} playSlots={playSlots} />,
+				<GameById
+					id={id}
+					onCreateBoard={vi.fn()}
+					onCreatePlay={vi.fn()}
+					onDeleteBoard={vi.fn()}
+					onUpdateBoard={vi.fn()}
+				/>,
 				di,
 			);
 
@@ -79,7 +77,13 @@ describe("GameById", () => {
 			di.adapters.date.format.mockReturnValue(mockDate);
 
 			renderWithProviders(
-				<GameById id={id} boardSlots={boardSlots} playSlots={playSlots} />,
+				<GameById
+					id={id}
+					onCreateBoard={vi.fn()}
+					onCreatePlay={vi.fn()}
+					onDeleteBoard={vi.fn()}
+					onUpdateBoard={vi.fn()}
+				/>,
 				di,
 			);
 
@@ -122,7 +126,13 @@ describe("GameById", () => {
 			di.adapters.date.format.mockReturnValue(mockDate);
 
 			renderWithProviders(
-				<GameById id={id} boardSlots={boardSlots} playSlots={playSlots} />,
+				<GameById
+					id={id}
+					onCreateBoard={vi.fn()}
+					onCreatePlay={vi.fn()}
+					onDeleteBoard={vi.fn()}
+					onUpdateBoard={vi.fn()}
+				/>,
 				di,
 			);
 
