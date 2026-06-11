@@ -86,6 +86,8 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// PLAYS LIST
 	[ILanguageAdapterKey.PLAYS_LIST_HEADER]: "Partidas",
+	[ILanguageAdapterKey.PLAYS_LIST_DESCRIPTION]:
+		"Consulta todas las partidas de este juego.",
 	[ILanguageAdapterKey.PLAYS_LIST_QUERY_PLAYS_ERROR_MSG]:
 		"No se pudo obtener la información de las partidas.",
 	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_TITLE]: "No se encontraron partidas",

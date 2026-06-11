@@ -84,6 +84,8 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// PLAYS LIST
 	[ILanguageAdapterKey.PLAYS_LIST_HEADER]: "Plays",
+	[ILanguageAdapterKey.PLAYS_LIST_DESCRIPTION]:
+		"Browse all plays for this game.",
 	[ILanguageAdapterKey.PLAYS_LIST_QUERY_PLAYS_ERROR_MSG]:
 		"Unable to retrieve play information.",
 	[ILanguageAdapterKey.PLAYS_LIST_NO_PLAYS_TITLE]: "No Plays Found",
