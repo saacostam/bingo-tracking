@@ -5,7 +5,11 @@ import {
 } from "@/features/game/by-id/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
-import type { IBoardSlots, IGameSlots, IPlaySlots } from "./GameById.props";
+import type {
+	IBoardSlots,
+	IGameSlots,
+	IPlaySlots,
+} from "./GameByIdComposer.props";
 
 export interface GameByIdComposerProps {
 	id: string;
