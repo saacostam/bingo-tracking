@@ -45,6 +45,7 @@ export function mockDi(overrides?: {
 		},
 		date: {
 			formatDate: vi.fn(),
+			formatDateTime: vi.fn(),
 		},
 		errorMonitoringAdapter: {
 			report: vi.fn(),

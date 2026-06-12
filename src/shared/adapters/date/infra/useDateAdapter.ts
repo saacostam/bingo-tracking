@@ -1,25 +1,33 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import type { IDateAdapter } from "@/shared/adapters/date/domain";
 
-export function useDateAdapter(): IDateAdapter {
-	const formatDate: IDateAdapter["formatDate"] = useCallback((args) => {
-		switch (args.type) {
-			case "utc-ms": {
-				const date = new Date(args.value);
+export function createDateAdapter(): IDateAdapter {
+	const dateFormatter = new Intl.DateTimeFormat(undefined, {
+		dateStyle: "medium",
+	});
 
-				const year = date.getUTCFullYear();
-				const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-				const day = String(date.getUTCDate()).padStart(2, "0");
+	const dateTimeFormatter = new Intl.DateTimeFormat(undefined, {
+		dateStyle: "medium",
+		timeStyle: "short",
+	});
 
-				return `${year}-${month}-${day}`;
+	return {
+		formatDate(args) {
+			switch (args.type) {
+				case "utc-ms":
+					return dateFormatter.format(new Date(args.value));
 			}
-		}
-	}, []);
+		},
 
-	return useMemo(
-		() => ({
-			formatDate,
-		}),
-		[formatDate],
-	);
+		formatDateTime(args) {
+			switch (args.type) {
+				case "utc-ms":
+					return dateTimeFormatter.format(new Date(args.value));
+			}
+		},
+	};
+}
+
+export function useDateAdapter(): IDateAdapter {
+	return useMemo(() => createDateAdapter(), []);
 }
