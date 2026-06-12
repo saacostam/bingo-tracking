@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { useGameColor } from "@/features/game/core/app";
 import type { IGame } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
-import { PuzzlePieceIcon } from "@/shared/icons";
+import { RectangleGroup } from "@/shared/icons";
 import { genRoute, RouteName } from "@/shared/router/app";
 
 export interface GameItemProps {
@@ -30,11 +30,11 @@ export function GameItem({ game }: GameItemProps) {
 				})}
 				withBorder
 			>
-				<Flex direction="row" gap="md">
+				<Flex direction="row" gap="md" wrap="wrap">
 					<Avatar color={color}>
-						<PuzzlePieceIcon />
+						<RectangleGroup />
 					</Avatar>
-					<Box w="100%">
+					<Box>
 						<Title size="lg">{game.name}</Title>
 						<Text c="dimmed" size="xs">
 							{date.formatDate({ type: "utc-ms", value: game.createdAt })}
