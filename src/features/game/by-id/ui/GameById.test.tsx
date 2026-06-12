@@ -76,7 +76,7 @@ describe("GameById", () => {
 			di.clients.game.getGameById.mockResolvedValue({
 				game,
 			});
-			di.adapters.date.formatDate.mockReturnValue(mockDate);
+			di.adapters.date.formatDateTime.mockReturnValue(mockDate);
 
 			renderWithProviders(
 				<GameById
@@ -103,7 +103,7 @@ describe("GameById", () => {
 			expect(content).toHaveTextContent(game.name);
 			expect(content).toHaveTextContent(mockDate);
 
-			expect(di.adapters.date.formatDate).toHaveBeenCalledWith({
+			expect(di.adapters.date.formatDateTime).toHaveBeenCalledWith({
 				type: "utc-ms",
 				value: game.createdAt,
 			});
@@ -126,7 +126,7 @@ describe("GameById", () => {
 			di.clients.game.getGameById.mockResolvedValue({
 				game,
 			});
-			di.adapters.date.formatDate.mockReturnValue(mockDate);
+			di.adapters.date.formatDateTime.mockReturnValue(mockDate);
 
 			renderWithProviders(
 				<GameById
@@ -156,7 +156,7 @@ describe("GameById", () => {
 			);
 			expect(emptyQuery).toBeInTheDocument();
 
-			expect(di.adapters.date.formatDate).toHaveBeenCalledWith({
+			expect(di.adapters.date.formatDateTime).toHaveBeenCalledWith({
 				type: "utc-ms",
 				value: game.createdAt,
 			});
