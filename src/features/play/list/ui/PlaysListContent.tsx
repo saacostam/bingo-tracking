@@ -42,7 +42,7 @@ export function PlaysListContent({ plays }: PlaysListContentProps) {
 							>
 								<Title size="lg">{play.name}</Title>
 								<Text c="dimmed" size="xs">
-									{date.format({ type: "utc-ms", value: play.startedAt })}
+									{date.formatDate({ type: "utc-ms", value: play.startedAt })}
 								</Text>
 							</Card>
 						</Grid.Col>

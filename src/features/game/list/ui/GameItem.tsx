@@ -37,7 +37,7 @@ export function GameItem({ game }: GameItemProps) {
 					<Box w="100%">
 						<Title size="lg">{game.name}</Title>
 						<Text c="dimmed" size="xs">
-							{date.format({ type: "utc-ms", value: game.createdAt })}
+							{date.formatDate({ type: "utc-ms", value: game.createdAt })}
 						</Text>
 					</Box>
 				</Flex>

@@ -58,7 +58,7 @@ describe("Games", () => {
 			);
 			di.clients.game.getGames.mockResolvedValue(getGamesResponse);
 
-			di.adapters.date.format.mockImplementation(({ value }) => {
+			di.adapters.date.formatDate.mockImplementation(({ value }) => {
 				const entry = data.find((entry) => entry.game.createdAt === value);
 				return entry?.mockDate ?? "unknown";
 			});
@@ -84,7 +84,7 @@ describe("Games", () => {
 				expect(element).toHaveTextContent(game.name);
 				expect(element).toHaveTextContent(mockDate);
 
-				expect(di.adapters.date.format).toHaveBeenCalledWith({
+				expect(di.adapters.date.formatDate).toHaveBeenCalledWith({
 					type: "utc-ms",
 					value: game.createdAt,
 				});

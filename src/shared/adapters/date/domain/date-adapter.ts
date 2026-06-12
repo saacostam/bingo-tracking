@@ -1,7 +1,9 @@
 export interface IDateAdapter {
-	format(input: IDateAdapterPayload["FormatArgs"]): string;
+	formatDate(input: IDateAdapterArgs["FormatDate"]["In"]): string;
 }
 
-export interface IDateAdapterPayload {
-	FormatArgs: { type: "utc-ms"; value: number };
+export interface IDateAdapterArgs {
+	FormatDate: {
+		In: { type: "utc-ms"; value: number };
+	};
 }

@@ -44,7 +44,7 @@ export function GameByIdContent({
 			<Box>
 				<Title size="h2">{game.name}</Title>
 				<Text c="dimmed" size="sm">
-					{date.format({ type: "utc-ms", value: game.createdAt })}
+					{date.formatDate({ type: "utc-ms", value: game.createdAt })}
 				</Text>
 			</Box>
 			<Divider />

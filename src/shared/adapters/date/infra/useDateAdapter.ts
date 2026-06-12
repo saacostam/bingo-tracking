@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import type { IDateAdapter } from "@/shared/adapters/date/domain";
 
 export function useDateAdapter(): IDateAdapter {
-	const format: IDateAdapter["format"] = useCallback((args) => {
+	const formatDate: IDateAdapter["formatDate"] = useCallback((args) => {
 		switch (args.type) {
 			case "utc-ms": {
 				const date = new Date(args.value);
@@ -18,8 +18,8 @@ export function useDateAdapter(): IDateAdapter {
 
 	return useMemo(
 		() => ({
-			format,
+			formatDate,
 		}),
-		[format],
+		[formatDate],
 	);
 }
