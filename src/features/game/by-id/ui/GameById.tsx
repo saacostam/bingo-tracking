@@ -52,7 +52,7 @@ export function GameById({
 					PlaysListSlot={PlaysListSlot}
 				/>
 			)}
-			{queryGameById.isPending && <GameByIdSkeleton />}
+			{queryGameById.isLoading && <GameByIdSkeleton />}
 		</>
 	);
 }
