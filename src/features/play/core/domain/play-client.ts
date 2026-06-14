@@ -7,6 +7,9 @@ export interface IPlayClient {
 	getAllByGameId(
 		req: IPlayClientPayload["GetAllByGameId"]["Req"],
 	): Promise<IPlayClientPayload["GetAllByGameId"]["Res"]>;
+	getById(
+		req: IPlayClientPayload["GetById"]["Req"],
+	): Promise<IPlayClientPayload["GetById"]["Res"]>;
 }
 
 export interface IPlayClientPayload {
@@ -25,6 +28,14 @@ export interface IPlayClientPayload {
 		};
 		Res: {
 			plays: IPlay[];
+		};
+	};
+	GetById: {
+		Req: {
+			playId: string;
+		};
+		Res: {
+			play: IPlay;
 		};
 	};
 }

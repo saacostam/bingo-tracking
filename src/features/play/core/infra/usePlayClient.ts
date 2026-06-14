@@ -22,6 +22,7 @@ export const createPlayClientFactory = (): IPlayClient => ({
 								name,
 								startedAt: Date.now(),
 								takenNumbers: [],
+								gameId,
 							},
 						],
 					}
@@ -47,6 +48,25 @@ export const createPlayClientFactory = (): IPlayClient => ({
 		return {
 			plays: game.plays,
 		};
+	},
+	getById: async ({ playId }) => {
+		await wait(200);
+
+		for (const game of DATA.GAMES) {
+			const play = game.plays.find((p) => p.id === playId);
+
+			if (!play) continue;
+
+			return {
+				play,
+			};
+		}
+
+		throw new DomainError({
+			type: DomainErrorType.NOT_FOUND,
+			msg: "Play not found",
+			userMsg: "Play not found",
+		});
 	},
 });
 

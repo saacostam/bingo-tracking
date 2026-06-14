@@ -27,7 +27,15 @@ export const DATA: {
 					],
 				},
 			],
-			plays: [],
+			plays: [
+				{
+					id: "1",
+					name: "Play 1",
+					gameId: "1",
+					startedAt: now + 200,
+					takenNumbers: [],
+				},
+			],
 		},
 		{
 			id: "2",
