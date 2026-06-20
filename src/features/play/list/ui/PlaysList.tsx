@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Skeleton, Text, Title } from "@mantine/core";
+import { Box, Button, Flex, Text, Title } from "@mantine/core";
 import { useQueryAllPlaysByGameId } from "@/features/play/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
@@ -6,13 +6,14 @@ import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
 import { PlusIcon } from "@/shared/icons";
 import { PlaysListContent } from "./PlaysListContent";
+import { PlaysListSkeleton } from "./PlaysListSkeleton";
 
-export interface PlayListProps {
+export interface PlaysListProps {
 	gameId: string;
 	onCreatePlay: () => void;
 }
 
-export function PlaysList({ gameId, onCreatePlay }: PlayListProps) {
+export function PlaysList({ gameId, onCreatePlay }: PlaysListProps) {
 	const { lang } = useAdapters();
 
 	const queryAllPlaysByGameId = useQueryAllPlaysByGameId({ gameId }).useQuery();
@@ -41,9 +42,7 @@ export function PlaysList({ gameId, onCreatePlay }: PlayListProps) {
 			</Flex>
 
 			<Box>
-				{queryAllPlaysByGameId.isLoading && (
-					<Skeleton data-testid="plays-list-skeleton" h="128px" />
-				)}
+				{queryAllPlaysByGameId.isLoading && <PlaysListSkeleton />}
 				{queryAllPlaysByGameId.isError && (
 					<QueryError
 						msg={lang.get(ILanguageAdapterKey.PLAYS_LIST_QUERY_PLAYS_ERROR_MSG)}
