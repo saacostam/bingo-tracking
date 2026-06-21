@@ -1,0 +1,121 @@
+import {
+	Badge,
+	Box,
+	Divider,
+	Flex,
+	Grid,
+	Paper,
+	Progress,
+	Text,
+	Title,
+} from "@mantine/core";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { IBoard } from "@/features/board/core/domain";
+import type { IPlay } from "@/features/play/core/domain";
+
+export interface PlayBoardListContentProps {
+	boards: IBoard[];
+	takenNumbers: IPlay["takenNumbers"];
+}
+
+export function PlayBoardListContent({
+	boards,
+	takenNumbers,
+}: PlayBoardListContentProps) {
+	return (
+		<Grid>
+			{boards.map((b) => (
+				<BoardItem key={b.id} board={b} takenNumbers={takenNumbers} />
+			))}
+		</Grid>
+	);
+}
+
+export interface BoardItemProps {
+	board: IBoard;
+	takenNumbers: IPlay["takenNumbers"];
+}
+
+function BoardItem({ board, takenNumbers }: BoardItemProps) {
+	const containerRef = useRef<HTMLDivElement>(null);
+
+	const [w, setW] = useState(0);
+
+	useEffect(() => {
+		const mxRowLength = board.grid.reduce(
+			(mx, row) => Math.max(mx, row.length),
+			0,
+		);
+
+		const updateWidth = () => {
+			if (containerRef.current) {
+				setW(containerRef.current.clientWidth / mxRowLength);
+			}
+		};
+
+		updateWidth();
+
+		const observer = new ResizeObserver(updateWidth);
+
+		if (containerRef.current) {
+			observer.observe(containerRef.current);
+		}
+
+		return () => observer.disconnect();
+	}, [board.grid]);
+
+	const boardNumbers = useMemo(() => board.grid.flat(), [board.grid]);
+	const percentage = useMemo(() => {
+		const numerator = boardNumbers.filter((n) =>
+			takenNumbers.includes(n),
+		).length;
+		const denominator = boardNumbers.length;
+
+		const frac = (numerator / denominator) * 100;
+		const val = Math.max(0, Math.min(frac, 100));
+
+		return Number(val.toFixed(2));
+	}, [boardNumbers, takenNumbers]);
+
+	return (
+		<Grid.Col span={{ base: 12, sm: 6 }}>
+			<Paper p="xs" withBorder>
+				<Flex direction="column" gap="xs">
+					<Title size="h5" ta="center">
+						{board.name}
+					</Title>
+					<Divider />
+					<Flex direction="column" gap="0.25rem" ref={containerRef}>
+						{board.grid.map((row, index) => (
+							<Flex key={+index} justify="space-between">
+								{row.map((n, i) => (
+									<Badge
+										key={+i}
+										color="gray"
+										style={{
+											height: w * 0.5,
+											fontSize: Math.min(16, w / 4),
+											width: w * 0.9,
+										}}
+										variant="light"
+									>
+										{n}
+									</Badge>
+								))}
+							</Flex>
+						))}
+					</Flex>
+					<Divider />
+					<Flex align="center" direction="row" gap="xs">
+						<Text c="dimmed" size="sm">
+							{percentage}%
+						</Text>
+						<Box flex={1}>
+							<Progress value={percentage} />
+						</Box>
+					</Flex>
+				</Flex>
+			</Paper>
+		</Grid.Col>
+	);
+}
