@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { useQueryGameById } from "@/features/game/core/app";
-import type { PlayListProps } from "@/features/play/list/ui";
+import type { PlaysListProps } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
@@ -14,7 +14,7 @@ export interface GameByIdProps {
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
 	onUpdateBoard: (boardId: string) => void;
-	PlaysListSlot: ComponentType<PlayListProps>;
+	PlaysListSlot: ComponentType<PlaysListProps>;
 }
 
 export function GameById({
