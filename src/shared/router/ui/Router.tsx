@@ -14,6 +14,7 @@ const ErrorScreen = lazy(() => import("@/shared/screens/error-screen"));
 const HomeScreen = lazy(() => import("@/shared/screens/home-screen"));
 const GameByIdScreen = lazy(() => import("@/shared/screens/game-by-id-screen"));
 const LandingScreen = lazy(() => import("@/shared/screens/landing-screen"));
+const PlayByIdScreen = lazy(() => import("@/shared/screens/play-by-id-screen"));
 
 export interface RouterProps {
 	Provider: JSXElementConstructor<PropsWithChildren>;
@@ -24,22 +25,28 @@ export function Router({ Provider }: RouterProps) {
 		<Provider>
 			<Suspense fallback={<SuspenseLoader style={{ height: "100vh" }} />}>
 				<Routes>
-					<Route element={<Outlet />}>
-						<Route
-							index
-							element={
-								<LandingLayout>
-									<LandingScreen />
-								</LandingLayout>
-							}
-						/>
-						<Route path="app" element={<AppLayout>{<Outlet />}</AppLayout>}>
-							<Route element={<HomeScreen />} index />
-						</Route>
-						<Route path="app/:id" element={<AppLayout>{<Outlet />}</AppLayout>}>
-							<Route element={<GameByIdScreen />} index />
-						</Route>
+					<Route
+						index
+						element={
+							<LandingLayout>
+								<LandingScreen />
+							</LandingLayout>
+						}
+					/>
+
+					<Route
+						path="app"
+						element={
+							<AppLayout>
+								<Outlet />
+							</AppLayout>
+						}
+					>
+						<Route index element={<HomeScreen />} />
+						<Route path=":id" element={<GameByIdScreen />} />
+						<Route path="play/:id" element={<PlayByIdScreen />} />
 					</Route>
+
 					<Route
 						path="*"
 						element={

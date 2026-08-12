@@ -14,7 +14,7 @@ import {
 import type { ComponentType } from "react";
 import { Board } from "@/features/board/core/ui";
 import type { IGame, IWithBoards } from "@/features/game/core/domain";
-import type { PlayListProps } from "@/features/play/list/ui";
+import type { PlaysListProps } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
@@ -26,7 +26,7 @@ export interface GameByIdContentProps {
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
 	onUpdateBoard: (boardId: string) => void;
-	PlaysListSlot: ComponentType<PlayListProps>;
+	PlaysListSlot: ComponentType<PlaysListProps>;
 }
 
 export function GameByIdContent({

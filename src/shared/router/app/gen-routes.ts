@@ -8,6 +8,7 @@ export enum RouteName {
 	GAME_BY_ID = "GAME_BY_ID",
 	HOME = "HOME",
 	LANDING = "LANDING",
+	PLAY_BY_ID = "PLAY_BY_ID",
 }
 
 /**
@@ -28,6 +29,12 @@ export type GenerateRouteAction =
 	  }
 	| {
 			name: RouteName.LANDING;
+	  }
+	| {
+			name: RouteName.PLAY_BY_ID;
+			params: {
+				id: string;
+			};
 	  };
 
 /**
@@ -54,6 +61,9 @@ export function genRoute(action: GenerateRouteAction): string {
 		}
 		case RouteName.LANDING: {
 			return "/";
+		}
+		case RouteName.PLAY_BY_ID: {
+			return `/app/play/${action.params.id}`;
 		}
 	}
 }

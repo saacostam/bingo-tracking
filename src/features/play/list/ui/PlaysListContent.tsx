@@ -46,7 +46,10 @@ export function PlaysListContent({ plays }: PlaysListContentProps) {
 								component={Link}
 								h="100%"
 								to={genRoute({
-									name: RouteName.HOME,
+									name: RouteName.PLAY_BY_ID,
+									params: {
+										id: play.id,
+									},
 								})}
 								withBorder
 							>
