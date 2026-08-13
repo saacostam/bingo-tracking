@@ -8,6 +8,7 @@ export interface IBoard {
 		[IBoardCell, IBoardCell, IBoardCell, IBoardCell, IBoardCell],
 		[IBoardCell, IBoardCell, IBoardCell, IBoardCell, IBoardCell],
 	];
+	gameId: string;
 }
 
 export type IBoardCell = number;

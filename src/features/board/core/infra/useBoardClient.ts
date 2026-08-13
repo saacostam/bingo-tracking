@@ -20,6 +20,7 @@ export const createBoardFactory = (): IBoardClient => ({
 								id,
 								grid,
 								name,
+								gameId,
 							},
 						],
 					}

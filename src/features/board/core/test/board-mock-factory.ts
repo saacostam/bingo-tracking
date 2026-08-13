@@ -51,6 +51,7 @@ class BoardMockFactory {
 					this._getCell(),
 				],
 			],
+			gameId: String(id),
 			...overrides,
 		};
 	}

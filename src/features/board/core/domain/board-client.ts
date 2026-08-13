@@ -49,7 +49,7 @@ export interface IBoardClientPayload {
 	Update: {
 		Req: {
 			boardId: string;
-			board: Omit<IBoard, "id">;
+			board: Omit<IBoard, "id" | "gameId">;
 		};
 	};
 }
