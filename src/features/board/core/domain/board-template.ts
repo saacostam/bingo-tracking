@@ -9,3 +9,8 @@ export type IBoardTemplateCell =
 	| {
 			type: "available";
 	  };
+
+export interface IBoardRange {
+	min: number;
+	max: number;
+}

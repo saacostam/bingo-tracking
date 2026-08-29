@@ -1,4 +1,4 @@
-import type { IBoardTemplate } from "@/features/board/core/domain";
+import type { IBoardRange, IBoardTemplate } from "@/features/board/core/domain";
 import type {
 	IGame,
 	IWithBoards,
@@ -12,6 +12,10 @@ const defaultBoardTemplate: IBoardTemplate = {
 	grid: new Array(5)
 		.fill(null)
 		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),
+};
+const defaultBoardRange: IBoardRange = {
+	min: 1,
+	max: 75,
 };
 
 export const DATA: {
@@ -40,6 +44,7 @@ export const DATA: {
 				},
 			],
 			boardTemplate: defaultBoardTemplate,
+			boardRange: defaultBoardRange,
 		},
 		{
 			id: "2",
@@ -48,6 +53,7 @@ export const DATA: {
 			boards: [],
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
+			boardRange: defaultBoardRange,
 		},
 		{
 			id: "3",
@@ -56,6 +62,7 @@ export const DATA: {
 			boards: [],
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
+			boardRange: defaultBoardRange,
 		},
 	],
 };
