@@ -69,6 +69,8 @@ export const createPlayClientFactory = (): IPlayClient => ({
 		});
 	},
 	takeNumber: async ({ playId, takenNumbers }) => {
+		await wait(200);
+
 		for (const game of DATA.GAMES) {
 			const play = game.plays.find((p) => p.id === playId);
 
