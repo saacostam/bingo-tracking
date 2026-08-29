@@ -12,5 +12,5 @@ export function PlayBoardListSkeleton() {
 		[],
 	);
 
-	return <Grid>{content}</Grid>;
+	return <Grid data-testid="play-board-list-skeleton">{content}</Grid>;
 }
