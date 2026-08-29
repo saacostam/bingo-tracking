@@ -30,7 +30,9 @@ export const DATA: {
 				{
 					id: "1",
 					name: "Board I",
-					values: new Array(5 * 5).fill(5),
+					values: new Array(5 * 5)
+						.fill(null)
+						.map(() => Math.ceil(75 * Math.random())),
 					gameId: "1",
 				},
 			],
