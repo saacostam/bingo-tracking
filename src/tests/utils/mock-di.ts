@@ -1,5 +1,9 @@
+import type { Mock } from "vitest";
 import type { IAdapters } from "@/shared/adapters/core/domain";
-import { ILanguageAdapterLanguage } from "@/shared/adapters/language/domain";
+import {
+	type ILanguageAdapterKey,
+	ILanguageAdapterLanguage,
+} from "@/shared/adapters/language/domain";
 import { ENGLISH_KEY_VALUE_PAIRS } from "@/shared/adapters/language/infra";
 import type { ISession } from "@/shared/adapters/session/domain";
 import { IThemeVariant } from "@/shared/adapters/theme/domain";
@@ -11,7 +15,7 @@ export function mockDi(overrides?: {
 			session?: ISession;
 		};
 	};
-}) {
+}): Mocked<IDepsInjection> {
 	const clients = {
 		board: {
 			create: vi.fn(),
@@ -38,7 +42,7 @@ export function mockDi(overrides?: {
 			patchTodo: vi.fn(),
 			queryTodos: vi.fn(),
 		},
-	} satisfies IClients;
+	};
 
 	const adapters = {
 		analyticsAdapter: {
@@ -62,7 +66,8 @@ export function mockDi(overrides?: {
 			// We default to english, but the consumer can override
 			language: ILanguageAdapterLanguage.ENGLISH,
 			setLanguage: vi.fn(),
-			get: (key) => ENGLISH_KEY_VALUE_PAIRS[key],
+			get: ((key: ILanguageAdapterKey) =>
+				ENGLISH_KEY_VALUE_PAIRS[key]) as Mocked<IAdapters>["lang"]["get"],
 		},
 		persistenceAdapter: {
 			get: vi.fn(),
@@ -87,10 +92,23 @@ export function mockDi(overrides?: {
 		uuidAdapter: {
 			gen: vi.fn(),
 		},
-	} satisfies IAdapters;
+	};
 
 	return {
 		clients,
 		adapters,
-	};
+	} satisfies Mocked<IDepsInjection>;
+}
+
+type Mocked<T> = {
+	[K in keyof T]: T[K] extends (...args: infer A) => infer R
+		? Mock<(...args: A) => R>
+		: T[K] extends object
+			? Mocked<T[K]>
+			: T[K];
+};
+
+export interface IDepsInjection {
+	adapters: IAdapters;
+	clients: IClients;
 }

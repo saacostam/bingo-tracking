@@ -3,7 +3,7 @@ import type { IGameClientPayload } from "@/features/game/core/domain";
 import { gameMockFactory } from "@/features/game/core/test";
 import { gamesDriver } from "@/features/game/list/test";
 import { Games } from "@/features/game/list/ui";
-import { mockDi, renderWithProviders } from "@/tests";
+import { type IDepsInjection, mockDi, renderWithProviders } from "@/tests";
 
 describe("Games", () => {
 	describe("sad path", () => {
@@ -12,7 +12,7 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockRejectedValue(new Error("mock-error"));
 
-			renderWithProviders(<Games />, di);
+			renderWithProviders(<Games />, di as IDepsInjection);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -33,7 +33,7 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockImplementation(() => new Promise(() => {}));
 
-			renderWithProviders(<Games />, di);
+			renderWithProviders(<Games />, di as IDepsInjection);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -63,7 +63,7 @@ describe("Games", () => {
 				return entry?.mockDate ?? "unknown";
 			});
 
-			renderWithProviders(<Games />, di);
+			renderWithProviders(<Games />, di as IDepsInjection);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -99,7 +99,7 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockResolvedValue([]);
 
-			renderWithProviders(<Games />, di);
+			renderWithProviders(<Games />, di as IDepsInjection);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 

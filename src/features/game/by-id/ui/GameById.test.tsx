@@ -1,7 +1,7 @@
 import { waitForElementToBeRemoved } from "@testing-library/dom";
 import { gameByIdDriver } from "@/features/game/by-id/test";
 import { gameMockFactory } from "@/features/game/core/test";
-import { mockDi, renderWithProviders } from "@/tests";
+import { type IDepsInjection, mockDi, renderWithProviders } from "@/tests";
 import { GameById } from "./GameById";
 
 describe("GameById", () => {
@@ -22,7 +22,7 @@ describe("GameById", () => {
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
-				di,
+				di as IDepsInjection,
 			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
@@ -55,7 +55,7 @@ describe("GameById", () => {
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
-				di,
+				di as IDepsInjection,
 			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
@@ -87,7 +87,7 @@ describe("GameById", () => {
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
-				di,
+				di as IDepsInjection,
 			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");
@@ -137,7 +137,7 @@ describe("GameById", () => {
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
-				di,
+				di as IDepsInjection,
 			);
 
 			const skeleton = await gameByIdDriver.findByTestId("skeleton");

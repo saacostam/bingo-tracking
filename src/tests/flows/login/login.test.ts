@@ -2,7 +2,12 @@ import { waitFor } from "@testing-library/dom";
 import type { ILoginClientPayload } from "@/features/login/domain";
 import { loginDriver } from "@/features/login/test";
 import { genRoute, RouteName } from "@/shared/router/app";
-import { expectRoute, mockDi, renderAppRoot } from "@/tests/utils";
+import {
+	expectRoute,
+	type IDepsInjection,
+	mockDi,
+	renderAppRoot,
+} from "@/tests/utils";
 
 describe("Login", () => {
 	it("should navigate to app after successful login", async () => {
@@ -21,7 +26,7 @@ describe("Login", () => {
 			route: genRoute({
 				name: RouteName.LANDING,
 			}),
-		});
+		} as IDepsInjection);
 
 		const mockUsername = "test-username";
 		const mockPassword = "test-password";

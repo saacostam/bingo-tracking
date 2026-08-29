@@ -5,7 +5,7 @@ import { screen, waitFor } from "@testing-library/dom";
 import type { Location } from "react-router";
 import { RouteName } from "@/shared/router/app";
 import type { ISession } from "@/shared/adapters/session/domain";
-import { mockDi, renderWithProviders } from "@/tests";
+import { mockDi, renderWithProviders, type IDepsInjection } from "@/tests";
 import { AuthGuard } from "./auth-guard";
 import { genRoute } from "@/shared/router/app";
 
@@ -50,7 +50,7 @@ describe("AuthGuard [Integration]", () => {
 			<AuthGuard>
 				<div data-testid="content" />
 			</AuthGuard>,
-			di,
+			di as IDepsInjection,
 		);
 
 		const content = screen.getByTestId("content");
@@ -70,7 +70,7 @@ describe("AuthGuard [Integration]", () => {
 			<AuthGuard>
 				<div data-testid="content" />
 			</AuthGuard>,
-			di,
+			di as IDepsInjection,
 		);
 
 		const content = screen.getByTestId("content");
@@ -90,7 +90,7 @@ describe("AuthGuard [Integration]", () => {
 			<AuthGuard>
 				<div data-testid="content" />
 			</AuthGuard>,
-			di,
+			di as IDepsInjection,
 		);
 
 		expect(screen.getByTestId("suspense-loader")).toBeInTheDocument();
@@ -117,7 +117,7 @@ describe("AuthGuard [Integration]", () => {
 			<AuthGuard>
 				<div data-testid="content" />
 			</AuthGuard>,
-			di,
+			di as IDepsInjection,
 		);
 
 		expect(screen.getByTestId("suspense-loader")).toBeInTheDocument();

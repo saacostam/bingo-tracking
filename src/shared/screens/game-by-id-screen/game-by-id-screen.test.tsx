@@ -2,7 +2,7 @@
 import { mockNavigate, mockUseParams } from "@/tests/mocks";
 
 import { GameByIdScreenController } from "@/shared/screens/game-by-id-screen";
-import { mockDi, renderWithProviders } from "@/tests";
+import { mockDi, renderWithProviders, type IDepsInjection } from "@/tests";
 import { genRoute, RouteName } from "@/shared/router/app";
 
 describe("GameByIdScreenController", () => {
@@ -33,7 +33,7 @@ describe("GameByIdScreenController", () => {
 
 			renderWithProviders(
 				<GameByIdScreenController GameById={mockGameById} />,
-				di,
+				di as IDepsInjection,
 			);
 
 			expect(mockNavigate).toHaveBeenCalledWith(
@@ -56,7 +56,7 @@ describe("GameByIdScreenController", () => {
 
 		renderWithProviders(
 			<GameByIdScreenController GameById={mockGameById} />,
-			di,
+			di as IDepsInjection,
 		);
 
 		const gameByIdProps = {
