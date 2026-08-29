@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
+import { computeCompletionPercentage } from "@/features/play/board-list/domain";
 import type { IPlay } from "@/features/play/core/domain";
 
 export interface PlayBoardListContentProps {
@@ -24,12 +25,26 @@ export function PlayBoardListContent({
 	boardTemplate,
 	takenNumbers,
 }: PlayBoardListContentProps) {
+	const sortedBoards = useMemo(
+		() =>
+			boards
+				.map((board) => ({
+					board,
+					completionPercentage: computeCompletionPercentage({
+						boardNumbers: board.values,
+						takenNumbers,
+					}),
+				}))
+				.sort((a, b) => b.completionPercentage - a.completionPercentage),
+		[boards, takenNumbers],
+	);
+
 	return (
 		<Grid>
-			{boards.map((b) => (
+			{sortedBoards.map(({ board }) => (
 				<BoardItem
-					key={b.id}
-					board={b}
+					key={board.id}
+					board={board}
 					boardTemplate={boardTemplate}
 					takenNumbers={takenNumbers}
 				/>
@@ -73,17 +88,10 @@ function BoardItem({ board, boardTemplate, takenNumbers }: BoardItemProps) {
 	}, [boardTemplate.grid]);
 
 	const boardNumbers = useMemo(() => board.values, [board.values]);
-	const percentage = useMemo(() => {
-		const numerator = boardNumbers.filter((n) =>
-			takenNumbers.includes(n),
-		).length;
-		const denominator = boardNumbers.length;
-
-		const frac = (numerator / denominator) * 100;
-		const val = Math.max(0, Math.min(frac, 100));
-
-		return Number(val.toFixed(2));
-	}, [boardNumbers, takenNumbers]);
+	const percentage = useMemo(
+		() => computeCompletionPercentage({ boardNumbers, takenNumbers }),
+		[boardNumbers, takenNumbers],
+	);
 
 	return (
 		<Grid.Col span={{ base: 12, sm: 6 }}>
