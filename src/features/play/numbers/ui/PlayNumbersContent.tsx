@@ -1,35 +1,40 @@
 import { ActionIcon, Flex } from "@mantine/core";
-import { useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
+import type { IBoardRange } from "@/features/board/core/domain";
 import type { IPlay } from "@/features/play/core/domain";
 
 export interface PlayNumbersContentProps {
+	boardRange: IBoardRange;
+	onClickTakenNumber: (takenNumber: number) => void;
 	takenNumbers: IPlay["takenNumbers"];
-	totalNumbers: number;
 }
 
 export function PlayNumbersContent({
+	boardRange,
+	onClickTakenNumber,
 	takenNumbers,
-	totalNumbers,
 }: PlayNumbersContentProps) {
-	const content = useMemo(
-		() =>
-			new Array(totalNumbers).fill(null).map((_, i) => {
-				const n = i + 1;
-				const isActive = takenNumbers.includes(n);
+	const content = useMemo(() => {
+		const content: ReactNode[] = [];
 
-				return (
-					<ActionIcon
-						key={n}
-						color={isActive ? "indigo" : "gray"}
-						fw="bold"
-						variant={isActive ? "filled" : "light"}
-					>
-						{n}
-					</ActionIcon>
-				);
-			}),
-		[takenNumbers, totalNumbers],
-	);
+		for (let val = boardRange.min; val <= boardRange.max; val++) {
+			const isActive = takenNumbers.includes(val);
+
+			content.push(
+				<ActionIcon
+					key={val}
+					color={isActive ? "indigo" : "gray"}
+					fw="bold"
+					variant={isActive ? "filled" : "light"}
+					onClick={() => onClickTakenNumber(val)}
+				>
+					{val}
+				</ActionIcon>,
+			);
+		}
+
+		return content;
+	}, [boardRange, onClickTakenNumber, takenNumbers]);
 
 	return (
 		<Flex
