@@ -1,7 +1,7 @@
 import { Flex } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import { useMutationReadBoardFromFile } from "@/features/board/core/app";
-import type { IBoard } from "@/features/board/core/domain";
+import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
@@ -11,10 +11,14 @@ import { ReadFromFileEmptyState } from "./ReadFromFileEmptyState";
 import { ReadFromFileLoadingState } from "./ReadFromFileLoadingState";
 
 export interface ReadFromFileProps {
-	onUpdateGrid: (grid: IBoard["grid"]) => void;
+	boardTemplate: IBoardTemplate;
+	onUpdateValues: (grid: IBoard["values"]) => void;
 }
 
-export function ReadFromFile({ onUpdateGrid }: ReadFromFileProps) {
+export function ReadFromFile({
+	boardTemplate,
+	onUpdateValues,
+}: ReadFromFileProps) {
 	const { lang } = useAdapters();
 
 	const [file, setFile] = useState<File | null>(null);
@@ -40,8 +44,9 @@ export function ReadFromFile({ onUpdateGrid }: ReadFromFileProps) {
 				<ReadFromFileEmptyState file={file} setFile={setFile} />
 			) : readBoardFromFile.isSuccess ? (
 				<ReadFromFileContent
-					grid={readBoardFromFile.data.grid}
-					onUpdateGrid={onUpdateGrid}
+					boardTemplate={boardTemplate}
+					values={readBoardFromFile.data.values}
+					onUpdateValues={onUpdateValues}
 					reset={reset}
 				/>
 			) : readBoardFromFile.isError ? (

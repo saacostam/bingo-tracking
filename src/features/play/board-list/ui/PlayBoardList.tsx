@@ -48,6 +48,7 @@ export function PlayBoardList({ playId }: PlayBoardListProps) {
 			) : queryPlayById.isSuccess && queryGameById.isSuccess ? (
 				<PlayBoardListContent
 					boards={queryGameById.data.game.boards}
+					boardTemplate={queryGameById.data.game.boardTemplate}
 					takenNumbers={queryPlayById.data.play.takenNumbers}
 				/>
 			) : (

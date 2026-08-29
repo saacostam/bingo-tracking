@@ -19,7 +19,7 @@ export interface IBoardClientPayload {
 		Req: {
 			gameId: string;
 			name: string;
-			grid: IBoard["grid"];
+			values: IBoard["values"];
 		};
 		Res: {
 			id: string;
@@ -43,7 +43,7 @@ export interface IBoardClientPayload {
 			file: File;
 		};
 		Res: {
-			grid: IBoard["grid"];
+			values: IBoard["values"];
 		};
 	};
 	Update: {

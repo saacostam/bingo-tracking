@@ -1,19 +1,21 @@
 import { Button, Divider, Flex, Grid, Paper, Text } from "@mantine/core";
-import type { IBoard } from "@/features/board/core/domain";
+import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import { BoardGrid } from "@/features/board/core/ui/BoardGrid";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface ReadFromFileContentProps {
-	grid: IBoard["grid"];
-	onUpdateGrid: (grid: IBoard["grid"]) => void;
+	boardTemplate: IBoardTemplate;
+	onUpdateValues: (grid: IBoard["values"]) => void;
 	reset: () => void;
+	values: IBoard["values"];
 }
 
 export function ReadFromFileContent({
-	grid,
-	onUpdateGrid,
+	boardTemplate,
+	onUpdateValues,
 	reset,
+	values,
 }: ReadFromFileContentProps) {
 	const { lang } = useAdapters();
 
@@ -31,7 +33,7 @@ export function ReadFromFileContent({
 				</Flex>
 
 				<Flex align="center" justify="center">
-					<BoardGrid grid={grid} />
+					<BoardGrid boardTemplate={boardTemplate} values={values} />
 				</Flex>
 
 				<Divider />
@@ -50,7 +52,7 @@ export function ReadFromFileContent({
 							fullWidth
 							onClick={() => {
 								reset();
-								onUpdateGrid(grid);
+								onUpdateValues(values);
 							}}
 						>
 							{lang.get(

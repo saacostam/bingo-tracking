@@ -1,4 +1,6 @@
+import { useCallback } from "react";
 import { useQueryBoardById } from "@/features/board/core/app";
+import { useQueryGameById } from "@/features/game/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
@@ -25,11 +27,22 @@ export function UpdateBoard({
 		boardId: id,
 	}).useQuery();
 
-	const retry = useRetry(queryBoardById.refetch, queryBoardById.isPending);
+	const queryGameById = useQueryGameById({
+		id: queryBoardById.isSuccess ? queryBoardById.data.board.gameId : "",
+		enabled: queryBoardById.isSuccess, // WARN: Empty id is intentional; execution is gated by enabled
+	}).useQuery();
+
+	const retry = useRetry(
+		useCallback(() => {
+			queryBoardById.refetch();
+			queryGameById.refetch();
+		}, [queryBoardById.refetch, queryGameById.refetch]),
+		queryBoardById.isPending || queryGameById.isPending,
+	);
 
 	return (
 		<>
-			{queryBoardById.isError && (
+			{(queryBoardById.isError || queryGameById.isError) && (
 				<QueryError
 					error={queryBoardById.error}
 					msg={lang.get(ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG)}
@@ -37,10 +50,13 @@ export function UpdateBoard({
 					where="UpdateBoard.queryBoardById.isError"
 				/>
 			)}
-			{queryBoardById.isLoading && <UpdateBoardSkeleton />}
-			{queryBoardById.isSuccess && (
+			{(queryBoardById.isLoading || queryGameById.isLoading) && (
+				<UpdateBoardSkeleton />
+			)}
+			{queryBoardById.isSuccess && queryGameById.isSuccess && (
 				<UpdateBoardContent
 					board={queryBoardById.data.board}
+					boardTemplate={queryGameById.data.game.boardTemplate}
 					onError={onError}
 					onSettled={onSettled}
 					onSuccess={onSuccess}

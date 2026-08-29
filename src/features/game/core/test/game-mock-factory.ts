@@ -1,5 +1,9 @@
 import { boardMockFactory } from "@/features/board/core/test";
-import type { IGame, IWithBoards } from "@/features/game/core/domain";
+import type {
+	IGame,
+	IWithBoards,
+	IWithBoardTemplate,
+} from "@/features/game/core/domain";
 
 class GameMockFactory {
 	_id = 0;
@@ -21,11 +25,18 @@ class GameMockFactory {
 	}
 
 	createGameWithBoards(
-		overrides?: Partial<IWithBoards<IGame>>,
-	): IWithBoards<IGame> {
+		overrides?: Partial<IWithBoardTemplate<IWithBoards<IGame>>>,
+	): IWithBoardTemplate<IWithBoards<IGame>> {
 		return {
 			...this.createGame(),
 			boards: [boardMockFactory.createBoard(), boardMockFactory.createBoard()],
+			boardTemplate: {
+				grid: new Array(5)
+					.fill(null)
+					.map(() =>
+						new Array(5).fill(null).map(() => ({ type: "available" })),
+					),
+			},
 			...overrides,
 		};
 	}

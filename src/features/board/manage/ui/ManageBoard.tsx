@@ -10,6 +10,7 @@ import {
 	TextInput,
 } from "@mantine/core";
 import { Controller } from "react-hook-form";
+import type { IBoardTemplate } from "@/features/board/core/domain";
 import type {
 	IManageBoardForm,
 	useManageBoardForm,
@@ -19,6 +20,7 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface ManageBoardProps {
 	action: string;
+	boardTemplate: IBoardTemplate;
 	form: ReturnType<typeof useManageBoardForm>;
 	isPending: boolean;
 	onSubmit: (data: IManageBoardForm) => void;
@@ -26,6 +28,7 @@ export interface ManageBoardProps {
 
 export function ManageBoard({
 	action,
+	boardTemplate,
 	form,
 	isPending,
 	onSubmit,
@@ -56,11 +59,50 @@ export function ManageBoard({
 					</Text>
 
 					<Flex direction="column" gap="xs">
-						<BoardRow control={control} row={0} />
-						<BoardRow control={control} row={1} />
-						<BoardCenterRow control={control} />
-						<BoardRow control={control} row={3} />
-						<BoardRow control={control} row={4} />
+						{boardTemplate.grid.map((row, ii) => (
+							<SimpleGrid cols={row.length} key={+ii}>
+								{row.map((cell, jj) => {
+									const index = ii * row.length + jj;
+
+									if (cell.type === "blocked") {
+										return <Flex key={+jj} align="center" justify="center" />;
+									}
+
+									return (
+										<Controller
+											key={+jj}
+											control={control}
+											name={`values.${index}`}
+											render={({ field, fieldState }) => (
+												<NumberInput
+													styles={{
+														input: {
+															textAlign: "center",
+														},
+													}}
+													hideControls
+													value={field.value ?? ""}
+													placeholder="-"
+													required
+													min={1}
+													max={1000}
+													onChange={(_value) => {
+														const parsedValue = Number(_value);
+														const value = Number.isNaN(parsedValue)
+															? 0
+															: parsedValue;
+
+														field.onChange(value);
+													}}
+													onBlur={field.onBlur}
+													error={fieldState.error?.message}
+												/>
+											)}
+										/>
+									);
+								})}
+							</SimpleGrid>
+						))}
 					</Flex>
 				</Box>
 
@@ -71,83 +113,5 @@ export function ManageBoard({
 				</Button>
 			</Flex>
 		</form>
-	);
-}
-
-interface BoardRowProps {
-	control: ManageBoardProps["form"]["control"];
-	row: 0 | 1 | 3 | 4;
-}
-
-function BoardRow({ control, row }: BoardRowProps) {
-	return (
-		<SimpleGrid cols={5} spacing="xs">
-			{([0, 1, 2, 3, 4] as const).map((col) => (
-				<BoardCellInput
-					key={`${row}-${col}`}
-					control={control}
-					name={`grid.${row}.${col}` as const}
-				/>
-			))}
-		</SimpleGrid>
-	);
-}
-
-interface BoardCenterRowProps {
-	control: ManageBoardProps["form"]["control"];
-}
-
-function BoardCenterRow({ control }: BoardCenterRowProps) {
-	return (
-		<SimpleGrid cols={5}>
-			<BoardCellInput control={control} name="grid.2.0" />
-			<BoardCellInput control={control} name="grid.2.1" />
-
-			<Flex align="center" justify="center" />
-
-			<BoardCellInput control={control} name="grid.2.2" />
-			<BoardCellInput control={control} name="grid.2.3" />
-		</SimpleGrid>
-	);
-}
-
-interface BoardCellInputProps {
-	control: ManageBoardProps["form"]["control"];
-	name:
-		| `grid.0.${0 | 1 | 2 | 3 | 4}`
-		| `grid.1.${0 | 1 | 2 | 3 | 4}`
-		| `grid.2.${0 | 1 | 2 | 3}`
-		| `grid.3.${0 | 1 | 2 | 3 | 4}`
-		| `grid.4.${0 | 1 | 2 | 3 | 4}`;
-}
-
-function BoardCellInput({ control, name }: BoardCellInputProps) {
-	return (
-		<Controller
-			control={control}
-			name={name}
-			render={({ field, fieldState }) => (
-				<NumberInput
-					styles={{
-						input: {
-							textAlign: "center",
-						},
-					}}
-					{...control.register(name)}
-					hideControls
-					value={field.value ?? ""}
-					error={fieldState.error?.message}
-					placeholder="-"
-					required
-					onChange={(_value) => {
-						const parsedValue = Number(_value);
-						const value = Number.isNaN(parsedValue) ? 0 : parsedValue;
-						field.onChange(value || 0);
-					}}
-					min={1}
-					max={1000}
-				/>
-			)}
-		/>
 	);
 }

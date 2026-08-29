@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { v4 } from "uuid";
-import type { IBoard, IBoardClient } from "@/features/board/core/domain";
+import type { IBoardClient } from "@/features/board/core/domain";
 import { DATA } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
 
 export const createBoardFactory = (): IBoardClient => ({
-	create: async ({ gameId, name, grid }) => {
+	create: async ({ gameId, name, values }) => {
 		await wait(200);
 		const id = v4();
 
@@ -18,7 +18,7 @@ export const createBoardFactory = (): IBoardClient => ({
 							...g.boards,
 							{
 								id,
-								grid,
+								values,
 								name,
 								gameId,
 							},
@@ -64,12 +64,8 @@ export const createBoardFactory = (): IBoardClient => ({
 
 		const randomCell = () => Math.floor(Math.random() * 100);
 
-		const rowLengths = [5, 5, 4, 5, 5];
-
 		return {
-			grid: rowLengths.map((length) =>
-				Array.from({ length }, randomCell),
-			) as IBoard["grid"],
+			values: new Array(25).fill(null).map(() => randomCell()),
 		};
 	},
 	update: async ({ boardId, board }) => {

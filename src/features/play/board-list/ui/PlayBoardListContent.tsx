@@ -10,22 +10,29 @@ import {
 	Title,
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { IBoard } from "@/features/board/core/domain";
+import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import type { IPlay } from "@/features/play/core/domain";
 
 export interface PlayBoardListContentProps {
 	boards: IBoard[];
+	boardTemplate: IBoardTemplate;
 	takenNumbers: IPlay["takenNumbers"];
 }
 
 export function PlayBoardListContent({
 	boards,
+	boardTemplate,
 	takenNumbers,
 }: PlayBoardListContentProps) {
 	return (
 		<Grid>
 			{boards.map((b) => (
-				<BoardItem key={b.id} board={b} takenNumbers={takenNumbers} />
+				<BoardItem
+					key={b.id}
+					board={b}
+					boardTemplate={boardTemplate}
+					takenNumbers={takenNumbers}
+				/>
 			))}
 		</Grid>
 	);
@@ -33,16 +40,17 @@ export function PlayBoardListContent({
 
 export interface BoardItemProps {
 	board: IBoard;
+	boardTemplate: IBoardTemplate;
 	takenNumbers: IPlay["takenNumbers"];
 }
 
-function BoardItem({ board, takenNumbers }: BoardItemProps) {
+function BoardItem({ board, boardTemplate, takenNumbers }: BoardItemProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	const [w, setW] = useState(0);
 
 	useEffect(() => {
-		const mxRowLength = board.grid.reduce(
+		const mxRowLength = boardTemplate.grid.reduce(
 			(mx, row) => Math.max(mx, row.length),
 			0,
 		);
@@ -62,9 +70,9 @@ function BoardItem({ board, takenNumbers }: BoardItemProps) {
 		}
 
 		return () => observer.disconnect();
-	}, [board.grid]);
+	}, [boardTemplate.grid]);
 
-	const boardNumbers = useMemo(() => board.grid.flat(), [board.grid]);
+	const boardNumbers = useMemo(() => board.values, [board.values]);
 	const percentage = useMemo(() => {
 		const numerator = boardNumbers.filter((n) =>
 			takenNumbers.includes(n),
@@ -86,22 +94,27 @@ function BoardItem({ board, takenNumbers }: BoardItemProps) {
 					</Title>
 					<Divider />
 					<Flex direction="column" gap="0.25rem" ref={containerRef}>
-						{board.grid.map((row, index) => (
-							<Flex key={+index} justify="space-between">
-								{row.map((n, i) => (
-									<Badge
-										key={+i}
-										color="gray"
-										style={{
-											height: w * 0.5,
-											fontSize: Math.min(16, w / 4),
-											width: w * 0.9,
-										}}
-										variant="light"
-									>
-										{n}
-									</Badge>
-								))}
+						{boardTemplate.grid.map((row, ii) => (
+							<Flex key={+ii} justify="space-between">
+								{row.map((_, jj) => {
+									const index = row.length * ii + jj;
+									const value = board.values.at(index);
+
+									return (
+										<Badge
+											key={+jj}
+											color="gray"
+											style={{
+												height: w * 0.5,
+												fontSize: Math.min(16, w / 4),
+												width: w * 0.9,
+											}}
+											variant="light"
+										>
+											{value}
+										</Badge>
+									);
+								})}
 							</Flex>
 						))}
 					</Flex>

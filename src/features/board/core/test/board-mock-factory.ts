@@ -14,43 +14,15 @@ class BoardMockFactory {
 		return this._cell;
 	}
 
-	createBoard(overrides?: Partial<IBoard>): IBoard {
+	createBoard(overrides?: Partial<IBoard>, numberOfValues?: number): IBoard {
 		const id = this._getId();
 
 		return {
 			id: String(id),
 			name: `board-${id}`,
-			grid: [
-				[
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-				],
-				[
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-				],
-				[this._getCell(), this._getCell(), this._getCell(), this._getCell()],
-				[
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-				],
-				[
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-					this._getCell(),
-				],
-			],
+			values: new Array(numberOfValues ?? 25)
+				.fill(null)
+				.map(() => this._getCell()),
 			gameId: String(id),
 			...overrides,
 		};

@@ -26,13 +26,7 @@ export const DATA: {
 				{
 					id: "1",
 					name: "Board I",
-					grid: [
-						[1, 2, 3, 4, 5],
-						[1, 2, 3, 4, 5],
-						[1, 2, 3, 4],
-						[1, 2, 3, 4, 5],
-						[1, 2, 3, 4, 5],
-					],
+					values: new Array(5 * 5).fill(5),
 					gameId: "1",
 				},
 			],

@@ -13,7 +13,11 @@ import {
 } from "@mantine/core";
 import type { ComponentType } from "react";
 import { Board } from "@/features/board/core/ui";
-import type { IGame, IWithBoards } from "@/features/game/core/domain";
+import type {
+	IGame,
+	IWithBoards,
+	IWithBoardTemplate,
+} from "@/features/game/core/domain";
 import type { PlaysListProps } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
@@ -21,7 +25,7 @@ import { EmptyQuery } from "@/shared/components";
 import { PencilIcon, PlusIcon, TrashIcon } from "@/shared/icons";
 
 export interface GameByIdContentProps {
-	game: IWithBoards<IGame>;
+	game: IWithBoardTemplate<IWithBoards<IGame>>;
 	onCreateBoard: () => void;
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
@@ -88,6 +92,7 @@ export function GameByIdContent({
 							<GridCol key={board.id} span={{ base: 12, xs: 6, md: 4 }}>
 								<Board
 									board={board}
+									boardTemplate={game.boardTemplate}
 									controls={
 										<Flex direction="row" gap="xs" justify="end">
 											<Tooltip

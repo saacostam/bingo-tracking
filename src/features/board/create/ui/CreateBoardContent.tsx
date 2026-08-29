@@ -1,7 +1,7 @@
 import { Box } from "@mantine/core";
 import { useCallback } from "react";
-import { useMutationUpdateBoard } from "@/features/board/core/app";
-import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
+import { useMutationCreateBoard } from "@/features/board/core/app";
+import type { IBoardTemplate } from "@/features/board/core/domain";
 import { BoardEditorFlow } from "@/features/board/editor-flow/ui";
 import {
 	type IManageBoardForm,
@@ -9,42 +9,37 @@ import {
 } from "@/features/board/manage/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
+import type { CreateBoardProps } from "./CreateBoard";
 
-export interface UpdateBoardContentProps {
-	board: IBoard;
+export interface CreateBoardContentProps extends CreateBoardProps {
 	boardTemplate: IBoardTemplate;
-	onError: (e: unknown) => void;
-	onSettled: () => void;
-	onSuccess: () => void;
 }
 
-export function UpdateBoardContent({
-	board,
+export function CreateBoardContent({
 	boardTemplate,
+	gameId,
 	onError,
 	onSettled,
 	onSuccess,
-}: UpdateBoardContentProps) {
+}: CreateBoardContentProps) {
 	const { lang } = useAdapters();
 
-	const updateBoardMutation = useMutationUpdateBoard();
+	const createBoardMutation = useMutationCreateBoard();
 
 	const form = useManageBoardForm({
 		defaultValues: {
-			name: board.name,
-			values: board.values,
+			name: "",
+			values: [],
 		},
 	});
 
 	const onSubmit = useCallback(
 		(data: IManageBoardForm) => {
-			updateBoardMutation.mutate(
+			createBoardMutation.mutate(
 				{
-					boardId: board.id,
-					board: {
-						name: data.name,
-						values: data.values,
-					},
+					gameId,
+					name: data.name,
+					values: data.values,
 				},
 				{
 					onError,
@@ -53,16 +48,16 @@ export function UpdateBoardContent({
 				},
 			);
 		},
-		[board.id, updateBoardMutation.mutate, onError, onSettled, onSuccess],
+		[createBoardMutation.mutate, gameId, onError, onSettled, onSuccess],
 	);
 
 	return (
-		<Box data-testid="update-board-content">
+		<Box data-testid="create-board-content">
 			<BoardEditorFlow
-				action={lang.get(ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM)}
+				action={lang.get(ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM)}
 				boardTemplate={boardTemplate}
 				form={form}
-				isPending={updateBoardMutation.isPending}
+				isPending={createBoardMutation.isPending}
 				onSubmit={onSubmit}
 			/>
 		</Box>

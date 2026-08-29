@@ -1,13 +1,9 @@
-import { useCallback } from "react";
-import { useMutationCreateBoard } from "@/features/board/core/app";
 import type { IBoardClientPayload } from "@/features/board/core/domain";
-import { BoardEditorFlow } from "@/features/board/editor-flow/ui";
-import {
-	type IManageBoardForm,
-	useManageBoardForm,
-} from "@/features/board/manage/app";
-import { useAdapters } from "@/shared/adapters/core/app";
-import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
+import { useQueryGameById } from "@/features/game/core/app";
+import { useRetry } from "@/shared/async-state";
+import { QueryError } from "@/shared/components";
+import { CreateBoardContent } from "./CreateBoardContent";
+import { CreateBoardSkeleton } from "./CreateBoardSkeleton";
 
 export interface CreateBoardProps {
 	gameId: string;
@@ -22,47 +18,29 @@ export function CreateBoard({
 	onSettled,
 	onSuccess,
 }: CreateBoardProps) {
-	const { lang } = useAdapters();
-
-	const createBoardMutation = useMutationCreateBoard();
-
-	const form = useManageBoardForm({
-		defaultValues: {
-			name: "",
-			grid: [
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-			],
-		},
-	});
-
-	const onSubmit = useCallback(
-		(data: IManageBoardForm) => {
-			createBoardMutation.mutate(
-				{
-					gameId,
-					name: data.name,
-					grid: data.grid,
-				},
-				{
-					onError,
-					onSettled,
-					onSuccess,
-				},
-			);
-		},
-		[createBoardMutation.mutate, gameId, onError, onSettled, onSuccess],
-	);
+	const queryGameById = useQueryGameById({ id: gameId }).useQuery();
+	const retry = useRetry(queryGameById.refetch, queryGameById.isPending);
 
 	return (
-		<BoardEditorFlow
-			action={lang.get(ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM)}
-			form={form}
-			isPending={createBoardMutation.isPending}
-			onSubmit={onSubmit}
-		/>
+		<>
+			{queryGameById.isError && (
+				<QueryError
+					error={queryGameById.error}
+					msg="Unable to fetch game info"
+					retry={retry}
+					where="CreateBoard.queryGameById.isError"
+				/>
+			)}
+			{queryGameById.isLoading && <CreateBoardSkeleton />}
+			{queryGameById.isSuccess && (
+				<CreateBoardContent
+					boardTemplate={queryGameById.data.game.boardTemplate}
+					gameId={gameId}
+					onError={onError}
+					onSettled={onSettled}
+					onSuccess={onSuccess}
+				/>
+			)}
+		</>
 	);
 }

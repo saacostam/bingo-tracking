@@ -1,6 +1,6 @@
 import { Tabs } from "@mantine/core";
 import { useCallback, useState } from "react";
-import type { IBoard } from "@/features/board/core/domain";
+import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import type {
 	IManageBoardForm,
 	useManageBoardForm,
@@ -12,6 +12,7 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface BoardEditorFlowProps {
 	action: string;
+	boardTemplate: IBoardTemplate;
 	form: ReturnType<typeof useManageBoardForm>;
 	isPending: boolean;
 	onSubmit: (data: IManageBoardForm) => void;
@@ -21,6 +22,7 @@ type BoardEditorFlowTab = "manual" | "read";
 
 export function BoardEditorFlow({
 	action,
+	boardTemplate,
 	form,
 	isPending,
 	onSubmit,
@@ -29,9 +31,9 @@ export function BoardEditorFlow({
 
 	const [tab, setTab] = useState<BoardEditorFlowTab>("manual");
 
-	const onUpdateGrid = useCallback(
-		(grid: IBoard["grid"]) => {
-			form.setValue("grid", grid);
+	const onUpdateValues = useCallback(
+		(values: IBoard["values"]) => {
+			form.setValue("values", values);
 			setTab("manual");
 		},
 		[form.setValue],
@@ -51,6 +53,7 @@ export function BoardEditorFlow({
 			<Tabs.Panel pt="md" value="manual">
 				<ManageBoard
 					action={action}
+					boardTemplate={boardTemplate}
 					form={form}
 					isPending={isPending}
 					onSubmit={onSubmit}
@@ -58,7 +61,10 @@ export function BoardEditorFlow({
 			</Tabs.Panel>
 
 			<Tabs.Panel pt="md" value="read">
-				<ReadFromFile onUpdateGrid={onUpdateGrid} />
+				<ReadFromFile
+					boardTemplate={boardTemplate}
+					onUpdateValues={onUpdateValues}
+				/>
 			</Tabs.Panel>
 		</Tabs>
 	);
