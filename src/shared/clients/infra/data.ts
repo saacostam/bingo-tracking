@@ -1,13 +1,21 @@
+import type { IBoardTemplate } from "@/features/board/core/domain";
 import type {
 	IGame,
 	IWithBoards,
+	IWithBoardTemplate,
 	IWithPlays,
 } from "@/features/game/core/domain";
 
 const now = Date.now();
 
+const defaultBoardTemplate: IBoardTemplate = {
+	grid: new Array(5)
+		.fill(null)
+		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),
+};
+
 export const DATA: {
-	GAMES: IWithPlays<IWithBoards<IGame>>[];
+	GAMES: IWithBoardTemplate<IWithPlays<IWithBoards<IGame>>>[];
 } = {
 	GAMES: [
 		{
@@ -37,6 +45,7 @@ export const DATA: {
 					takenNumbers: [],
 				},
 			],
+			boardTemplate: defaultBoardTemplate,
 		},
 		{
 			id: "2",
@@ -44,6 +53,7 @@ export const DATA: {
 			createdAt: now + 1,
 			boards: [],
 			plays: [],
+			boardTemplate: defaultBoardTemplate,
 		},
 		{
 			id: "3",
@@ -51,6 +61,7 @@ export const DATA: {
 			createdAt: now + 2,
 			boards: [],
 			plays: [],
+			boardTemplate: defaultBoardTemplate,
 		},
 	],
 };

@@ -1,4 +1,4 @@
-import type { IGame, IWithBoards } from "./game";
+import type { IGame, IWithBoards, IWithBoardTemplate } from "./game";
 
 export interface IGameClient {
 	getGames(): Promise<IGameClientPayload["GetGames"]["Res"]>;
@@ -16,7 +16,7 @@ export interface IGameClientPayload {
 			id: string;
 		};
 		Res: {
-			game: IWithBoards<IGame>;
+			game: IWithBoardTemplate<IWithBoards<IGame>>;
 		};
 	};
 }
