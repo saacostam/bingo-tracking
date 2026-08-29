@@ -1,16 +1,18 @@
-import { ActionIcon, Flex } from "@mantine/core";
+import { ActionIcon, Flex, LoadingOverlay } from "@mantine/core";
 import { type ReactNode, useMemo } from "react";
 import type { IBoardRange } from "@/features/board/core/domain";
 import type { IPlay } from "@/features/play/core/domain";
 
 export interface PlayNumbersContentProps {
 	boardRange: IBoardRange;
+	isPending: boolean;
 	onClickTakenNumber: (takenNumber: number) => void;
 	takenNumbers: IPlay["takenNumbers"];
 }
 
 export function PlayNumbersContent({
 	boardRange,
+	isPending,
 	onClickTakenNumber,
 	takenNumbers,
 }: PlayNumbersContentProps) {
@@ -42,7 +44,9 @@ export function PlayNumbersContent({
 			direction="row"
 			gap="xs"
 			wrap="wrap"
+			pos="relative"
 		>
+			<LoadingOverlay visible={isPending} />
 			{content}
 		</Flex>
 	);
