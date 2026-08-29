@@ -3,6 +3,7 @@ import { useQueryGameById } from "@/features/game/core/app";
 import { useQueryPlayById } from "@/features/play/core/app";
 import type { IRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
+import { BoardItem } from "./BoardItem";
 import { PlayBoardListContent } from "./PlayBoardListContent";
 import { PlayBoardListSkeleton } from "./PlayBoardListSkeleton";
 
@@ -47,6 +48,7 @@ export function PlayBoardList({ playId }: PlayBoardListProps) {
 				/>
 			) : queryPlayById.isSuccess && queryGameById.isSuccess ? (
 				<PlayBoardListContent
+					BoardItem={BoardItem}
 					boards={queryGameById.data.game.boards}
 					boardTemplate={queryGameById.data.game.boardTemplate}
 					takenNumbers={queryPlayById.data.play.takenNumbers}
