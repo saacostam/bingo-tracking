@@ -68,6 +68,19 @@ export const createPlayClientFactory = (): IPlayClient => ({
 			userMsg: "Play not found",
 		});
 	},
+	takeNumber: async ({ playId, takenNumbers }) => {
+		for (const game of DATA.GAMES) {
+			const play = game.plays.find((p) => p.id === playId);
+
+			if (play !== undefined) {
+				play.takenNumbers = takenNumbers;
+			}
+		}
+
+		return {
+			takenNumbers,
+		};
+	},
 });
 
 export function usePlayClient(): IPlayClient {
