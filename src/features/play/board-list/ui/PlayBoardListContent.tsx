@@ -100,16 +100,19 @@ function BoardItem({ board, boardTemplate, takenNumbers }: BoardItemProps) {
 									const index = row.length * ii + jj;
 									const value = board.values.at(index);
 
+									const isActive =
+										value !== undefined && takenNumbers.includes(value);
+
 									return (
 										<Badge
 											key={+jj}
-											color="gray"
+											color={isActive ? "indigo" : "gray"}
+											variant={isActive ? "filled" : "light"}
 											style={{
 												height: w * 0.5,
 												fontSize: Math.min(16, w / 4),
 												width: w * 0.9,
 											}}
-											variant="light"
 										>
 											{value}
 										</Badge>
