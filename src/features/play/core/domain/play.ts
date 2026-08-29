@@ -5,3 +5,5 @@ export interface IPlay {
 	startedAt: number;
 	takenNumbers: number[];
 }
+
+export type IPattern = boolean[];

@@ -3,7 +3,7 @@ import type {
 	IBoardRange,
 	IBoardTemplate,
 } from "@/features/board/core/domain";
-import type { IPlay } from "@/features/play/core/domain";
+import type { IPattern, IPlay } from "@/features/play/core/domain";
 
 export interface IGame {
 	id: string;
@@ -22,4 +22,5 @@ export type IWithPlays<G> = G & {
 export type IWithBoardTemplate<G> = G & {
 	boardTemplate: IBoardTemplate;
 	boardRange: IBoardRange;
+	patterns: IPattern[];
 };

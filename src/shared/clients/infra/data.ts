@@ -5,6 +5,7 @@ import type {
 	IWithBoardTemplate,
 	IWithPlays,
 } from "@/features/game/core/domain";
+import type { IPattern } from "@/features/play/core/domain";
 
 const now = Date.now();
 
@@ -17,6 +18,9 @@ const defaultBoardRange: IBoardRange = {
 	min: 1,
 	max: 75,
 };
+const defaultPatterns: IPattern[] = [
+	[...new Array(5).fill([false, false, true, false, false])],
+];
 
 export const DATA: {
 	GAMES: IWithBoardTemplate<IWithPlays<IWithBoards<IGame>>>[];
@@ -55,6 +59,7 @@ export const DATA: {
 			],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
+			patterns: defaultPatterns,
 		},
 		{
 			id: "2",
@@ -64,6 +69,7 @@ export const DATA: {
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
+			patterns: defaultPatterns,
 		},
 		{
 			id: "3",
@@ -73,6 +79,7 @@ export const DATA: {
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
+			patterns: defaultPatterns,
 		},
 	],
 };
