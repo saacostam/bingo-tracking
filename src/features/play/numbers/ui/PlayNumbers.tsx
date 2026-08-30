@@ -1,4 +1,3 @@
-import { Skeleton } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { useCallback } from "react";
 
@@ -12,6 +11,7 @@ import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
 
 import { PlayNumbersContent } from "./PlayNumbersContent";
+import { PlayNumbersSkeleton } from "./PlayNumbersSkeleton";
 
 export interface PlayNumbersProps {
 	playId: string;
@@ -113,7 +113,7 @@ export function PlayNumbers({ playId }: PlayNumbersProps) {
 			)}
 
 			{(queryPlayById.isLoading || queryGameById.isLoading) && (
-				<Skeleton data-testid="play-numbers-skeleton" h="128px" />
+				<PlayNumbersSkeleton />
 			)}
 		</>
 	);
