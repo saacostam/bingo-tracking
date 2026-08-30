@@ -1,21 +1,21 @@
 import type { IGame, IWithBoards, IWithBoardTemplate } from "./game";
 
 export interface IGameClient {
-	getGames(): Promise<IGameClientPayload["GetGames"]["Res"]>;
+	getGames(): Promise<IGameClientPayload["getGames"]["res"]>;
 	getGameById(
-		req: IGameClientPayload["GetGameById"]["Req"],
-	): Promise<IGameClientPayload["GetGameById"]["Res"]>;
+		req: IGameClientPayload["getGameById"]["req"],
+	): Promise<IGameClientPayload["getGameById"]["res"]>;
 }
 
 export interface IGameClientPayload {
-	GetGames: {
-		Res: IGame[];
+	getGames: {
+		res: IGame[];
 	};
-	GetGameById: {
-		Req: {
+	getGameById: {
+		req: {
 			id: string;
 		};
-		Res: {
+		res: {
 			game: IWithBoardTemplate<IWithBoards<IGame>>;
 		};
 	};

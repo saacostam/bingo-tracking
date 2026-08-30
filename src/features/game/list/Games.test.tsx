@@ -53,7 +53,7 @@ describe("Games", () => {
 				mockDate: `mock-date-${index}`,
 			}));
 
-			const getGamesResponse: IGameClientPayload["GetGames"]["Res"] = data.map(
+			const getGamesResponse: IGameClientPayload["getGames"]["res"] = data.map(
 				(entry) => entry.game,
 			);
 			di.clients.game.getGames.mockResolvedValue(getGamesResponse);
