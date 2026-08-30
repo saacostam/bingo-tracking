@@ -33,6 +33,7 @@ export function PlayDetailsHeaderContent({
 			<Box>
 				<Title size="h2">{name}</Title>
 				<Text c="dimmed" size="sm">
+					Created at:{" "}
 					{date.formatDateTime({
 						type: "utc-ms",
 						value: createdAt,
