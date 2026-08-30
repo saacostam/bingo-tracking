@@ -2,42 +2,42 @@ import type { IPlay } from "./play";
 
 export interface IPlayClient {
 	create(
-		req: IPlayClientPayload["Create"]["Req"],
-	): Promise<IPlayClientPayload["Create"]["Res"]>;
+		req: IPlayClientPayload["create"]["req"],
+	): Promise<IPlayClientPayload["create"]["res"]>;
 	getAllByGameId(
-		req: IPlayClientPayload["GetAllByGameId"]["Req"],
-	): Promise<IPlayClientPayload["GetAllByGameId"]["Res"]>;
+		req: IPlayClientPayload["getAllByGameId"]["req"],
+	): Promise<IPlayClientPayload["getAllByGameId"]["res"]>;
 	getById(
-		req: IPlayClientPayload["GetById"]["Req"],
-	): Promise<IPlayClientPayload["GetById"]["Res"]>;
+		req: IPlayClientPayload["getById"]["req"],
+	): Promise<IPlayClientPayload["getById"]["res"]>;
 	takeNumber(
 		req: IPlayClientPayload["takeNumber"]["req"],
 	): Promise<IPlayClientPayload["takeNumber"]["res"]>;
 }
 
 export interface IPlayClientPayload {
-	Create: {
-		Req: {
+	create: {
+		req: {
 			gameId: string;
 			name: string;
 		};
-		Res: {
+		res: {
 			id: string;
 		};
 	};
-	GetAllByGameId: {
-		Req: {
+	getAllByGameId: {
+		req: {
 			gameId: string;
 		};
-		Res: {
+		res: {
 			plays: IPlay[];
 		};
 	};
-	GetById: {
-		Req: {
+	getById: {
+		req: {
 			playId: string;
 		};
-		Res: {
+		res: {
 			play: IPlay;
 		};
 	};

@@ -10,7 +10,7 @@ export function useMutationCreatePlay() {
 
 	return useMetaMutation({
 		mutationKey: [MutationKeys.CREATE_PLAY],
-		mutationFn: (req: IPlayClientPayload["Create"]["Req"]) => play.create(req),
+		mutationFn: (req: IPlayClientPayload["create"]["req"]) => play.create(req),
 		onSettled: (_, __, { gameId }) => {
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_PLAYS_BY_GAME_ID, gameId],
