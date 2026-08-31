@@ -24,6 +24,10 @@ export function useSetBoardTemplateMutation() {
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_PLAYS_BY_GAME_ID],
 			});
+
+			queryClient.invalidateQueries({
+				queryKey: [QueryKeys.GET_BOARD_BY_ID],
+			});
 		},
 	});
 }
