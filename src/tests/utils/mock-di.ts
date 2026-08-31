@@ -16,88 +16,85 @@ export function mockDi(overrides?: {
 		};
 	};
 }): Mocked<IDepsInjection> {
-	const clients = {
-		board: {
-			create: vi.fn(),
-			delete: vi.fn(),
-			getById: vi.fn(),
-			readFromFile: vi.fn(),
-			update: vi.fn(),
-		},
-		game: {
-			getGames: vi.fn(),
-			getGameById: vi.fn(),
-		},
-		loginClient: {
-			login: vi.fn(),
-		},
-		play: {
-			create: vi.fn(),
-			getAllByGameId: vi.fn(),
-			getById: vi.fn(),
-			takeNumber: vi.fn(),
-		},
-		todoClient: {
-			createTodo: vi.fn(),
-			deleteTodo: vi.fn(),
-			patchTodo: vi.fn(),
-			queryTodos: vi.fn(),
-		},
-	};
-
-	const adapters = {
-		analyticsAdapter: {
-			trackEvent: vi.fn(),
-		},
-		date: {
-			formatDate: vi.fn(),
-			formatDateTime: vi.fn(),
-		},
-		errorMonitoringAdapter: {
-			report: vi.fn(),
-		},
-		fetcherAdapter: {
-			get: vi.fn(),
-			post: vi.fn(),
-			put: vi.fn(),
-			patch: vi.fn(),
-			delete: vi.fn(),
-		},
-		lang: {
-			// We default to english, but the consumer can override
-			language: ILanguageAdapterLanguage.ENGLISH,
-			setLanguage: vi.fn(),
-			get: ((key: ILanguageAdapterKey) =>
-				ENGLISH_KEY_VALUE_PAIRS[key]) as Mocked<IAdapters>["lang"]["get"],
-		},
-		persistenceAdapter: {
-			get: vi.fn(),
-			set: vi.fn(),
-			unsafeGet: vi.fn(),
-		},
-		notificationAdapter: {
-			notify: vi.fn(),
-		},
-		sessionAdapter: {
-			session: overrides?.adapters?.sessionAdapter?.session ?? {
-				type: "authenticated",
-				token: "token",
-			},
-			removeToken: vi.fn(),
-			setToken: vi.fn(),
-		},
-		themeAdapter: {
-			theme: IThemeVariant.LIGHT,
-			setTheme: vi.fn(),
-		},
-		uuidAdapter: {
-			gen: vi.fn(),
-		},
-	};
-
 	return {
-		clients,
-		adapters,
+		clients: {
+			board: {
+				create: vi.fn(),
+				delete: vi.fn(),
+				getById: vi.fn(),
+				readFromFile: vi.fn(),
+				update: vi.fn(),
+			},
+			game: {
+				getGames: vi.fn(),
+				getGameById: vi.fn(),
+				setBoardTemplate: vi.fn(),
+			},
+			loginClient: {
+				login: vi.fn(),
+			},
+			play: {
+				create: vi.fn(),
+				getAllByGameId: vi.fn(),
+				getById: vi.fn(),
+				takeNumber: vi.fn(),
+			},
+			todoClient: {
+				createTodo: vi.fn(),
+				deleteTodo: vi.fn(),
+				patchTodo: vi.fn(),
+				queryTodos: vi.fn(),
+			},
+		},
+		adapters: {
+			analyticsAdapter: {
+				trackEvent: vi.fn(),
+			},
+			date: {
+				formatDate: vi.fn(),
+				formatDateTime: vi.fn(),
+			},
+			errorMonitoringAdapter: {
+				report: vi.fn(),
+			},
+			fetcherAdapter: {
+				get: vi.fn(),
+				post: vi.fn(),
+				put: vi.fn(),
+				patch: vi.fn(),
+				delete: vi.fn(),
+			},
+			lang: {
+				// We default to english, but the consumer can override
+				language: ILanguageAdapterLanguage.ENGLISH,
+				setLanguage: vi.fn(),
+				get: ((key: ILanguageAdapterKey) =>
+					ENGLISH_KEY_VALUE_PAIRS[key]) as Mocked<IAdapters>["lang"]["get"],
+			},
+			persistenceAdapter: {
+				get: vi.fn(),
+				set: vi.fn(),
+				unsafeGet: vi.fn(),
+			},
+			notificationAdapter: {
+				notify: vi.fn(),
+			},
+			sessionAdapter: {
+				session: overrides?.adapters?.sessionAdapter?.session ?? {
+					type: "authenticated",
+					token: "token",
+				},
+				removeToken: vi.fn(),
+				setToken: vi.fn(),
+			},
+			themeAdapter: {
+				theme: IThemeVariant.LIGHT,
+				setTheme: vi.fn(),
+			},
+			uuidAdapter: {
+				gen: vi.fn(),
+			},
+		},
 	} satisfies Mocked<IDepsInjection>;
 }
 

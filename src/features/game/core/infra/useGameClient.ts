@@ -29,11 +29,26 @@ export function useGameClient(): IGameClient {
 		return DATA.GAMES;
 	}, []);
 
+	const setBoardTemplate: IGameClient["setBoardTemplate"] = useCallback(
+		async ({ gameId, boardRange, boardTemplate }) => {
+			await wait(500);
+
+			for (const game of DATA.GAMES) {
+				if (game.id !== gameId) continue;
+
+				game.boardRange = boardRange;
+				game.boardTemplate = boardTemplate;
+			}
+		},
+		[],
+	);
+
 	return useMemo(
 		() => ({
 			getGameById,
 			getGames,
+			setBoardTemplate,
 		}),
-		[getGameById, getGames],
+		[getGameById, getGames, setBoardTemplate],
 	);
 }

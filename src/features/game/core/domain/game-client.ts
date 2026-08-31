@@ -1,3 +1,4 @@
+import type { IBoardRange, IBoardTemplate } from "@/features/board/core/domain";
 import type { IGame, IWithBoards, IWithBoardTemplate } from "./game";
 
 export interface IGameClient {
@@ -5,6 +6,9 @@ export interface IGameClient {
 	getGameById(
 		req: IGameClientPayload["getGameById"]["req"],
 	): Promise<IGameClientPayload["getGameById"]["res"]>;
+	setBoardTemplate(
+		req: IGameClientPayload["setBoardTemplate"]["req"],
+	): Promise<void>;
 }
 
 export interface IGameClientPayload {
@@ -17,6 +21,13 @@ export interface IGameClientPayload {
 		};
 		res: {
 			game: IWithBoardTemplate<IWithBoards<IGame>>;
+		};
+	};
+	setBoardTemplate: {
+		req: {
+			gameId: string;
+			boardRange: IBoardRange;
+			boardTemplate: IBoardTemplate;
 		};
 	};
 }
