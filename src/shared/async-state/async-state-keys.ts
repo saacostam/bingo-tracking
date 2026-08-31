@@ -20,6 +20,9 @@ export enum MutationKeys {
 	READ_BOARD_FROM_FILE = "Read Board Form File",
 	UPDATE_BOARD = "Update Board",
 
+	// GAMES
+	SET_BOARD_TEMPLATE = "Set Board Template",
+
 	// PLAYS
 	CREATE_PLAY = "Create Play",
 	TAKE_NUMBER = "Take Number",
