@@ -2,52 +2,52 @@ import type { IBoard } from "@/features/board/core/domain/board";
 
 export interface IBoardClient {
 	create(
-		req: IBoardClientPayload["Create"]["Req"],
-	): Promise<IBoardClientPayload["Create"]["Res"]>;
-	delete(req: IBoardClientPayload["Delete"]["Req"]): Promise<void>;
+		req: IBoardClientPayload["create"]["req"],
+	): Promise<IBoardClientPayload["create"]["res"]>;
+	delete(req: IBoardClientPayload["delete"]["req"]): Promise<void>;
 	getById(
-		req: IBoardClientPayload["GetById"]["Req"],
-	): Promise<IBoardClientPayload["GetById"]["Res"]>;
+		req: IBoardClientPayload["getById"]["req"],
+	): Promise<IBoardClientPayload["getById"]["res"]>;
 	readFromFile(
-		req: IBoardClientPayload["ReadFromFile"]["Req"],
-	): Promise<IBoardClientPayload["ReadFromFile"]["Res"]>;
-	update(req: IBoardClientPayload["Update"]["Req"]): Promise<void>;
+		req: IBoardClientPayload["readFromFile"]["req"],
+	): Promise<IBoardClientPayload["readFromFile"]["res"]>;
+	update(req: IBoardClientPayload["update"]["req"]): Promise<void>;
 }
 
 export interface IBoardClientPayload {
-	Create: {
-		Req: {
+	create: {
+		req: {
 			gameId: string;
 			name: string;
 			values: IBoard["values"];
 		};
-		Res: {
+		res: {
 			id: string;
 		};
 	};
-	Delete: {
-		Req: {
+	delete: {
+		req: {
 			boardId: string;
 		};
 	};
-	GetById: {
-		Req: {
+	getById: {
+		req: {
 			boardId: string;
 		};
-		Res: {
+		res: {
 			board: IBoard;
 		};
 	};
-	ReadFromFile: {
-		Req: {
+	readFromFile: {
+		req: {
 			file: File;
 		};
-		Res: {
+		res: {
 			values: IBoard["values"];
 		};
 	};
-	Update: {
-		Req: {
+	update: {
+		req: {
 			boardId: string;
 			board: Omit<IBoard, "id" | "gameId">;
 		};

@@ -10,7 +10,7 @@ export function useMutationDeleteBoard() {
 
 	return useMetaMutation({
 		mutationKey: [MutationKeys.DELETE_BOARD],
-		mutationFn: (req: IBoardClientPayload["Delete"]["Req"]) =>
+		mutationFn: (req: IBoardClientPayload["delete"]["req"]) =>
 			board.delete(req),
 		onSettled: (_, __, { boardId }) => {
 			queryClient.invalidateQueries({

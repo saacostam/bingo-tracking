@@ -9,7 +9,7 @@ export interface CreateBoardProps {
 	gameId: string;
 	onError: (e: unknown) => void;
 	onSettled: () => void;
-	onSuccess: (res: IBoardClientPayload["Create"]["Res"]) => void;
+	onSuccess: (res: IBoardClientPayload["create"]["res"]) => void;
 }
 
 export function CreateBoard({

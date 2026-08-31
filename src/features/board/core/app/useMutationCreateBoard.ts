@@ -10,7 +10,7 @@ export function useMutationCreateBoard() {
 
 	return useMetaMutation({
 		mutationKey: [MutationKeys.CREATE_BOARD],
-		mutationFn: (req: IBoardClientPayload["Create"]["Req"]) =>
+		mutationFn: (req: IBoardClientPayload["create"]["req"]) =>
 			board.create(req),
 		onSettled: (res, __, { gameId }) => {
 			queryClient.invalidateQueries({

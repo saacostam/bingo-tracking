@@ -7,7 +7,7 @@ export function useMutationReadBoardFromFile() {
 
 	return useMetaMutation({
 		mutationKey: [MutationKeys.READ_BOARD_FROM_FILE],
-		mutationFn: (req: IBoardClientPayload["ReadFromFile"]["Req"]) =>
+		mutationFn: (req: IBoardClientPayload["readFromFile"]["req"]) =>
 			board.readFromFile(req),
 	});
 }

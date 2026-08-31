@@ -10,7 +10,7 @@ export function useMutationUpdateBoard() {
 
 	return useMetaMutation({
 		mutationKey: [MutationKeys.UPDATE_BOARD],
-		mutationFn: (req: IBoardClientPayload["Update"]["Req"]) =>
+		mutationFn: (req: IBoardClientPayload["update"]["req"]) =>
 			board.update(req),
 		onSettled: (_, __, { boardId }) => {
 			queryClient.invalidateQueries({
