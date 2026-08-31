@@ -12,13 +12,17 @@ export function useSetBoardTemplateMutation() {
 		mutationKey: [MutationKeys.SET_BOARD_TEMPLATE],
 		mutationFn: (req: IGameClientPayload["setBoardTemplate"]["req"]) =>
 			c.game.setBoardTemplate(req),
-		onSettled: (_, __, { gameId }) => {
+		onSettled: () => {
 			queryClient.invalidateQueries({
 				queryKey: [QueryKeys.GET_GAMES],
 			});
 
 			queryClient.invalidateQueries({
-				queryKey: [QueryKeys.GET_GAME_BY_ID, gameId],
+				queryKey: [QueryKeys.GET_GAME_BY_ID],
+			});
+
+			queryClient.invalidateQueries({
+				queryKey: [QueryKeys.GET_PLAYS_BY_GAME_ID],
 			});
 		},
 	});
