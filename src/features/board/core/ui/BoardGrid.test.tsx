@@ -21,4 +21,41 @@ describe("BoardGrid", () => {
 
 		expect(screen.queryAllByText("0")).toHaveLength(25);
 	});
+
+	it("should skip blocked cells when mapping values", () => {
+		const boardTemplateWithBlocked: IBoardTemplate = {
+			grid: [
+				[{ type: "available" }, { type: "available" }, { type: "blocked" }],
+				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
+			],
+		};
+
+		const values: IBoard["values"] = [1, 2, 3, 4];
+
+		renderWithProviders(
+			<BoardGrid boardTemplate={boardTemplateWithBlocked} values={values} />,
+		);
+
+		expect(screen.getByText("1")).toBeInTheDocument();
+		expect(screen.getByText("2")).toBeInTheDocument();
+		expect(screen.getByText("3")).toBeInTheDocument();
+		expect(screen.getByText("4")).toBeInTheDocument();
+	});
+
+	it("should not render values for blocked cells", () => {
+		const boardTemplateWithBlocked: IBoardTemplate = {
+			grid: [
+				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
+			],
+		};
+
+		const values: IBoard["values"] = [10, 20];
+
+		renderWithProviders(
+			<BoardGrid boardTemplate={boardTemplateWithBlocked} values={values} />,
+		);
+
+		expect(screen.getByText("10")).toBeInTheDocument();
+		expect(screen.getByText("20")).toBeInTheDocument();
+	});
 });
