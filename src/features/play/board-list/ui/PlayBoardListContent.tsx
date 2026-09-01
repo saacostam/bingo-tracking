@@ -1,5 +1,6 @@
 import { Grid } from "@mantine/core";
 import { type ComponentType, useMemo } from "react";
+import { computeBoardLayoutValues } from "@/features/board/core/app";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import { computeCompletionPercentage } from "@/features/play/board-list/domain";
 import type { IPlay } from "@/features/play/core/domain";
@@ -21,15 +22,22 @@ export function PlayBoardListContent({
 	const sortedBoards = useMemo(
 		() =>
 			boards
-				.map((board) => ({
-					board,
-					completionPercentage: computeCompletionPercentage({
-						boardNumbers: board.values,
-						takenNumbers,
-					}),
-				}))
+				.map((board) => {
+					const { values } = computeBoardLayoutValues(
+						boardTemplate,
+						board.values,
+					);
+
+					return {
+						board,
+						completionPercentage: computeCompletionPercentage({
+							boardNumbers: values,
+							takenNumbers,
+						}),
+					};
+				})
 				.sort((a, b) => b.completionPercentage - a.completionPercentage),
-		[boards, takenNumbers],
+		[boards, boardTemplate, takenNumbers],
 	);
 
 	return (

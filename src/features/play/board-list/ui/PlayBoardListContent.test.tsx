@@ -1,19 +1,23 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
+import { boardMockFactory } from "@/features/board/core/test";
+import { gameMockFactory } from "@/features/game/core/test";
 import type { IPlay } from "@/features/play/core/domain";
 import { renderWithProviders } from "@/tests";
 import { PlayBoardListContent } from "./PlayBoardListContent";
 
 function createBoard(id: string, values: number[]): IBoard {
-	return {
+	return boardMockFactory.createBoard({
 		id,
 		values,
-	} as IBoard;
+	});
 }
 
 function createBoardTemplate(): IBoardTemplate {
-	return {} as IBoardTemplate;
+	const { boardTemplate } = gameMockFactory.createGameWithBoards();
+
+	return boardTemplate;
 }
 
 describe("PlayBoardListContent", () => {
