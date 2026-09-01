@@ -10,6 +10,7 @@ import {
 	Title,
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useBoardLayoutValues } from "@/features/board/core/app";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import { computeCompletionPercentage } from "@/features/play/board-list/domain";
 import type { IPlay } from "@/features/play/core/domain";
@@ -52,10 +53,14 @@ export function BoardItem({
 		return () => observer.disconnect();
 	}, [boardTemplate.grid]);
 
-	const boardNumbers = useMemo(() => board.values, [board.values]);
+	const { values, valueByPosition } = useBoardLayoutValues(
+		boardTemplate,
+		board.values,
+	);
+
 	const percentage = useMemo(
-		() => computeCompletionPercentage({ boardNumbers, takenNumbers }),
-		[boardNumbers, takenNumbers],
+		() => computeCompletionPercentage({ boardNumbers: values, takenNumbers }),
+		[values, takenNumbers],
 	);
 
 	return (
@@ -70,8 +75,7 @@ export function BoardItem({
 						{boardTemplate.grid.map((row, ii) => (
 							<Flex key={+ii} justify="space-between">
 								{row.map((_, jj) => {
-									const index = row.length * ii + jj;
-									const value = board.values.at(index);
+									const value = valueByPosition[ii][jj];
 
 									const isActive =
 										value !== undefined && takenNumbers.includes(value);
