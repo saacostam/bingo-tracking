@@ -4,6 +4,7 @@ export interface IPlay {
 	name: string;
 	startedAt: number;
 	takenNumbers: number[];
+	patterns: IPattern[];
 }
 
 export type IPattern = boolean[];

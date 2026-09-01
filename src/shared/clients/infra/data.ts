@@ -55,11 +55,11 @@ export const DATA: {
 					gameId: "1",
 					startedAt: now + 200,
 					takenNumbers: [],
+					patterns: defaultPatterns,
 				},
 			],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
-			patterns: defaultPatterns,
 		},
 		{
 			id: "2",
@@ -69,7 +69,6 @@ export const DATA: {
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
-			patterns: defaultPatterns,
 		},
 		{
 			id: "3",
@@ -79,7 +78,6 @@ export const DATA: {
 			plays: [],
 			boardTemplate: defaultBoardTemplate,
 			boardRange: defaultBoardRange,
-			patterns: defaultPatterns,
 		},
 	],
 };

@@ -41,7 +41,6 @@ class GameMockFactory {
 				min: 1,
 				max: 75,
 			},
-			patterns: [[...new Array(5).fill([false, false, true, false, false])]],
 			...overrides,
 		};
 	}
