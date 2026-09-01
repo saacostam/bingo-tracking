@@ -11,6 +11,7 @@ import {
 	type IGameSlots,
 	type IPlaySlots,
 } from "@/features/game/by-id/ui";
+import { UpdateGameLayout } from "@/features/game/update-layout/ui";
 import { CreatePlay } from "@/features/play/create/ui";
 import { PlaysList } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
@@ -33,6 +34,7 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 	const gameSlots: IGameSlots = useMemo(
 		() => ({
 			ById: GameById,
+			SetBoardTemplate: UpdateGameLayout,
 		}),
 		[],
 	);

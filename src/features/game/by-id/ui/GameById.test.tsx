@@ -19,6 +19,7 @@ describe("GameById", () => {
 					onCreateBoard={vi.fn()}
 					onCreatePlay={vi.fn()}
 					onDeleteBoard={vi.fn()}
+					onSetGameBoardTemplate={vi.fn()}
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
@@ -52,6 +53,7 @@ describe("GameById", () => {
 					onCreateBoard={vi.fn()}
 					onCreatePlay={vi.fn()}
 					onDeleteBoard={vi.fn()}
+					onSetGameBoardTemplate={vi.fn()}
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
@@ -84,6 +86,7 @@ describe("GameById", () => {
 					onCreateBoard={vi.fn()}
 					onCreatePlay={vi.fn()}
 					onDeleteBoard={vi.fn()}
+					onSetGameBoardTemplate={vi.fn()}
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,
@@ -134,6 +137,7 @@ describe("GameById", () => {
 					onCreateBoard={vi.fn()}
 					onCreatePlay={vi.fn()}
 					onDeleteBoard={vi.fn()}
+					onSetGameBoardTemplate={vi.fn()}
 					onUpdateBoard={vi.fn()}
 					PlaysListSlot={vi.fn()}
 				/>,

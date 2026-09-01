@@ -23,6 +23,7 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 		| { type: "create-play"; payload: { gameId: string } }
 		| { type: "delete-board"; payload: { id: string } }
 		| { type: "update-board"; payload: { id: string } }
+		| { type: "update-game-layout"; payload: { gameId: string } }
 	>({
 		type: "idle",
 	});
@@ -45,6 +46,11 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 		[],
 	);
 
+	const onSetGameBoardTemplate = useCallback(
+		() => setModal({ type: "update-game-layout", payload: { gameId } }),
+		[gameId],
+	);
+
 	const onUpdateBoard = useCallback(
 		(boardId: string) =>
 			setModal({ type: "update-board", payload: { id: boardId } }),
@@ -58,8 +64,17 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 			onCreateBoard,
 			onCreatePlay,
 			onDeleteBoard,
+			onSetGameBoardTemplate,
 			onUpdateBoard,
 		}),
-		[modal, onClose, onCreateBoard, onCreatePlay, onDeleteBoard, onUpdateBoard],
+		[
+			modal,
+			onClose,
+			onCreateBoard,
+			onCreatePlay,
+			onDeleteBoard,
+			onUpdateBoard,
+			onSetGameBoardTemplate,
+		],
 	);
 }

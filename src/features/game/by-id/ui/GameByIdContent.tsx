@@ -6,6 +6,7 @@ import {
 	Flex,
 	Grid,
 	GridCol,
+	Group,
 	Paper,
 	Text,
 	Title,
@@ -29,6 +30,7 @@ export interface GameByIdContentProps {
 	onCreateBoard: () => void;
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
+	onSetGameBoardTemplate: () => void;
 	onUpdateBoard: (boardId: string) => void;
 	PlaysListSlot: ComponentType<PlaysListProps>;
 }
@@ -38,6 +40,7 @@ export function GameByIdContent({
 	onCreateBoard,
 	onCreatePlay,
 	onDeleteBoard,
+	onSetGameBoardTemplate,
 	onUpdateBoard,
 	PlaysListSlot,
 }: GameByIdContentProps) {
@@ -70,12 +73,19 @@ export function GameByIdContent({
 							{lang.get(ILanguageAdapterKey.GAME_BY_ID_BOARDS_DESCRIPTION)}
 						</Text>
 					</Box>
-					<Button
-						leftSection={<PlusIcon height="1rem" width="1rem" />}
-						onClick={onCreateBoard}
-					>
-						{lang.get(ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL)}
-					</Button>
+					<Group gap="md" wrap="wrap">
+						<Button onClick={onSetGameBoardTemplate} variant="outline">
+							Update Layout
+						</Button>
+						<Button
+							leftSection={<PlusIcon height="1rem" width="1rem" />}
+							onClick={onCreateBoard}
+						>
+							{lang.get(
+								ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL,
+							)}
+						</Button>
+					</Group>
 				</Flex>
 				{game.boards.length === 0 ? (
 					<Paper p="md" withBorder>

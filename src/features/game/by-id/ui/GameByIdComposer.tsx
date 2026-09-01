@@ -32,6 +32,7 @@ export function GameByIdComposer({
 		onCreateBoard,
 		onCreatePlay,
 		onDeleteBoard,
+		onSetGameBoardTemplate,
 		onUpdateBoard,
 	} = useGameByIdModals({
 		gameId: id,
@@ -47,6 +48,7 @@ export function GameByIdComposer({
 				onCreateBoard={onCreateBoard}
 				onCreatePlay={onCreatePlay}
 				onDeleteBoard={onDeleteBoard}
+				onSetGameBoardTemplate={onSetGameBoardTemplate}
 				onUpdateBoard={onUpdateBoard}
 				PlaysListSlot={playSlots.List}
 			/>
@@ -106,6 +108,18 @@ export function GameByIdComposer({
 						onError={updateBoard.onError}
 						onSuccess={updateBoard.onSuccess}
 						onSettled={onClose}
+					/>
+				)}
+			</Modal>
+			<Modal
+				opened={view.type === "update-game-layout"}
+				onClose={onClose}
+				title="Update Layout"
+			>
+				{view.type === "update-game-layout" && (
+					<gameSlots.SetBoardTemplate
+						gameId={view.payload.gameId}
+						onClose={onClose}
 					/>
 				)}
 			</Modal>
