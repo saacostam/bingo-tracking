@@ -1,3 +1,4 @@
+export * from "./useBoardTemplateValues";
 export * from "./useMutationCreateBoard";
 export * from "./useMutationDeleteBoard";
 export * from "./useMutationReadBoardFromFile";
