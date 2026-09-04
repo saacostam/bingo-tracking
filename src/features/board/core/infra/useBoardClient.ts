@@ -49,7 +49,7 @@ export const createBoardFactory = (): IBoardClient => ({
 			const board = g.boards.find((b) => b.id === boardId);
 
 			if (board) {
-				return { board };
+				return { board: structuredClone(board) };
 			}
 		}
 

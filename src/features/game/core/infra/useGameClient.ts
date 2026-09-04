@@ -18,7 +18,7 @@ export function useGameClient(): IGameClient {
 				});
 
 			return {
-				game,
+				game: structuredClone(game),
 			};
 		},
 		[],
@@ -26,7 +26,7 @@ export function useGameClient(): IGameClient {
 
 	const getGames: IGameClient["getGames"] = useCallback(async () => {
 		await wait(500);
-		return DATA.GAMES;
+		return DATA.GAMES.map((game) => structuredClone(game));
 	}, []);
 
 	const setBoardTemplate: IGameClient["setBoardTemplate"] = useCallback(

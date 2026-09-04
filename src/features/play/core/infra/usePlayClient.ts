@@ -47,7 +47,7 @@ export const createPlayClientFactory = (): IPlayClient => ({
 			});
 
 		return {
-			plays: game.plays,
+			plays: structuredClone(game.plays),
 		};
 	},
 	getById: async ({ playId }) => {
@@ -59,7 +59,7 @@ export const createPlayClientFactory = (): IPlayClient => ({
 			if (!play) continue;
 
 			return {
-				play,
+				play: structuredClone(play),
 			};
 		}
 
