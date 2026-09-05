@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { v4 } from "uuid";
-import type { IPlayClient } from "@/features/play/core/domain";
+import type { IPattern, IPlayClient } from "@/features/play/core/domain";
 import { DATA } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
@@ -88,6 +88,22 @@ export const createPlayClientFactory = (): IPlayClient => ({
 		return {
 			takenNumbers,
 		};
+	},
+	updatePatterns: async ({ playId, patterns }) => {
+		await wait(200);
+
+		for (const game of DATA.GAMES) {
+			const play = game.plays.find((p) => p.id === playId);
+
+			if (play !== undefined) {
+				play.patterns = patterns.map(
+					(patternBody): IPattern => ({
+						id: v4(),
+						body: patternBody,
+					}),
+				);
+			}
+		}
 	},
 });
 

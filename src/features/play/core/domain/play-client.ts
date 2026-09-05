@@ -1,4 +1,4 @@
-import type { IPlay } from "./play";
+import type { IPattern, IPlay } from "./play";
 
 export interface IPlayClient {
 	create(
@@ -13,6 +13,9 @@ export interface IPlayClient {
 	takeNumber(
 		req: IPlayClientPayload["takeNumber"]["req"],
 	): Promise<IPlayClientPayload["takeNumber"]["res"]>;
+	updatePatterns(
+		req: IPlayClientPayload["updatePatterns"]["req"],
+	): Promise<void>;
 }
 
 export interface IPlayClientPayload {
@@ -48,6 +51,12 @@ export interface IPlayClientPayload {
 		};
 		res: {
 			takenNumbers: number[];
+		};
+	};
+	updatePatterns: {
+		req: {
+			playId: string;
+			patterns: IPattern["body"][];
 		};
 	};
 }
