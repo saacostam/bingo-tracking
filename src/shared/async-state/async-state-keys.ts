@@ -26,6 +26,7 @@ export enum MutationKeys {
 	// PLAYS
 	CREATE_PLAY = "Create Play",
 	TAKE_NUMBER = "Take Number",
+	UPDATE_PATTERNS = "Update Patterns",
 
 	// TODO
 	CREATE_TODO = "Create Todo",
