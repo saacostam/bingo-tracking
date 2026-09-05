@@ -20,33 +20,9 @@ const defaultBoardRange: IBoardRange = {
 };
 const defaultPatterns: IPattern[] = Array.from({ length: 3 }, (_, index) => ({
 	id: String(index + 1),
-	body: [
-		false,
-		false,
-		true,
-		false,
-		false,
-		false,
-		false,
-		true,
-		false,
-		false,
-		false,
-		false,
-		true,
-		false,
-		false,
-		false,
-		false,
-		true,
-		false,
-		false,
-		false,
-		false,
-		true,
-		false,
-		false,
-	],
+	body: new Array(25)
+		.fill(null)
+		.map((_, elementIndex) => elementIndex % 5 === index),
 }));
 
 export const DATA: {
