@@ -1,13 +1,15 @@
 import { Button, Divider, Flex, Grid, Modal, Title } from "@mantine/core";
 import type { ComponentType } from "react";
 import type { PlayBoardListProps } from "@/features/play/board-list/ui";
+import { usePlayByIdModals } from "@/features/play/by-id/app";
 import type { PlayDetailsHeaderProps } from "@/features/play/details-header/ui";
 import type { PlayNumbersProps } from "@/features/play/numbers/ui";
 import type { PatternsListProps } from "@/features/play/patterns-list/ui";
+import type { UpdatePatternsProps } from "@/features/play/update-patterns/ui";
 
 export interface IPatternSlots {
 	List: ComponentType<PatternsListProps>;
-	Update: ComponentType;
+	Update: ComponentType<UpdatePatternsProps>;
 }
 
 export interface IPlaySlots {
@@ -27,6 +29,8 @@ export function PlayByIdComposer({
 	playId,
 	playSlots,
 }: PlayByIdComposerProps) {
+	const modal = usePlayByIdModals();
+
 	return (
 		<>
 			<Flex direction="column" gap="lg">
@@ -42,7 +46,7 @@ export function PlayByIdComposer({
 								wrap="wrap"
 							>
 								<Title size="h3">Pattern</Title>
-								<Button>Change</Button>
+								<Button onClick={modal.openUpdatePatterns}>Update</Button>
 							</Flex>
 							<patternSlots.List playId={playId} />
 							<Divider />
@@ -60,8 +64,12 @@ export function PlayByIdComposer({
 			</Flex>
 
 			{/* Modals */}
-			<Modal opened={false} onClose={() => {}} title="Update Pattern">
-				<patternSlots.Update />
+			<Modal
+				opened={modal.modal.type === "update-patterns"}
+				onClose={modal.close}
+				title="Update Patterns"
+			>
+				<patternSlots.Update playId={playId} />
 			</Modal>
 		</>
 	);
