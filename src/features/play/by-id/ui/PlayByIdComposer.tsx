@@ -3,9 +3,10 @@ import type { ComponentType } from "react";
 import type { PlayBoardListProps } from "@/features/play/board-list/ui";
 import type { PlayDetailsHeaderProps } from "@/features/play/details-header/ui";
 import type { PlayNumbersProps } from "@/features/play/numbers/ui";
+import type { PatternsListProps } from "@/features/play/patterns-list/ui";
 
 export interface IPatternSlots {
-	Read: ComponentType;
+	List: ComponentType<PatternsListProps>;
 	Update: ComponentType;
 }
 
@@ -43,7 +44,7 @@ export function PlayByIdComposer({
 								<Title size="h3">Pattern</Title>
 								<Button>Change</Button>
 							</Flex>
-							<patternSlots.Read />
+							<patternSlots.List playId={playId} />
 							<Divider />
 							<Title size="h3">Taken Numbers</Title>
 							<playSlots.Numbers playId={playId} />

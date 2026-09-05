@@ -1,6 +1,7 @@
 import { PlayBoardList } from "@/features/play/board-list/ui";
 import { PlayDetailsHeader } from "@/features/play/details-header/ui";
 import { PlayNumbers } from "@/features/play/numbers/ui";
+import { PatternsList } from "@/features/play/patterns-list/ui";
 import {
 	type IPatternSlots,
 	type IPlaySlots,
@@ -10,7 +11,7 @@ import {
 const Mock = () => null;
 
 const patternsSlots: IPatternSlots = {
-	Read: Mock,
+	List: PatternsList,
 	Update: Mock,
 };
 

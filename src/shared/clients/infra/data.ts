@@ -18,9 +18,36 @@ const defaultBoardRange: IBoardRange = {
 	min: 1,
 	max: 75,
 };
-const defaultPatterns: IPattern[] = [
-	[...new Array(5).fill([false, false, true, false, false])],
-];
+const defaultPatterns: IPattern[] = Array.from({ length: 3 }, (_, index) => ({
+	id: String(index + 1),
+	body: [
+		false,
+		false,
+		true,
+		false,
+		false,
+		false,
+		false,
+		true,
+		false,
+		false,
+		false,
+		false,
+		true,
+		false,
+		false,
+		false,
+		false,
+		true,
+		false,
+		false,
+		false,
+		false,
+		true,
+		false,
+		false,
+	],
+}));
 
 export const DATA: {
 	GAMES: IWithBoardTemplate<IWithPlays<IWithBoards<IGame>>>[];

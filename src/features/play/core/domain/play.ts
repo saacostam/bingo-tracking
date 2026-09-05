@@ -7,4 +7,7 @@ export interface IPlay {
 	patterns: IPattern[];
 }
 
-export type IPattern = boolean[];
+export type IPattern = {
+	id: string;
+	body: boolean[];
+};

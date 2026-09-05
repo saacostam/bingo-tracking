@@ -23,7 +23,12 @@ export const createPlayClientFactory = (): IPlayClient => ({
 								startedAt: Date.now(),
 								takenNumbers: [],
 								gameId,
-								patterns: [[true, true, true, true, true]],
+								patterns: [
+									{
+										id: id,
+										body: [true, true, true, true, true],
+									},
+								],
 							},
 						],
 					}
