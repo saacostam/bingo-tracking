@@ -51,6 +51,7 @@ export function PlayBoardList({ playId }: PlayBoardListProps) {
 					BoardItem={BoardItem}
 					boards={queryGameById.data.game.boards}
 					boardTemplate={queryGameById.data.game.boardTemplate}
+					patterns={queryPlayById.data.play.patterns}
 					takenNumbers={queryPlayById.data.play.takenNumbers}
 				/>
 			) : (

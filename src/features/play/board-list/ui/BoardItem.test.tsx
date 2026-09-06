@@ -1,6 +1,7 @@
 import { Grid } from "@mantine/core";
 import { screen } from "@testing-library/dom";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
+import type { IPattern } from "@/features/play/core/domain";
 import { renderWithProviders } from "@/tests";
 import { BoardItem } from "./BoardItem";
 
@@ -14,8 +15,16 @@ const boardTemplate: IBoardTemplate = {
 const board: IBoard = {
 	id: "board-1",
 	name: "Test Board",
-	values: [1, 2, 3],
+	values: [
+		[1, 2],
+		[3, undefined],
+	],
 	gameId: "game-id-1",
+};
+
+const fullPattern: IPattern = {
+	id: "pattern-1",
+	body: boardTemplate.grid.map((row) => row.map(() => true)),
 };
 
 function renderBoardItem(
@@ -25,6 +34,8 @@ function renderBoardItem(
 		board,
 		boardTemplate,
 		takenNumbers: [],
+		name: "test-name",
+		pattern: fullPattern,
 		...overrides,
 	};
 
@@ -48,7 +59,10 @@ describe("BoardItem", () => {
 		renderBoardItem({
 			board: {
 				...board,
-				values: [1, 2, 3],
+				values: [
+					[1, 2],
+					[3, 4],
+				],
 			},
 		});
 
@@ -63,18 +77,18 @@ describe("BoardItem", () => {
 			takenNumbers: [1, 3],
 		});
 
-		expect(screen.getByText("66.67%")).toBeInTheDocument();
+		expect(screen.getByText("66.7%")).toBeInTheDocument();
 	});
 
 	it("should ignore values beyond the layout when calculating completion", () => {
 		renderBoardItem({
 			board: {
 				...board,
-				values: [1, 2, 3, 4, 5],
+				values: [[1, 2, 3, 4, 5]],
 			},
 			takenNumbers: [1, 4],
 		});
 
-		expect(screen.getByText("33.33%")).toBeInTheDocument();
+		expect(screen.getByText("33.3%")).toBeInTheDocument();
 	});
 });

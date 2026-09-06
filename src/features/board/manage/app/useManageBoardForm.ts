@@ -4,7 +4,7 @@ import z from "zod";
 
 export const manageBoardSchema = z.object({
 	name: z.string().min(1, "Required"),
-	values: z.array(z.coerce.number<number>()),
+	values: z.array(z.array(z.coerce.number<number>().optional())),
 });
 
 export type IManageBoardForm = z.infer<typeof manageBoardSchema>;

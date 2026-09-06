@@ -62,8 +62,6 @@ export function ManageBoard({
 						{boardTemplate.grid.map((row, ii) => (
 							<SimpleGrid cols={row.length} key={+ii}>
 								{row.map((cell, jj) => {
-									const index = ii * row.length + jj;
-
 									if (cell.type === "blocked") {
 										return <Flex key={+jj} align="center" justify="center" />;
 									}
@@ -72,7 +70,7 @@ export function ManageBoard({
 										<Controller
 											key={+jj}
 											control={control}
-											name={`values.${index}`}
+											name={`values.${ii}.${jj}`}
 											render={({ field, fieldState }) => (
 												<NumberInput
 													styles={{

@@ -1,7 +1,7 @@
 import { Avatar, Flex, type MantineSpacing } from "@mantine/core";
-import type { PropsWithChildren } from "react";
-import { useBoardLayoutValues } from "@/features/board/core/app";
+import { type PropsWithChildren, useMemo } from "react";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
+import { mapValuesToBoardTemplate } from "@/features/board/core/domain";
 
 export interface BoardGridProps {
 	boardTemplate: IBoardTemplate;
@@ -11,14 +11,17 @@ export interface BoardGridProps {
 export function BoardGrid({ boardTemplate, values }: BoardGridProps) {
 	const gap: MantineSpacing = "0.5rem";
 
-	const { valueByPosition } = useBoardLayoutValues(boardTemplate, values);
+	const valuesToBoardTemplate = useMemo(
+		() => mapValuesToBoardTemplate(boardTemplate, values),
+		[boardTemplate, values],
+	);
 
 	return (
 		<Flex direction="column" gap={gap}>
-			{boardTemplate.grid.map((row, ii) => (
+			{valuesToBoardTemplate.map((row, ii) => (
 				<Flex key={+ii} gap={gap}>
 					{row.map((cell, jj) => {
-						const value = valueByPosition[ii][jj];
+						const value = cell.value;
 
 						return (
 							<BoardGridItem key={+jj} accent={cell.type === "blocked"}>

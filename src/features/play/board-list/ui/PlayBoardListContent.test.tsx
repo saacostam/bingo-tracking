@@ -3,11 +3,11 @@ import { describe, expect, it, vi } from "vitest";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
 import { boardMockFactory } from "@/features/board/core/test";
 import { gameMockFactory } from "@/features/game/core/test";
-import type { IPlay } from "@/features/play/core/domain";
+import type { IPattern, IPlay } from "@/features/play/core/domain";
 import { renderWithProviders } from "@/tests";
 import { PlayBoardListContent } from "./PlayBoardListContent";
 
-function createBoard(id: string, values: number[]): IBoard {
+function createBoard(id: string, values: number[][]): IBoard {
 	return boardMockFactory.createBoard({
 		id,
 		values,
@@ -20,6 +20,17 @@ function createBoardTemplate(): IBoardTemplate {
 	return boardTemplate;
 }
 
+const patternWhereAllAreAvailable: IPattern = {
+	id: "pattern-1",
+	body: [
+		[true, true, true, true, true],
+		[true, true, true, true, true],
+		[true, true, true, true, true],
+		[true, true, true, true, true],
+		[true, true, true, true, true],
+	],
+};
+
 describe("PlayBoardListContent", () => {
 	it("renders a BoardItem for each board", () => {
 		const BoardItem = vi.fn(({ board }) => (
@@ -27,8 +38,8 @@ describe("PlayBoardListContent", () => {
 		));
 
 		const boards = [
-			createBoard("board-1", [1, 2, 3]),
-			createBoard("board-2", [4, 5, 6]),
+			createBoard("board-1", [[1, 2, 3]]),
+			createBoard("board-2", [[4, 5, 6]]),
 		];
 
 		renderWithProviders(
@@ -37,6 +48,7 @@ describe("PlayBoardListContent", () => {
 				boards={boards}
 				boardTemplate={createBoardTemplate()}
 				takenNumbers={[]}
+				patterns={[patternWhereAllAreAvailable]}
 			/>,
 		);
 
@@ -50,9 +62,9 @@ describe("PlayBoardListContent", () => {
 		));
 
 		const boards = [
-			createBoard("board-1", [1, 2, 3, 4]), // 75%
-			createBoard("board-2", [1, 2, 3]), // 100%
-			createBoard("board-3", [1, 2, 3, 4, 5, 6]), // 50%
+			createBoard("board-1", [[1, 2, 3, 4]]), // 75%
+			createBoard("board-2", [[1, 2, 3]]), // 100%
+			createBoard("board-3", [[1, 2, 3, 4, 5], [6]]), // 50%
 		];
 
 		renderWithProviders(
@@ -61,6 +73,7 @@ describe("PlayBoardListContent", () => {
 				boards={boards}
 				boardTemplate={createBoardTemplate()}
 				takenNumbers={[1, 2, 3]}
+				patterns={[patternWhereAllAreAvailable]}
 			/>,
 		);
 
@@ -80,8 +93,8 @@ describe("PlayBoardListContent", () => {
 		const takenNumbers: IPlay["takenNumbers"] = [1, 2];
 
 		const boards = [
-			createBoard("board-1", [1, 2, 3]),
-			createBoard("board-2", [2, 3, 4]),
+			createBoard("board-1", [[1, 2, 3]]),
+			createBoard("board-2", [[2, 3, 4]]),
 		];
 
 		renderWithProviders(
@@ -90,6 +103,7 @@ describe("PlayBoardListContent", () => {
 				boards={boards}
 				boardTemplate={boardTemplate}
 				takenNumbers={takenNumbers}
+				patterns={[patternWhereAllAreAvailable]}
 			/>,
 		);
 
@@ -120,9 +134,9 @@ describe("PlayBoardListContent", () => {
 		));
 
 		const boards = [
-			createBoard("board-1", [1, 2, 3, 4]),
-			createBoard("board-2", [5, 6, 7, 8]),
-			createBoard("board-3", [9, 10, 11, 12]),
+			createBoard("board-1", [[1, 2, 3, 4]]),
+			createBoard("board-2", [[5, 6, 7, 8]]),
+			createBoard("board-3", [[9, 10, 11, 12]]),
 		];
 
 		renderWithProviders(
@@ -131,6 +145,7 @@ describe("PlayBoardListContent", () => {
 				boards={boards}
 				boardTemplate={createBoardTemplate()}
 				takenNumbers={[1, 2]}
+				patterns={[patternWhereAllAreAvailable]}
 			/>,
 		);
 
@@ -152,6 +167,7 @@ describe("PlayBoardListContent", () => {
 				boards={[]}
 				boardTemplate={createBoardTemplate()}
 				takenNumbers={[]}
+				patterns={[patternWhereAllAreAvailable]}
 			/>,
 		);
 

@@ -65,7 +65,9 @@ export const createBoardFactory = (): IBoardClient => ({
 		const randomCell = () => Math.floor(Math.random() * 100);
 
 		return {
-			values: new Array(25).fill(null).map(() => randomCell()),
+			values: new Array(5)
+				.fill(null)
+				.map(() => new Array(5).fill(null).map(() => randomCell())),
 		};
 	},
 	update: async ({ boardId, board }) => {

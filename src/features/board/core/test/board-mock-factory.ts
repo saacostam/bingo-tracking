@@ -20,9 +20,11 @@ class BoardMockFactory {
 		return {
 			id: String(id),
 			name: `board-${id}`,
-			values: new Array(numberOfValues ?? 25)
+			values: new Array(numberOfValues ?? 5)
 				.fill(null)
-				.map(() => this._getCell()),
+				.map(() =>
+					new Array(numberOfValues ?? 5).fill(null).map(() => this._getCell()),
+				),
 			gameId: String(id),
 			...overrides,
 		};

@@ -1,7 +1,7 @@
 export interface IBoard {
 	id: string;
 	name: string;
-	values: number[];
+	values: (number | undefined)[][];
 	gameId: string;
 }
 

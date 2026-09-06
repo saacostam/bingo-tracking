@@ -10,20 +10,23 @@ import {
 	Title,
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useBoardLayoutValues } from "@/features/board/core/app";
 import type { IBoard, IBoardTemplate } from "@/features/board/core/domain";
-import { computeCompletionPercentage } from "@/features/play/board-list/domain";
-import type { IPlay } from "@/features/play/core/domain";
+import { applyPatternToBoard } from "@/features/board/core/domain";
+import type { IPattern, IPlay } from "@/features/play/core/domain";
 
 export interface BoardItemProps {
 	board: IBoard;
 	boardTemplate: IBoardTemplate;
+	name: string;
+	pattern: IPattern;
 	takenNumbers: IPlay["takenNumbers"];
 }
 
 export function BoardItem({
 	board,
 	boardTemplate,
+	name,
+	pattern,
 	takenNumbers,
 }: BoardItemProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -53,45 +56,71 @@ export function BoardItem({
 		return () => observer.disconnect();
 	}, [boardTemplate.grid]);
 
-	const { values, valueByPosition } = useBoardLayoutValues(
-		boardTemplate,
-		board.values,
+	const valueToBoardTemplate = useMemo(
+		() => applyPatternToBoard(boardTemplate, board.values, pattern),
+		[board.values, boardTemplate, pattern],
 	);
 
-	const percentage = useMemo(
-		() => computeCompletionPercentage({ boardNumbers: values, takenNumbers }),
-		[values, takenNumbers],
-	);
+	const percentage = useMemo(() => {
+		const isWinningCell = (
+			cell: (typeof valueToBoardTemplate)[number][number],
+		) => cell.type === "available" && cell.isWinning;
+
+		const allWinningCells = valueToBoardTemplate.flat().filter(isWinningCell);
+		const matchedCells = allWinningCells.filter(
+			(cell) =>
+				isWinningCell(cell) &&
+				!!takenNumbers.find((number) => number === cell.value),
+		);
+		const ratio = Math.max(
+			0,
+			Math.min(matchedCells.length / allWinningCells.length, 1),
+		);
+
+		return ratio * 100;
+	}, [takenNumbers, valueToBoardTemplate]);
 
 	return (
 		<Grid.Col span={{ base: 12, sm: 6 }}>
 			<Paper p="xs" withBorder>
 				<Flex direction="column" gap="xs">
 					<Title size="h5" ta="center">
-						{board.name}
+						{name}
 					</Title>
 					<Divider />
 					<Flex direction="column" gap="0.25rem" ref={containerRef}>
-						{boardTemplate.grid.map((row, ii) => (
+						{valueToBoardTemplate.map((row, ii) => (
 							<Flex key={+ii} justify="space-between">
-								{row.map((_, jj) => {
-									const value = valueByPosition[ii][jj];
-
-									const isActive =
-										value !== undefined && takenNumbers.includes(value);
+								{row.map((cell, jj) => {
+									const status: "empty" | "available" | "winning" =
+										cell.type === "available"
+											? cell.isWinning
+												? "winning"
+												: "available"
+											: "empty";
 
 									return (
 										<Badge
 											key={+jj}
-											color={isActive ? "indigo" : "gray"}
-											variant={isActive ? "filled" : "light"}
+											color={
+												status === "winning"
+													? "green"
+													: status === "available"
+														? "indigo"
+														: "gray"
+											}
+											variant={
+												takenNumbers.find((n) => n === cell.value)
+													? "filled"
+													: "light"
+											}
 											style={{
 												height: w * 0.5,
 												fontSize: Math.min(16, w / 4),
 												width: w * 0.9,
 											}}
 										>
-											{value}
+											{cell.value}
 										</Badge>
 									);
 								})}
@@ -101,10 +130,13 @@ export function BoardItem({
 					<Divider />
 					<Flex align="center" direction="row" gap="xs">
 						<Text c="dimmed" size="sm">
-							{percentage}%
+							{percentage.toFixed(1)}%
 						</Text>
 						<Box flex={1}>
-							<Progress value={percentage} />
+							<Progress
+								color={percentage >= 100 ? "green" : undefined}
+								value={percentage}
+							/>
 						</Box>
 					</Flex>
 				</Flex>

@@ -13,7 +13,7 @@ const boardTemplate: IBoardTemplate = {
 
 describe("BoardGrid", () => {
 	it("should render 0 as string", () => {
-		const values: IBoard["values"] = new Array(25).fill(0);
+		const values: IBoard["values"] = new Array(5).fill(new Array(5).fill(0));
 
 		renderWithProviders(
 			<BoardGrid boardTemplate={boardTemplate} values={values} />,
@@ -30,7 +30,10 @@ describe("BoardGrid", () => {
 			],
 		};
 
-		const values: IBoard["values"] = [1, 2, 3, 4];
+		const values: IBoard["values"] = [
+			[1, 2, undefined],
+			[3, undefined, 4],
+		];
 
 		renderWithProviders(
 			<BoardGrid boardTemplate={boardTemplateWithBlocked} values={values} />,
@@ -49,7 +52,7 @@ describe("BoardGrid", () => {
 			],
 		};
 
-		const values: IBoard["values"] = [10, 20];
+		const values: IBoard["values"] = [[10, undefined, 20]];
 
 		renderWithProviders(
 			<BoardGrid boardTemplate={boardTemplateWithBlocked} values={values} />,

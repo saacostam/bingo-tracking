@@ -41,17 +41,21 @@ export const DATA: {
 				{
 					id: "1",
 					name: "Board I",
-					values: new Array(5 * 5)
+					values: new Array(5)
 						.fill(null)
-						.map(() => Math.ceil(75 * Math.random())),
+						.map(() =>
+							new Array(5).fill(null).map(() => Math.ceil(75 * Math.random())),
+						),
 					gameId: "1",
 				},
 				{
 					id: "2",
 					name: "Board II",
-					values: new Array(5 * 5)
+					values: new Array(5)
 						.fill(null)
-						.map(() => Math.ceil(75 * Math.random())),
+						.map(() =>
+							new Array(5).fill(null).map(() => Math.ceil(75 * Math.random())),
+						),
 					gameId: "1",
 				},
 			],
