@@ -100,8 +100,8 @@ export function UpdateGameLayoutContent({
 
 	const gridColors = useMemo(
 		() => ({
-			available: "var(--mantine-primary-color-7)",
-			blocked: "var(--mantine-color-yellow-7)",
+			available: "var(--mantine-primary-color-5)",
+			blocked: "var(--mantine-color-gray-3)",
 		}),
 		[],
 	);

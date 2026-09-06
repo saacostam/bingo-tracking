@@ -67,9 +67,10 @@ export function PlayByIdComposer({
 			<Modal
 				opened={modal.modal.type === "update-patterns"}
 				onClose={modal.close}
+				size="xl"
 				title="Update Patterns"
 			>
-				<patternSlots.Update playId={playId} />
+				<patternSlots.Update playId={playId} onClose={modal.close} />
 			</Modal>
 		</>
 	);

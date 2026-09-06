@@ -2,17 +2,16 @@ import { PlayBoardList } from "@/features/play/board-list/ui";
 import { PlayDetailsHeader } from "@/features/play/details-header/ui";
 import { PlayNumbers } from "@/features/play/numbers/ui";
 import { PatternsList } from "@/features/play/patterns-list/ui";
+import { UpdatePatterns } from "@/features/play/update-patterns/ui";
 import {
 	type IPatternSlots,
 	type IPlaySlots,
 	PlayByIdComposer,
 } from "./PlayByIdComposer";
 
-const Mock = () => null;
-
 const patternsSlots: IPatternSlots = {
 	List: PatternsList,
-	Update: Mock,
+	Update: UpdatePatterns,
 };
 
 const playSlots: IPlaySlots = {
