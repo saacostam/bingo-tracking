@@ -37,7 +37,10 @@ export function useGameClient(): IGameClient {
 				if (game.id !== gameId) continue;
 
 				game.boardRange = boardRange;
-				game.boardTemplate = boardTemplate;
+				game.boardTemplate = {
+					...game.boardTemplate,
+					...boardTemplate,
+				};
 			}
 		},
 		[],

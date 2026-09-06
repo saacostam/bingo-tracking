@@ -1,4 +1,5 @@
 export interface IBoardTemplate {
+	id: string;
 	grid: IBoardTemplateCell[][];
 }
 

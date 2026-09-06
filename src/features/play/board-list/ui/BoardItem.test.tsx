@@ -6,6 +6,7 @@ import { renderWithProviders } from "@/tests";
 import { BoardItem } from "./BoardItem";
 
 const boardTemplate: IBoardTemplate = {
+	id: "board-template-id",
 	grid: [
 		[{ type: "available" }, { type: "available" }],
 		[{ type: "available" }, { type: "blocked" }],

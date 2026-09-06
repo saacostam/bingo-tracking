@@ -4,6 +4,7 @@ import { renderWithProviders } from "@/tests";
 import { BoardGrid } from "./BoardGrid";
 
 const boardTemplate: IBoardTemplate = {
+	id: "board-template",
 	grid: new Array(5)
 		.fill(null)
 		.map(() =>
@@ -24,6 +25,7 @@ describe("BoardGrid", () => {
 
 	it("should skip blocked cells when mapping values", () => {
 		const boardTemplateWithBlocked: IBoardTemplate = {
+			id: "board-template",
 			grid: [
 				[{ type: "available" }, { type: "available" }, { type: "blocked" }],
 				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
@@ -47,6 +49,7 @@ describe("BoardGrid", () => {
 
 	it("should not render values for blocked cells", () => {
 		const boardTemplateWithBlocked: IBoardTemplate = {
+			id: "board-template",
 			grid: [
 				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
 			],

@@ -27,7 +27,7 @@ export interface IGameClientPayload {
 		req: {
 			gameId: string;
 			boardRange: IBoardRange;
-			boardTemplate: IBoardTemplate;
+			boardTemplate: Pick<IBoardTemplate, "grid">;
 		};
 	};
 }

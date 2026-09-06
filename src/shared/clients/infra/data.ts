@@ -10,6 +10,7 @@ import type { IPattern } from "@/features/play/core/domain";
 const now = Date.now();
 
 const defaultBoardTemplate: IBoardTemplate = {
+	id: "board-template-id",
 	grid: new Array(5)
 		.fill(null)
 		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),

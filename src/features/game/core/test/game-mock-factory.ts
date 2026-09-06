@@ -31,6 +31,7 @@ class GameMockFactory {
 			...this.createGame(),
 			boards: [boardMockFactory.createBoard(), boardMockFactory.createBoard()],
 			boardTemplate: {
+				id: this._getId().toString(),
 				grid: new Array(5)
 					.fill(null)
 					.map(() =>
