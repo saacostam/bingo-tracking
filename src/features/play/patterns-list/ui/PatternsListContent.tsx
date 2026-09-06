@@ -47,8 +47,8 @@ export function PatternsListContent({ game, play }: PatternsListContentProps) {
 
 	const gridDimensions = useMemo(
 		() => ({
-			height: game.boardTemplate.grid.at(0)?.length ?? 0,
-			width: game.boardTemplate.grid.length,
+			height: game.boardTemplate.grid.length,
+			width: game.boardTemplate.grid.at(0)?.length ?? 0,
 		}),
 		[game.boardTemplate.grid],
 	);
