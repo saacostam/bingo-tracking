@@ -9,5 +9,5 @@ export interface IPlay {
 
 export type IPattern = {
 	id: string;
-	body: boolean[];
+	body: boolean[][];
 };

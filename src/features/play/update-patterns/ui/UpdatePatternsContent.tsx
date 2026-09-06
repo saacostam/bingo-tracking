@@ -66,7 +66,7 @@ export function UpdatePatternsContent({
 	const onAddPattern = useCallback(() => {
 		const pattern: IPattern = {
 			id: uuidAdapter.gen(),
-			body: game.boardTemplate.grid.flat().map(() => false),
+			body: game.boardTemplate.grid.map((row) => row.map(() => false)),
 		};
 
 		setPatterns((current) => [...current, pattern]);

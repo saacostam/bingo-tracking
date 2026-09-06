@@ -26,7 +26,13 @@ export const createPlayClientFactory = (): IPlayClient => ({
 								patterns: [
 									{
 										id: id,
-										body: [true, true, true, true, true],
+										body: [
+											[true, true, true, true, true],
+											[true, true, true, true, true],
+											[true, true, true, true, true],
+											[true, true, true, true, true],
+											[true, true, true, true, true],
+										],
 									},
 								],
 							},

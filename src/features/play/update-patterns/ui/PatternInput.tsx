@@ -47,27 +47,21 @@ export function PatternInput({
 		[grid],
 	);
 
-	const rowOffsets = useMemo(() => {
-		let offset = 0;
-
-		return grid.map((row) => {
-			const currentOffset = offset;
-			offset += row.length;
-			return currentOffset;
-		});
-	}, [grid]);
-
 	const onToggleCell = (rowIndex: number, columnIndex: number) => {
 		const cell = grid[rowIndex][columnIndex];
 
 		if (cell.type === "blocked") return;
 
-		const index = rowOffsets[rowIndex] + columnIndex;
+		const newPattern: IPattern["body"] = grid.map((row, ri) =>
+			row.map((_, ci) => value.at(ri)?.at(ci) ?? false),
+		);
+		if (0 <= rowIndex && rowIndex < newPattern.length) {
+			const row = newPattern[rowIndex];
+			if (0 <= columnIndex && columnIndex < row.length)
+				row[columnIndex] = !row[columnIndex];
+		}
 
-		const nextValue = [...value];
-		nextValue[index] = !nextValue[index];
-
-		onPatternChange(nextValue);
+		onPatternChange(newPattern);
 	};
 
 	return (
@@ -124,9 +118,7 @@ export function PatternInput({
 			>
 				{grid.map((row, rowIndex) =>
 					row.map((cell, columnIndex) => {
-						const index = rowOffsets[rowIndex] + columnIndex;
-
-						const selected = value[index] ?? false;
+						const selected = value.at(rowIndex)?.at(columnIndex) ?? false;
 						const blocked = cell.type === "blocked";
 
 						return (

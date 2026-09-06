@@ -18,11 +18,15 @@ const defaultBoardRange: IBoardRange = {
 	min: 1,
 	max: 75,
 };
-const defaultPatterns: IPattern[] = Array.from({ length: 3 }, (_, index) => ({
+const defaultPatterns: IPattern[] = Array.from({ length: 1 }, (_, index) => ({
 	id: String(index + 1),
-	body: new Array(25)
-		.fill(null)
-		.map((_, elementIndex) => elementIndex % 5 === index),
+	body: [
+		[false, false, true, false, false],
+		[false, false, true, false, false],
+		[false, false, true, false, false],
+		[false, false, true, false, false],
+		[false, false, true, false, false],
+	],
 }));
 
 export const DATA: {

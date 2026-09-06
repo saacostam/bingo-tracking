@@ -17,8 +17,6 @@ export function PatternsListContent({ game, play }: PatternsListContentProps) {
 			const requiredCellsForWinning = new Set<string>();
 			const availableButNotRequiredCells = new Set<string>();
 
-			let patternIndex = 0;
-
 			for (let i = 0; i < game.boardTemplate.grid.length; i++) {
 				const row = game.boardTemplate.grid[i];
 
@@ -27,11 +25,9 @@ export function PatternsListContent({ game, play }: PatternsListContentProps) {
 					const key = serializePair(i, j);
 
 					if (cell.type === "available") {
-						if (pattern.body.at(patternIndex) === true)
+						if (pattern.body.at(i)?.at(j) === true)
 							requiredCellsForWinning.add(key);
 						else availableButNotRequiredCells.add(key);
-
-						patternIndex++;
 					}
 				}
 			}
