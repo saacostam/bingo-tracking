@@ -80,9 +80,18 @@ export function BoardItem({
 		return ratio * 100;
 	}, [takenNumbers, valueToBoardTemplate]);
 
+	const isComplete = percentage >= 100;
+
 	return (
 		<Grid.Col span={{ base: 12, sm: 6 }}>
-			<Paper p="xs" withBorder>
+			<Paper
+				p="xs"
+				style={{
+					borderColor: isComplete ? "var(--mantine-color-green-6)" : undefined,
+					borderWidth: isComplete ? "0.20rem" : undefined,
+				}}
+				withBorder
+			>
 				<Flex direction="column" gap="xs">
 					<Title size="h5" ta="center">
 						{name}
@@ -134,7 +143,7 @@ export function BoardItem({
 						</Text>
 						<Box flex={1}>
 							<Progress
-								color={percentage >= 100 ? "green" : undefined}
+								color={isComplete ? "green" : undefined}
 								value={percentage}
 							/>
 						</Box>
