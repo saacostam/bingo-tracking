@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import type { IBoardRange, IBoardTemplate } from "@/features/board/core/domain";
 import type {
 	IGame,
@@ -9,12 +10,12 @@ import type { IPattern } from "@/features/play/core/domain";
 
 const now = Date.now();
 
-const defaultBoardTemplate: IBoardTemplate = {
-	id: "board-template-id",
+const defaultBoardTemplate: () => IBoardTemplate = () => ({
+	id: v4(),
 	grid: new Array(5)
 		.fill(null)
 		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),
-};
+});
 const defaultBoardRange: IBoardRange = {
 	min: 1,
 	max: 75,
@@ -70,7 +71,7 @@ export const DATA: {
 					patterns: defaultPatterns,
 				},
 			],
-			boardTemplate: defaultBoardTemplate,
+			boardTemplate: defaultBoardTemplate(),
 			boardRange: defaultBoardRange,
 		},
 		{
@@ -79,7 +80,7 @@ export const DATA: {
 			createdAt: now + 1,
 			boards: [],
 			plays: [],
-			boardTemplate: defaultBoardTemplate,
+			boardTemplate: defaultBoardTemplate(),
 			boardRange: defaultBoardRange,
 		},
 		{
@@ -88,7 +89,7 @@ export const DATA: {
 			createdAt: now + 2,
 			boards: [],
 			plays: [],
-			boardTemplate: defaultBoardTemplate,
+			boardTemplate: defaultBoardTemplate(),
 			boardRange: defaultBoardRange,
 		},
 	],
