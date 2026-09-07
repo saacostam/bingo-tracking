@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { v4 } from "uuid";
-import type { IBoardClient } from "@/features/board/core/domain";
+import type {
+	IBoardClient,
+	IBoardTemplate,
+} from "@/features/board/core/domain";
 import { DATA } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
@@ -59,15 +62,27 @@ export const createBoardFactory = (): IBoardClient => ({
 			userMsg: "Board not found",
 		});
 	},
-	readFromFile: async () => {
+	readFromFile: async ({ boardTemplateId }) => {
 		await wait(1000);
 
-		const randomCell = () => Math.floor(Math.random() * 100);
+		let boardTemplate: IBoardTemplate | null = null;
+		for (const game of DATA.GAMES) {
+			if (game.boardTemplate.id === boardTemplateId) {
+				boardTemplate = game.boardTemplate;
+			}
+		}
 
+		if (!boardTemplate) {
+			throw new DomainError({
+				type: DomainErrorType.NOT_FOUND,
+				msg: "Board template not found",
+				userMsg: "Board template not found",
+			});
+		}
+
+		const randomCell = () => Math.floor(Math.random() * 100);
 		return {
-			values: new Array(5)
-				.fill(null)
-				.map(() => new Array(5).fill(null).map(() => randomCell())),
+			values: boardTemplate.grid.map((row) => row.map(() => randomCell())),
 		};
 	},
 	update: async ({ boardId, board }) => {

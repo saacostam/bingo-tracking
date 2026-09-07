@@ -27,9 +27,9 @@ export function ReadFromFile({
 
 	useEffect(() => {
 		if (file) {
-			readBoardFromFile.mutate({ file });
+			readBoardFromFile.mutate({ file, boardTemplateId: boardTemplate.id });
 		}
-	}, [file, readBoardFromFile.mutate]);
+	}, [boardTemplate.id, file, readBoardFromFile.mutate]);
 
 	const reset = useCallback(() => {
 		setFile(null);

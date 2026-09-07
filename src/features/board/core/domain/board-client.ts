@@ -41,6 +41,7 @@ export interface IBoardClientPayload {
 	readFromFile: {
 		req: {
 			file: File;
+			boardTemplateId: string;
 		};
 		res: {
 			values: IBoard["values"];
