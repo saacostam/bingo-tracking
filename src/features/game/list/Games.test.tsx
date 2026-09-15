@@ -12,7 +12,10 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockRejectedValue(new Error("mock-error"));
 
-			renderWithProviders(<Games />, di as IDepsInjection);
+			renderWithProviders(
+				<Games onClickDeleteGameById={vi.fn()} />,
+				di as IDepsInjection,
+			);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -33,7 +36,10 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockImplementation(() => new Promise(() => {}));
 
-			renderWithProviders(<Games />, di as IDepsInjection);
+			renderWithProviders(
+				<Games onClickDeleteGameById={vi.fn()} />,
+				di as IDepsInjection,
+			);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -63,7 +69,10 @@ describe("Games", () => {
 				return entry?.mockDate ?? "unknown";
 			});
 
-			renderWithProviders(<Games />, di as IDepsInjection);
+			renderWithProviders(
+				<Games onClickDeleteGameById={vi.fn()} />,
+				di as IDepsInjection,
+			);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 			expect(skeleton).toBeVisible();
@@ -99,7 +108,10 @@ describe("Games", () => {
 
 			di.clients.game.getGames.mockResolvedValue([]);
 
-			renderWithProviders(<Games />, di as IDepsInjection);
+			renderWithProviders(
+				<Games onClickDeleteGameById={vi.fn()} />,
+				di as IDepsInjection,
+			);
 
 			const skeleton = await gamesDriver.findByTestId("skeleton");
 

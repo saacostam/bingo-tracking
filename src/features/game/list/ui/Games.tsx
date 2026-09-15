@@ -6,7 +6,11 @@ import { QueryError } from "@/shared/components";
 import { GamesContent } from "./GamesContent";
 import { GamesSkeleton } from "./GamesSkeleton";
 
-export function Games() {
+export interface GamesProps {
+	onClickDeleteGameById: (gameId: string) => void;
+}
+
+export function Games({ onClickDeleteGameById }: GamesProps) {
 	const { lang } = useAdapters();
 
 	const queryGames = useQueryGames().useQuery();
@@ -23,7 +27,12 @@ export function Games() {
 					where="Games.queryGames.isError"
 				/>
 			)}
-			{queryGames.isSuccess && <GamesContent games={queryGames.data} />}
+			{queryGames.isSuccess && (
+				<GamesContent
+					games={queryGames.data}
+					onClickDeleteGameById={onClickDeleteGameById}
+				/>
+			)}
 		</>
 	);
 }
