@@ -1,10 +1,35 @@
 import { useCallback, useMemo } from "react";
+import { v4 } from "uuid";
 import type { IGameClient } from "@/features/game/core/domain";
-import { DATA } from "@/shared/clients/infra";
+import {
+	DATA,
+	defaultBoardRange,
+	defaultBoardTemplate,
+} from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
 
 export function useGameClient(): IGameClient {
+	const createGame: IGameClient["createGame"] = useCallback(
+		async ({ name }) => {
+			await wait(500);
+
+			DATA.GAMES = [
+				...DATA.GAMES,
+				{
+					id: v4(),
+					name,
+					createdAt: Date.now(),
+					boards: [],
+					plays: [],
+					boardRange: defaultBoardRange,
+					boardTemplate: defaultBoardTemplate(),
+				},
+			];
+		},
+		[],
+	);
+
 	const deleteGame: IGameClient["deleteGame"] = useCallback(
 		async ({ gameId }) => {
 			await wait(500);
@@ -65,11 +90,12 @@ export function useGameClient(): IGameClient {
 
 	return useMemo(
 		() => ({
+			createGame,
 			deleteGame,
 			getGameById,
 			getGames,
 			setBoardTemplate,
 		}),
-		[deleteGame, getGameById, getGames, setBoardTemplate],
+		[createGame, deleteGame, getGameById, getGames, setBoardTemplate],
 	);
 }

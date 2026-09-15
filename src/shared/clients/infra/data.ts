@@ -10,13 +10,13 @@ import type { IPattern } from "@/features/play/core/domain";
 
 const now = Date.now();
 
-const defaultBoardTemplate: () => IBoardTemplate = () => ({
+export const defaultBoardTemplate: () => IBoardTemplate = () => ({
 	id: v4(),
 	grid: new Array(5)
 		.fill(null)
 		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),
 });
-const defaultBoardRange: IBoardRange = {
+export const defaultBoardRange: IBoardRange = {
 	min: 1,
 	max: 75,
 };
