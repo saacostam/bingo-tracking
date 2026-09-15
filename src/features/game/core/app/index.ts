@@ -1,3 +1,4 @@
+export * from "./useCreateGameMutation";
 export * from "./useDeleteGameMutation";
 export * from "./useGameColor";
 export * from "./useQueryGameById";
