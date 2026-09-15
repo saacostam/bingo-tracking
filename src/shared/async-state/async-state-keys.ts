@@ -21,6 +21,7 @@ export enum MutationKeys {
 	UPDATE_BOARD = "Update Board",
 
 	// GAMES
+	DELETE_GAME = "Delete Game",
 	SET_BOARD_TEMPLATE = "Set Board Template",
 
 	// PLAYS
