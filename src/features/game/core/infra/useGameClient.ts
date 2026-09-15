@@ -5,6 +5,23 @@ import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
 
 export function useGameClient(): IGameClient {
+	const deleteGame: IGameClient["deleteGame"] = useCallback(
+		async ({ gameId }) => {
+			await wait(500);
+			const game = DATA.GAMES.find((g) => g.id === gameId);
+
+			if (!game)
+				throw new DomainError({
+					type: DomainErrorType.NOT_FOUND,
+					userMsg: "Game not found",
+					msg: "Game not found",
+				});
+
+			DATA.GAMES = DATA.GAMES.filter((game) => game.id !== gameId);
+		},
+		[],
+	);
+
 	const getGameById: IGameClient["getGameById"] = useCallback(
 		async ({ id }) => {
 			await wait(500);
@@ -48,10 +65,11 @@ export function useGameClient(): IGameClient {
 
 	return useMemo(
 		() => ({
+			deleteGame,
 			getGameById,
 			getGames,
 			setBoardTemplate,
 		}),
-		[getGameById, getGames, setBoardTemplate],
+		[deleteGame, getGameById, getGames, setBoardTemplate],
 	);
 }

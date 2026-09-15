@@ -2,6 +2,7 @@ import type { IBoardRange, IBoardTemplate } from "@/features/board/core/domain";
 import type { IGame, IWithBoards, IWithBoardTemplate } from "./game";
 
 export interface IGameClient {
+	deleteGame(req: IGameClientPayload["deleteGame"]["req"]): Promise<void>;
 	getGames(): Promise<IGameClientPayload["getGames"]["res"]>;
 	getGameById(
 		req: IGameClientPayload["getGameById"]["req"],
@@ -12,6 +13,11 @@ export interface IGameClient {
 }
 
 export interface IGameClientPayload {
+	deleteGame: {
+		req: {
+			gameId: string;
+		};
+	};
 	getGames: {
 		res: IGame[];
 	};
