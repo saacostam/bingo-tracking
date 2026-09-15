@@ -1,4 +1,5 @@
 import { Avatar, Box, Card, Flex, GridCol, Text, Title } from "@mantine/core";
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { useGameColor } from "@/features/game/core/app";
 import type { IGame } from "@/features/game/core/domain";
@@ -7,10 +8,11 @@ import { RectangleGroup } from "@/shared/icons";
 import { genRoute, RouteName } from "@/shared/router/app";
 
 export interface GameItemProps {
+	controls?: ReactNode;
 	game: IGame;
 }
 
-export function GameItem({ game }: GameItemProps) {
+export function GameItem({ controls, game }: GameItemProps) {
 	const { date } = useAdapters();
 
 	const color = useGameColor(game.createdAt);
@@ -30,16 +32,17 @@ export function GameItem({ game }: GameItemProps) {
 				})}
 				withBorder
 			>
-				<Flex direction="row" gap="md" wrap="wrap">
+				<Flex align="center" direction="row" gap="md" wrap="wrap">
 					<Avatar color={color}>
 						<RectangleGroup />
 					</Avatar>
-					<Box>
+					<Box style={{ flex: 1, minWidth: 0 }}>
 						<Title size="lg">{game.name}</Title>
-						<Text c="dimmed" size="xs">
+						<Text c="dimmed" size="xs" truncate>
 							{date.formatDate({ type: "utc-ms", value: game.createdAt })}
 						</Text>
 					</Box>
+					{controls}
 				</Flex>
 			</Card>
 		</GridCol>
