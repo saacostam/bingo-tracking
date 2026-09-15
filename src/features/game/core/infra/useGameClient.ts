@@ -14,10 +14,12 @@ export function useGameClient(): IGameClient {
 		async ({ name }) => {
 			await wait(500);
 
+			const gameId = v4();
+
 			DATA.GAMES = [
 				...DATA.GAMES,
 				{
-					id: v4(),
+					id: gameId,
 					name,
 					createdAt: Date.now(),
 					boards: [],
@@ -26,6 +28,10 @@ export function useGameClient(): IGameClient {
 					boardTemplate: defaultBoardTemplate(),
 				},
 			];
+
+			return {
+				gameId,
+			};
 		},
 		[],
 	);
