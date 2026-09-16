@@ -3,7 +3,6 @@ import { useBoardClient } from "@/features/board/core/infra";
 import { useGameClient } from "@/features/game/core/infra";
 import { useLoginClient } from "@/features/login/infra";
 import { usePlayClient } from "@/features/play/core/infra";
-import { useTodoClient } from "@/features/todo/infra";
 import { ClientsContext } from "../app";
 import type { IClients } from "../domain";
 
@@ -22,7 +21,6 @@ export function ClientsProvider({ children }: PropsWithChildren) {
 	const gameClient = useGameClient();
 	const loginClient = useLoginClient();
 	const playClient = usePlayClient();
-	const todoClient = useTodoClient();
 
 	const clients: IClients = useMemo(
 		() => ({
@@ -30,9 +28,8 @@ export function ClientsProvider({ children }: PropsWithChildren) {
 			game: gameClient,
 			loginClient,
 			play: playClient,
-			todoClient,
 		}),
-		[boardClient, gameClient, loginClient, playClient, todoClient],
+		[boardClient, gameClient, loginClient, playClient],
 	);
 
 	return (

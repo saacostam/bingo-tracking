@@ -42,12 +42,6 @@ export function mockDi(overrides?: {
 				takeNumber: vi.fn(),
 				updatePatterns: vi.fn(),
 			},
-			todoClient: {
-				createTodo: vi.fn(),
-				deleteTodo: vi.fn(),
-				patchTodo: vi.fn(),
-				queryTodos: vi.fn(),
-			},
 		},
 		adapters: {
 			analyticsAdapter: {

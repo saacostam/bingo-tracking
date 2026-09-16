@@ -6,8 +6,6 @@ export enum QueryKeys {
 	GET_GAME_BY_ID = "Get Game by Id",
 	GET_GAMES = "Get Games",
 
-	QUERY_TODOS = "Query Todos",
-
 	// PLAYS
 	GET_PLAY_BY_ID = "Get Play by Id",
 	GET_PLAYS_BY_GAME_ID = "Get Plays by Game Id",
@@ -29,11 +27,6 @@ export enum MutationKeys {
 	CREATE_PLAY = "Create Play",
 	TAKE_NUMBER = "Take Number",
 	UPDATE_PATTERNS = "Update Patterns",
-
-	// TODO
-	CREATE_TODO = "Create Todo",
-	DELETE_TODO = "Delete Todo",
-	PATCH_TODO = "Patch Todo",
 
 	// LOGIN
 	LOGIN = "Login",
