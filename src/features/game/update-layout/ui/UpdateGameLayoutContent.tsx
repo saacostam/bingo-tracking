@@ -41,7 +41,7 @@ export function UpdateGameLayoutContent({
 	onClose,
 }: UpdateGameLayoutContentProps) {
 	const { notificationAdapter } = useAdapters();
-	const { boardTemplate, boardRange } = game;
+	const { boardTemplate } = game;
 
 	const setBoardTemplate = useSetBoardTemplateMutation();
 
@@ -49,8 +49,8 @@ export function UpdateGameLayoutContent({
 
 	const form = useForm<BoardRangeForm>({
 		defaultValues: {
-			min: boardRange.min,
-			max: boardRange.max,
+			min: boardTemplate.boardRange.min,
+			max: boardTemplate.boardRange.max,
 		},
 		resolver: zodResolver(boardRangeSchema),
 	});
@@ -82,10 +82,10 @@ export function UpdateGameLayoutContent({
 					gameId: game.id,
 					boardTemplate: {
 						grid,
-					},
-					boardRange: {
-						min: data.min,
-						max: data.max,
+						boardRange: {
+							min: data.min,
+							max: data.max,
+						},
 					},
 				},
 				{

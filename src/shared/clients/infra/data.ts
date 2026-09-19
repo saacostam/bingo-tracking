@@ -10,16 +10,17 @@ import type { IPattern } from "@/features/play/core/domain";
 
 const now = Date.now();
 
+export const defaultBoardRange: IBoardRange = {
+	min: 1,
+	max: 75,
+};
 export const defaultBoardTemplate: () => IBoardTemplate = () => ({
 	id: v4(),
 	grid: new Array(5)
 		.fill(null)
 		.map(() => new Array(5).fill(null).map(() => ({ type: "available" }))),
+	boardRange: defaultBoardRange,
 });
-export const defaultBoardRange: IBoardRange = {
-	min: 1,
-	max: 75,
-};
 const defaultPatterns: IPattern[] = Array.from({ length: 1 }, (_, index) => ({
 	id: String(index + 1),
 	body: [
@@ -72,7 +73,6 @@ export const DATA: {
 				},
 			],
 			boardTemplate: defaultBoardTemplate(),
-			boardRange: defaultBoardRange,
 		},
 		{
 			id: "2",
@@ -81,7 +81,6 @@ export const DATA: {
 			boards: [],
 			plays: [],
 			boardTemplate: defaultBoardTemplate(),
-			boardRange: defaultBoardRange,
 		},
 		{
 			id: "3",
@@ -90,7 +89,6 @@ export const DATA: {
 			boards: [],
 			plays: [],
 			boardTemplate: defaultBoardTemplate(),
-			boardRange: defaultBoardRange,
 		},
 	],
 };

@@ -1,4 +1,4 @@
-import type { IBoardRange, IBoardTemplate } from "@/features/board/core/domain";
+import type { IBoardTemplate } from "@/features/board/core/domain";
 import type { IGame, IWithBoards, IWithBoardTemplate } from "./game";
 
 export interface IGameClient {
@@ -43,8 +43,7 @@ export interface IGameClientPayload {
 	setBoardTemplate: {
 		req: {
 			gameId: string;
-			boardRange: IBoardRange;
-			boardTemplate: Pick<IBoardTemplate, "grid">;
+			boardTemplate: Pick<IBoardTemplate, "grid" | "boardRange">;
 		};
 	};
 }

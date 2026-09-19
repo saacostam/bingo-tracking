@@ -37,10 +37,10 @@ class GameMockFactory {
 					.map(() =>
 						new Array(5).fill(null).map(() => ({ type: "available" })),
 					),
-			},
-			boardRange: {
-				min: 1,
-				max: 75,
+				boardRange: {
+					min: 1,
+					max: 75,
+				},
 			},
 			...overrides,
 		};

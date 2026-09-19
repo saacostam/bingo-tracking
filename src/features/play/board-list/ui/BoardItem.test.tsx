@@ -11,6 +11,10 @@ const boardTemplate: IBoardTemplate = {
 		[{ type: "available" }, { type: "available" }],
 		[{ type: "available" }, { type: "blocked" }],
 	],
+	boardRange: {
+		min: 1,
+		max: 75,
+	},
 };
 
 const board: IBoard = {

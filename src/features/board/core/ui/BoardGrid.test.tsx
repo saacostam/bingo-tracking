@@ -10,6 +10,10 @@ const boardTemplate: IBoardTemplate = {
 		.map(() =>
 			new Array(5).fill(null).map(() => ({ type: "available" as const })),
 		),
+	boardRange: {
+		min: 1,
+		max: 75,
+	},
 };
 
 describe("BoardGrid", () => {
@@ -30,6 +34,10 @@ describe("BoardGrid", () => {
 				[{ type: "available" }, { type: "available" }, { type: "blocked" }],
 				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
 			],
+			boardRange: {
+				min: 1,
+				max: 75,
+			},
 		};
 
 		const values: IBoard["values"] = [
@@ -53,6 +61,10 @@ describe("BoardGrid", () => {
 			grid: [
 				[{ type: "available" }, { type: "blocked" }, { type: "available" }],
 			],
+			boardRange: {
+				min: 1,
+				max: 75,
+			},
 		};
 
 		const values: IBoard["values"] = [[10, undefined, 20]];

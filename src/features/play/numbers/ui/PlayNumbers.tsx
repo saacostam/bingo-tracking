@@ -105,7 +105,7 @@ export function PlayNumbers({ playId }: PlayNumbersProps) {
 
 			{queryPlayById.isSuccess && queryGameById.isSuccess && (
 				<PlayNumbersContent
-					boardRange={queryGameById.data.game.boardRange}
+					boardRange={queryGameById.data.game.boardTemplate.boardRange}
 					takenNumbers={queryPlayById.data.play.takenNumbers}
 					onClickTakenNumber={onClickTakenNumber}
 					isPending={isPending}

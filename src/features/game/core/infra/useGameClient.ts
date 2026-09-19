@@ -1,11 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { v4 } from "uuid";
 import type { IGameClient } from "@/features/game/core/domain";
-import {
-	DATA,
-	defaultBoardRange,
-	defaultBoardTemplate,
-} from "@/shared/clients/infra";
+import { DATA, defaultBoardTemplate } from "@/shared/clients/infra";
 import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import { wait } from "@/shared/utils/time";
 
@@ -24,7 +20,6 @@ export function useGameClient(): IGameClient {
 					createdAt: Date.now(),
 					boards: [],
 					plays: [],
-					boardRange: defaultBoardRange,
 					boardTemplate: defaultBoardTemplate(),
 				},
 			];
@@ -78,13 +73,12 @@ export function useGameClient(): IGameClient {
 	}, []);
 
 	const setBoardTemplate: IGameClient["setBoardTemplate"] = useCallback(
-		async ({ gameId, boardRange, boardTemplate }) => {
+		async ({ gameId, boardTemplate }) => {
 			await wait(500);
 
 			for (const game of DATA.GAMES) {
 				if (game.id !== gameId) continue;
 
-				game.boardRange = boardRange;
 				game.boardTemplate = {
 					...game.boardTemplate,
 					...boardTemplate,
