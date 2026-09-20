@@ -4,5 +4,3 @@ export interface IBoard {
 	values: (number | undefined)[][];
 	gameId: string;
 }
-
-export type IBoardCell = number;
