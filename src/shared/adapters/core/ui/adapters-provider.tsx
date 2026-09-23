@@ -74,7 +74,10 @@ function AdaptersProviderDependencyInjection({ children }: PropsWithChildren) {
 					},
 				},
 				{
-					baseUrl: import.meta.env.VITE_API_URL,
+					baseUrl: "https://saacostam-api.onrender.com/bingo-tracker",
+					defaultHeaders: {
+						Authorization: `Bearer ${sessionAdapter.session.type === "authenticated" ? sessionAdapter.session.token : ""}`,
+					},
 				},
 			),
 		[nav, sessionAdapter],
