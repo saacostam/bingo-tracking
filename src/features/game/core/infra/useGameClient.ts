@@ -1,91 +1,97 @@
 import { useCallback, useMemo } from "react";
-import { v4 } from "uuid";
+import { z } from "zod";
 import type { IGameClient } from "@/features/game/core/domain";
-import { DATA, defaultBoardTemplate } from "@/shared/clients/infra";
-import { DomainError, DomainErrorType } from "@/shared/errors/domain";
-import { wait } from "@/shared/utils/time";
+import { useAdapters } from "@/shared/adapters/core/app";
+
+const boardValidator = z.object({
+	id: z.string(),
+	name: z.string(),
+	values: z.array(z.array(z.number().optional())),
+	gameId: z.string(),
+});
+
+const boardTemplateValidator = z.object({
+	id: z.string(),
+	grid: z.array(
+		z.array(
+			z.object({
+				type: z.enum(["blocked", "available"]),
+			}),
+		),
+	),
+	boardRange: z.object({
+		min: z.number(),
+		max: z.number(),
+	}),
+});
+
+const gameValidator = z.object({
+	id: z.string(),
+	name: z.string(),
+	createdAt: z.number(),
+});
+
+const gameListItemValidator = gameValidator.extend({
+	boardTemplateId: z.string(),
+});
+
+const createGameResponseValidator = z.object({
+	gameId: z.string(),
+});
+
+const getGamesResponseValidator = z.array(gameListItemValidator);
+
+const getGameByIdResponseValidator = z.object({
+	game: gameValidator.extend({
+		boardTemplate: boardTemplateValidator,
+		boards: z.array(boardValidator),
+	}),
+});
 
 export function useGameClient(): IGameClient {
+	const { fetcherAdapter } = useAdapters();
+
 	const createGame: IGameClient["createGame"] = useCallback(
 		async ({ name }) => {
-			await wait(500);
+			const response = await fetcherAdapter.post("/game", {
+				name,
+			});
 
-			const gameId = v4();
-
-			DATA.GAMES = [
-				...DATA.GAMES,
-				{
-					id: gameId,
-					name,
-					createdAt: Date.now(),
-					boards: [],
-					plays: [],
-					boardTemplate: defaultBoardTemplate(),
-				},
-			];
-
-			return {
-				gameId,
-			};
+			return createGameResponseValidator.parse(response);
 		},
-		[],
+		[fetcherAdapter],
 	);
 
 	const deleteGame: IGameClient["deleteGame"] = useCallback(
 		async ({ gameId }) => {
-			await wait(500);
-			const game = DATA.GAMES.find((g) => g.id === gameId);
-
-			if (!game)
-				throw new DomainError({
-					type: DomainErrorType.NOT_FOUND,
-					userMsg: "Game not found",
-					msg: "Game not found",
-				});
-
-			DATA.GAMES = DATA.GAMES.filter((game) => game.id !== gameId);
+			await fetcherAdapter.delete(`/game/${gameId}`);
 		},
-		[],
+		[fetcherAdapter],
 	);
 
 	const getGameById: IGameClient["getGameById"] = useCallback(
 		async ({ id }) => {
-			await wait(500);
-			const game = DATA.GAMES.find((g) => g.id === id);
+			const response = await fetcherAdapter.get(`/game/${id}`);
 
-			if (!game)
-				throw new DomainError({
-					type: DomainErrorType.NOT_FOUND,
-					userMsg: "Game not found",
-					msg: "Game not found",
-				});
-
-			return {
-				game: structuredClone(game),
-			};
+			return getGameByIdResponseValidator.parse(response);
 		},
-		[],
+		[fetcherAdapter],
 	);
 
 	const getGames: IGameClient["getGames"] = useCallback(async () => {
-		await wait(500);
-		return DATA.GAMES.map((game) => structuredClone(game));
-	}, []);
+		const response = await fetcherAdapter.get("/game");
+
+		return getGamesResponseValidator.parse(response);
+	}, [fetcherAdapter]);
 
 	const setBoardTemplate: IGameClient["setBoardTemplate"] = useCallback(
 		async ({ gameId, boardTemplate }) => {
-			await wait(500);
-
-			for (const game of DATA.GAMES) {
-				if (game.id !== gameId) continue;
-
-				game.boardTemplate = {
-					...game.boardTemplate,
-					...boardTemplate,
-				};
-			}
+			await fetcherAdapter.patch(`/game/${gameId}/board-template`, {
+				grid: boardTemplate.grid,
+				boardRange: boardTemplate.boardRange,
+			});
 		},
-		[],
+		[fetcherAdapter],
 	);
 
 	return useMemo(
