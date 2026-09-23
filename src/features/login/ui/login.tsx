@@ -3,7 +3,6 @@ import {
 	Box,
 	Button,
 	Card,
-	Divider,
 	PasswordInput,
 	Space,
 	Text,
@@ -58,10 +57,6 @@ export function MockLogin() {
 					{lang.get(ILanguageAdapterKey.LOGIN_SUBMIT_CTA)}
 				</Button>
 			</form>
-			<Divider my="md" />
-			<Alert>
-				{lang.get(ILanguageAdapterKey.LOGIN_MOCK_IMPLEMENTATION_DISCLAIMER)}
-			</Alert>
 		</Card>
 	);
 }
