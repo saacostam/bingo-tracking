@@ -10,9 +10,7 @@ export interface IPlayClient {
 	getById(
 		req: IPlayClientPayload["getById"]["req"],
 	): Promise<IPlayClientPayload["getById"]["res"]>;
-	takeNumber(
-		req: IPlayClientPayload["takeNumber"]["req"],
-	): Promise<IPlayClientPayload["takeNumber"]["res"]>;
+	takeNumber(req: IPlayClientPayload["takeNumber"]["req"]): Promise<void>;
 	updatePatterns(
 		req: IPlayClientPayload["updatePatterns"]["req"],
 	): Promise<void>;
@@ -47,9 +45,6 @@ export interface IPlayClientPayload {
 	takeNumber: {
 		req: {
 			playId: string;
-			takenNumbers: number[];
-		};
-		res: {
 			takenNumbers: number[];
 		};
 	};

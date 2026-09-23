@@ -1,118 +1,92 @@
-import { useMemo } from "react";
-import { v4 } from "uuid";
-import type { IPattern, IPlayClient } from "@/features/play/core/domain";
-import { DATA } from "@/shared/clients/infra";
-import { DomainError, DomainErrorType } from "@/shared/errors/domain";
-import { wait } from "@/shared/utils/time";
+import { useCallback, useMemo } from "react";
+import { z } from "zod";
+import type { IPlayClient } from "@/features/play/core/domain";
+import { useAdapters } from "@/shared/adapters/core/app";
 
-export const createPlayClientFactory = (): IPlayClient => ({
-	create: async ({ gameId, name }) => {
-		await wait(200);
+const patternValidator = z.object({
+	id: z.string(),
+	body: z.array(z.array(z.boolean())),
+});
 
-		const id = v4();
+const playValidator = z.object({
+	id: z.string(),
+	name: z.string(),
+	startedAt: z.number(),
+	takenNumbers: z.array(z.number()),
+	gameId: z.string(),
+	patterns: z.array(patternValidator),
+});
 
-		DATA.GAMES = DATA.GAMES.map((g) =>
-			g.id === gameId
-				? {
-						...g,
-						plays: [
-							...g.plays,
-							{
-								id,
-								name,
-								startedAt: Date.now(),
-								takenNumbers: [],
-								gameId,
-								patterns: [
-									{
-										id: id,
-										body: [
-											[true, true, true, true, true],
-											[true, true, true, true, true],
-											[true, true, true, true, true],
-											[true, true, true, true, true],
-											[true, true, true, true, true],
-										],
-									},
-								],
-							},
-						],
-					}
-				: g,
-		);
+const createResponseValidator = z.object({
+	id: z.string(),
+});
 
-		return {
-			id,
-		};
-	},
-	getAllByGameId: async ({ gameId }) => {
-		await wait(200);
+const getAllByGameIdResponseValidator = z.object({
+	plays: z.array(playValidator),
+});
 
-		const game = DATA.GAMES.find((g) => g.id === gameId);
-
-		if (!game)
-			throw new DomainError({
-				type: DomainErrorType.NOT_FOUND,
-				msg: "Game not found",
-				userMsg: "Game not found",
-			});
-
-		return {
-			plays: structuredClone(game.plays),
-		};
-	},
-	getById: async ({ playId }) => {
-		await wait(200);
-
-		for (const game of DATA.GAMES) {
-			const play = game.plays.find((p) => p.id === playId);
-
-			if (!play) continue;
-
-			return {
-				play: structuredClone(play),
-			};
-		}
-
-		throw new DomainError({
-			type: DomainErrorType.NOT_FOUND,
-			msg: "Play not found",
-			userMsg: "Play not found",
-		});
-	},
-	takeNumber: async ({ playId, takenNumbers }) => {
-		await wait(200);
-
-		for (const game of DATA.GAMES) {
-			const play = game.plays.find((p) => p.id === playId);
-
-			if (play !== undefined) {
-				play.takenNumbers = takenNumbers;
-			}
-		}
-
-		return {
-			takenNumbers,
-		};
-	},
-	updatePatterns: async ({ playId, patterns }) => {
-		await wait(200);
-
-		for (const game of DATA.GAMES) {
-			const play = game.plays.find((p) => p.id === playId);
-
-			if (play !== undefined) {
-				play.patterns = patterns.map(
-					(patternBody): IPattern => ({
-						id: v4(),
-						body: patternBody,
-					}),
-				);
-			}
-		}
-	},
+const getByIdResponseValidator = z.object({
+	play: playValidator,
 });
 
 export function usePlayClient(): IPlayClient {
-	return useMemo(() => createPlayClientFactory(), []);
+	const { fetcherAdapter } = useAdapters();
+
+	const create: IPlayClient["create"] = useCallback(
+		async ({ gameId, name }) => {
+			const response = await fetcherAdapter.post(`/play/${gameId}`, {
+				name,
+			});
+
+			return createResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const getAllByGameId: IPlayClient["getAllByGameId"] = useCallback(
+		async ({ gameId }) => {
+			const response = await fetcherAdapter.get(`/play/game/${gameId}`);
+
+			return getAllByGameIdResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const getById: IPlayClient["getById"] = useCallback(
+		async ({ playId }) => {
+			const response = await fetcherAdapter.get(`/play/${playId}`);
+
+			return getByIdResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const takeNumber: IPlayClient["takeNumber"] = useCallback(
+		async ({ playId, takenNumbers }) => {
+			await fetcherAdapter.patch(`/play/${playId}/taken-numbers`, {
+				takenNumbers,
+			});
+		},
+		[fetcherAdapter],
+	);
+
+	const updatePatterns: IPlayClient["updatePatterns"] = useCallback(
+		async ({ playId, patterns }) => {
+			await fetcherAdapter.patch(`/play/${playId}/patterns`, {
+				patterns,
+			});
+		},
+		[fetcherAdapter],
+	);
+
+	return useMemo(
+		() => ({
+			create,
+			getAllByGameId,
+			getById,
+			takeNumber,
+			updatePatterns,
+		}),
+		[create, getAllByGameId, getById, takeNumber, updatePatterns],
+	);
 }
