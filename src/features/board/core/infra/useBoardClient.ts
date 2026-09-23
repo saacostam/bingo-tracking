@@ -1,119 +1,91 @@
-import { useMemo } from "react";
-import { v4 } from "uuid";
-import type {
-	IBoardClient,
-	IBoardTemplate,
-} from "@/features/board/core/domain";
-import { DATA } from "@/shared/clients/infra";
-import { DomainError, DomainErrorType } from "@/shared/errors/domain";
-import { wait } from "@/shared/utils/time";
+import { useCallback, useMemo } from "react";
+import { z } from "zod";
+import type { IBoardClient } from "@/features/board/core/domain";
+import { useAdapters } from "@/shared/adapters/core/app";
 
-export const createBoardFactory = (): IBoardClient => ({
-	create: async ({ gameId, name, values }) => {
-		await wait(200);
-		const id = v4();
+const boardValidator = z.object({
+	id: z.string(),
+	name: z.string(),
+	values: z.array(z.array(z.number().optional())),
+	gameId: z.string(),
+});
 
-		DATA.GAMES = DATA.GAMES.map((g) =>
-			g.id === gameId
-				? {
-						...g,
-						boards: [
-							...g.boards,
-							{
-								id,
-								values,
-								name,
-								gameId,
-							},
-						],
-					}
-				: g,
-		);
+const createResponseValidator = z.object({
+	id: z.string(),
+});
 
-		return { id };
-	},
-	delete: async ({ boardId }) => {
-		await wait(200);
+const getByIdResponseValidator = z.object({
+	board: boardValidator,
+});
 
-		DATA.GAMES = DATA.GAMES.map((g) => {
-			const hasBoard = g.boards.some((b) => b.id === boardId);
-			if (!hasBoard) return g;
-
-			return {
-				...g,
-				boards: g.boards.filter((b) => b.id !== boardId),
-			};
-		});
-	},
-	getById: async ({ boardId }) => {
-		await wait(200);
-
-		for (const g of DATA.GAMES) {
-			const board = g.boards.find((b) => b.id === boardId);
-
-			if (board) {
-				return { board: structuredClone(board) };
-			}
-		}
-
-		throw new DomainError({
-			type: DomainErrorType.NOT_FOUND,
-			msg: "Board not found",
-			userMsg: "Board not found",
-		});
-	},
-	readFromFile: async ({ boardTemplateId }) => {
-		await wait(1000);
-
-		let boardTemplate: IBoardTemplate | null = null;
-		for (const game of DATA.GAMES) {
-			if (game.boardTemplate.id === boardTemplateId) {
-				boardTemplate = game.boardTemplate;
-			}
-		}
-
-		if (!boardTemplate) {
-			throw new DomainError({
-				type: DomainErrorType.NOT_FOUND,
-				msg: "Board template not found",
-				userMsg: "Board template not found",
-			});
-		}
-
-		const randomCell = () => Math.floor(Math.random() * 100);
-		return {
-			values: boardTemplate.grid.map((row) => row.map(() => randomCell())),
-		};
-	},
-	update: async ({ boardId, board }) => {
-		await wait(200);
-
-		let exists = false;
-
-		DATA.GAMES = DATA.GAMES.map((g) => {
-			const hasBoard = g.boards.some((b) => b.id === boardId);
-			if (!hasBoard) return g;
-
-			exists = true;
-
-			return {
-				...g,
-				boards: g.boards.map((b) =>
-					b.id === boardId ? { ...b, ...board } : b,
-				),
-			};
-		});
-
-		if (!exists) {
-			throw new DomainError({
-				type: DomainErrorType.NOT_FOUND,
-				msg: "Board not found",
-				userMsg: "Board not found",
-			});
-		}
-	},
+const readFromFileResponseValidator = z.object({
+	values: z.array(z.array(z.number().optional())),
 });
 
 export function useBoardClient(): IBoardClient {
-	return useMemo(() => createBoardFactory(), []);
+	const { fetcherAdapter } = useAdapters();
+
+	const create: IBoardClient["create"] = useCallback(
+		async ({ gameId, name, values }) => {
+			const response = await fetcherAdapter.post(`/board/${gameId}`, {
+				name,
+				values,
+			});
+
+			return createResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const deleteBoard: IBoardClient["delete"] = useCallback(
+		async ({ boardId }) => {
+			await fetcherAdapter.delete(`/board/${boardId}`);
+		},
+		[fetcherAdapter],
+	);
+
+	const getById: IBoardClient["getById"] = useCallback(
+		async ({ boardId }) => {
+			const response = await fetcherAdapter.get(`/board/${boardId}`);
+
+			return getByIdResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const readFromFile: IBoardClient["readFromFile"] = useCallback(
+		async ({ boardTemplateId, file }) => {
+			const formData = new FormData();
+			formData.append("image", file);
+
+			const response = await fetcherAdapter.post(
+				`/board/read/template/${boardTemplateId}`,
+				formData,
+			);
+
+			return readFromFileResponseValidator.parse(response);
+		},
+		[fetcherAdapter],
+	);
+
+	const update: IBoardClient["update"] = useCallback(
+		async ({ boardId, board }) => {
+			await fetcherAdapter.patch(`/board/${boardId}`, {
+				name: board.name,
+				values: board.values,
+			});
+		},
+		[fetcherAdapter],
+	);
+
+	return useMemo(
+		() => ({
+			create,
+			delete: deleteBoard,
+			getById,
+			readFromFile,
+			update,
+		}),
+		[create, deleteBoard, getById, readFromFile, update],
+	);
 }
