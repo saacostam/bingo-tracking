@@ -48,9 +48,10 @@ export class HttpFetcherAdapter implements IFetcherAdapter {
 	private buildHeaders(
 		config?: IFetcherAdapterRequestConfig,
 		hasBody = false,
+		isFormData = false,
 	): HeadersInit {
 		return {
-			...(hasBody ? { "Content-Type": "application/json" } : {}),
+			...(hasBody && !isFormData ? { "Content-Type": "application/json" } : {}),
 			...this.defaultHeaders,
 			...config?.headers,
 		};
@@ -63,11 +64,12 @@ export class HttpFetcherAdapter implements IFetcherAdapter {
 		config?: IFetcherAdapterRequestConfig,
 	): Promise<TResponse> {
 		const hasBody = body !== undefined;
+		const isFormData = body instanceof FormData;
 
 		const response = await fetch(this.buildUrl(url, config?.params), {
 			method,
-			headers: this.buildHeaders(config, hasBody),
-			body: hasBody ? JSON.stringify(body) : undefined,
+			headers: this.buildHeaders(config, hasBody, isFormData),
+			body: hasBody ? (isFormData ? body : JSON.stringify(body)) : undefined,
 		});
 
 		if (!response.ok) {
