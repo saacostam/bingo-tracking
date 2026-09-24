@@ -182,4 +182,35 @@ describe("HttpFetcherAdapter", () => {
 		expect(options.body).toBe(JSON.stringify({ a: 1 }));
 		expect(options.headers["Content-Type"]).toBe("application/json");
 	});
+
+	it("maps backend error message and fields to DomainError", async () => {
+		const errorResponse = {
+			message: "Play not found",
+			status: 404,
+			errors: [
+				{
+					name: "playId",
+					message: "Play does not exist",
+				},
+			],
+		};
+
+		fetchMock.mockReturnValue(
+			mockResponse(404, JSON.stringify(errorResponse), false),
+		);
+
+		const adapter = new HttpFetcherAdapter();
+
+		await expect(adapter.get("/plays/123")).rejects.toMatchObject({
+			type: DomainErrorType.NOT_FOUND,
+			message: "Play not found",
+			userMsg: "Play not found",
+			fields: [
+				{
+					name: "playId",
+					message: "Play does not exist",
+				},
+			],
+		});
+	});
 });

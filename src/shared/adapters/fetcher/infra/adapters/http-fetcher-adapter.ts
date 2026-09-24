@@ -1,9 +1,18 @@
-import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 import type {
 	IFetcherAdapter,
 	IFetcherAdapterRequestConfig,
 	IFetcherSideEffects,
-} from "../../domain";
+} from "@/shared/adapters/fetcher/domain";
+import {
+	DomainError,
+	type DomainErrorField,
+	DomainErrorType,
+} from "@/shared/errors/domain";
+
+interface HttpErrorResponse {
+	message?: string;
+	errors?: DomainErrorField[];
+}
 
 export class HttpFetcherAdapter implements IFetcherAdapter {
 	private readonly baseUrl?: string;
@@ -57,6 +66,22 @@ export class HttpFetcherAdapter implements IFetcherAdapter {
 		};
 	}
 
+	private async parseErrorResponse(
+		response: Response,
+	): Promise<HttpErrorResponse> {
+		const text = await response.text().catch(() => "");
+
+		if (!text) {
+			return {};
+		}
+
+		try {
+			return JSON.parse(text) as HttpErrorResponse;
+		} catch {
+			return {};
+		}
+	}
+
 	private async request<TResponse>(
 		method: string,
 		url: string,
@@ -73,38 +98,48 @@ export class HttpFetcherAdapter implements IFetcherAdapter {
 		});
 
 		if (!response.ok) {
-			const errorBody = await response.text().catch(() => "");
+			const errorBody = await this.parseErrorResponse(response);
+
+			const msg = errorBody.message;
+			const fields = errorBody.errors;
 
 			switch (response.status) {
 				case 401:
 					this.sideEffects?.onUnauthorized?.();
+
 					throw new DomainError({
 						type: DomainErrorType.UNAUTHORIZED,
-						userMsg: "Unauthorized",
-						msg: errorBody,
+						userMsg: msg ?? "Unauthorized",
+						msg: msg ?? "Unauthorized",
+						fields,
 					});
 
 				case 403:
 					this.sideEffects?.onForbidden?.();
+
 					throw new DomainError({
 						type: DomainErrorType.FORBIDDEN,
-						userMsg: "Forbidden",
-						msg: errorBody,
+						userMsg: msg ?? "Forbidden",
+						msg: msg ?? "Forbidden",
+						fields,
 					});
 
 				case 404:
 					this.sideEffects?.onNotFound?.();
+
 					throw new DomainError({
 						type: DomainErrorType.NOT_FOUND,
-						userMsg: "Not found",
-						msg: `[HttpFetcherAdapter.404]: ${errorBody}`,
+						userMsg: msg ?? "Not found",
+						msg: msg ?? "Not found",
+						fields,
 					});
 
 				default:
 					throw new DomainError({
 						type: DomainErrorType.UNKNOWN,
-						userMsg: "Unexpected server error",
-						msg: `HTTP ${response.status} ${response.statusText}: ${errorBody}`,
+						userMsg: msg ?? "Unexpected server error",
+						msg: msg ?? `HTTP ${response.status} ${response.statusText}`,
+						fields,
 					});
 			}
 		}
