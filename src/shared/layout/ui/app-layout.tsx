@@ -8,6 +8,7 @@ import {
 	UnstyledButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useQueryClient } from "@tanstack/react-query";
 import { type PropsWithChildren, useCallback, useMemo } from "react";
 import { Link } from "react-router";
 import { LanguageMenu } from "@/features/language/ui";
@@ -20,6 +21,8 @@ import { genRoute, RouteName } from "@/shared/router/app";
 const MAIN_LINKS = [] as const;
 
 export function AppLayout({ children }: PropsWithChildren) {
+	const queryClient = useQueryClient();
+
 	const { lang, sessionAdapter } = useAdapters();
 
 	const [opened, { toggle }] = useDisclosure();
@@ -35,10 +38,10 @@ export function AppLayout({ children }: PropsWithChildren) {
 		[],
 	);
 
-	const onClickLogout = useCallback(
-		() => sessionAdapter.removeToken(),
-		[sessionAdapter.removeToken],
-	);
+	const onClickLogout = useCallback(() => {
+		sessionAdapter.removeToken();
+		queryClient.removeQueries();
+	}, [queryClient.removeQueries, sessionAdapter.removeToken]);
 
 	return (
 		<AppShell
