@@ -42,6 +42,9 @@ export function mockDi(overrides?: {
 				takeNumber: vi.fn(),
 				updatePatterns: vi.fn(),
 			},
+			user: {
+				getCapabilities: vi.fn(),
+			},
 		},
 		adapters: {
 			analyticsAdapter: {
