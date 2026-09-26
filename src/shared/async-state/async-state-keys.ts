@@ -9,6 +9,9 @@ export enum QueryKeys {
 	// PLAYS
 	GET_PLAY_BY_ID = "Get Play by Id",
 	GET_PLAYS_BY_GAME_ID = "Get Plays by Game Id",
+
+	// USERS
+	GET_USER_CAPABILITIES = "Get User Capabilities",
 }
 
 export enum MutationKeys {
