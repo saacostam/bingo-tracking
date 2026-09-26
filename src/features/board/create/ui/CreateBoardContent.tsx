@@ -13,10 +13,12 @@ import type { CreateBoardProps } from "./CreateBoard";
 
 export interface CreateBoardContentProps extends CreateBoardProps {
 	boardTemplate: IBoardTemplate;
+	canUseImageFlow: boolean;
 }
 
 export function CreateBoardContent({
 	boardTemplate,
+	canUseImageFlow,
 	gameId,
 	onError,
 	onSettled,
@@ -56,6 +58,7 @@ export function CreateBoardContent({
 			<BoardEditorFlow
 				action={lang.get(ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM)}
 				boardTemplate={boardTemplate}
+				canUseImageFlow={canUseImageFlow}
 				form={form}
 				isPending={createBoardMutation.isPending}
 				onSubmit={onSubmit}

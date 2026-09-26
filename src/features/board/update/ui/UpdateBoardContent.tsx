@@ -13,6 +13,7 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 export interface UpdateBoardContentProps {
 	board: IBoard;
 	boardTemplate: IBoardTemplate;
+	canUseImageFlow: boolean;
 	onError: (e: unknown) => void;
 	onSettled: () => void;
 	onSuccess: () => void;
@@ -21,6 +22,7 @@ export interface UpdateBoardContentProps {
 export function UpdateBoardContent({
 	board,
 	boardTemplate,
+	canUseImageFlow,
 	onError,
 	onSettled,
 	onSuccess,
@@ -61,6 +63,7 @@ export function UpdateBoardContent({
 			<BoardEditorFlow
 				action={lang.get(ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM)}
 				boardTemplate={boardTemplate}
+				canUseImageFlow={canUseImageFlow}
 				form={form}
 				isPending={updateBoardMutation.isPending}
 				onSubmit={onSubmit}

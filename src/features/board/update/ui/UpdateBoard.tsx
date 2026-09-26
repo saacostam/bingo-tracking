@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useQueryBoardById } from "@/features/board/core/app";
 import { useQueryGameById } from "@/features/game/core/app";
+import { useQueryUserCapabilities } from "@/features/user/core/app";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
@@ -32,35 +33,49 @@ export function UpdateBoard({
 		enabled: queryBoardById.isSuccess, // WARN: Empty id is intentional; execution is gated by enabled
 	}).useQuery();
 
+	const queryUserCapabilities = useQueryUserCapabilities().useQuery();
+
+	const retryQueries = useCallback(() => {
+		queryBoardById.refetch();
+		queryGameById.refetch();
+		queryUserCapabilities.refetch();
+	}, [
+		queryBoardById.refetch,
+		queryGameById.refetch,
+		queryUserCapabilities.refetch,
+	]);
+
 	const retry = useRetry(
-		useCallback(() => {
-			queryBoardById.refetch();
-			queryGameById.refetch();
-		}, [queryBoardById.refetch, queryGameById.refetch]),
-		queryBoardById.isPending || queryGameById.isPending,
+		retryQueries,
+		queryBoardById.isPending ||
+			queryGameById.isPending ||
+			queryUserCapabilities.isPending,
 	);
+
+	const canUseImageFlow = queryUserCapabilities.isSuccess
+		? queryUserCapabilities.data.vision
+		: false;
 
 	return (
 		<>
-			{(queryBoardById.isError || queryGameById.isError) && (
+			{queryBoardById.isError || queryGameById.isError ? (
 				<QueryError
 					error={queryBoardById.error}
 					msg={lang.get(ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG)}
 					retry={retry}
 					where="UpdateBoard.queryBoardById.isError"
 				/>
-			)}
-			{(queryBoardById.isLoading || queryGameById.isLoading) && (
-				<UpdateBoardSkeleton />
-			)}
-			{queryBoardById.isSuccess && queryGameById.isSuccess && (
+			) : queryBoardById.isSuccess && queryGameById.isSuccess ? (
 				<UpdateBoardContent
 					board={queryBoardById.data.board}
 					boardTemplate={queryGameById.data.game.boardTemplate}
+					canUseImageFlow={canUseImageFlow}
 					onError={onError}
 					onSettled={onSettled}
 					onSuccess={onSuccess}
 				/>
+			) : (
+				<UpdateBoardSkeleton />
 			)}
 		</>
 	);
