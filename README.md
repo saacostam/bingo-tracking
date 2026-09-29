@@ -31,6 +31,14 @@ Game
 
 Create a game, add its boards, start a play, and record numbers as they're called. Multiple boards and plays can be tracked independently within the same game.
 
+## Architecture
+
+Bingo Tracker follows a pragmatic, feature-oriented architecture inspired by Clean Architecture.
+
+The codebase separates domain logic, application orchestration, UI, and infrastructure while keeping dependencies explicit and testable. Features are organized vertically, with soft boundaries that prioritize cohesion and maintainability over strict isolation.
+
+For a detailed explanation of the architecture, dependency rules, testing strategy, and composition patterns, see [`architecture.md`](./docs/architecture.md).
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR.
