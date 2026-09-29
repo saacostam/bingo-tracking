@@ -1,3 +1,36 @@
+# Bingo Tracker
+
+A simple app for tracking bingo games with multiple boards.
+
+Create games, add and manage bingo boards, and keep track of plays and called numbers in one place.
+
+## What you can do
+
+* Create and manage bingo games
+* Add multiple boards to each game
+* Import boards from files
+* Configure board templates
+* Track multiple plays within a game
+* Record called numbers as a play progresses
+* Define winning patterns for each play
+* Manage your games and boards from a single application
+
+## How it works
+
+A typical session looks like:
+
+```text
+Game
+├── Board 1
+├── Board 2
+├── Board 3
+└── Plays
+    ├── Play 1
+    └── Play 2
+```
+
+Create a game, add its boards, start a play, and record numbers as they're called. Multiple boards and plays can be tracked independently within the same game.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR.
