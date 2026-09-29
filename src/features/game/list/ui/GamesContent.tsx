@@ -53,7 +53,7 @@ export function GamesContent({
 										size="md"
 										variant="light"
 									>
-										<TrashIcon />
+										<TrashIcon height="20" width="20" />
 									</ActionIcon>
 								</Flex>
 							}
