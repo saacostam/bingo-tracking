@@ -1,15 +1,13 @@
 import {
 	AppShell,
-	Burger,
 	Button,
 	Container,
 	Flex,
 	Group,
 	UnstyledButton,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
-import { type PropsWithChildren, useCallback, useMemo } from "react";
+import { type PropsWithChildren, useCallback } from "react";
 import { Link } from "react-router";
 import { LanguageMenu } from "@/features/language/ui";
 import { ThemeToggle } from "@/features/theme/ui";
@@ -18,25 +16,10 @@ import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { Logo } from "@/shared/components";
 import { genRoute, RouteName } from "@/shared/router/app";
 
-const MAIN_LINKS = [] as const;
-
 export function AppLayout({ children }: PropsWithChildren) {
 	const queryClient = useQueryClient();
 
 	const { lang, sessionAdapter } = useAdapters();
-
-	const [opened, { toggle }] = useDisclosure();
-
-	const links = useMemo(
-		() =>
-			MAIN_LINKS.map(({ name, label }) => ({
-				href: genRoute({
-					name,
-				}),
-				label,
-			})),
-		[],
-	);
 
 	const onClickLogout = useCallback(() => {
 		sessionAdapter.removeToken();
@@ -44,18 +27,9 @@ export function AppLayout({ children }: PropsWithChildren) {
 	}, [queryClient.removeQueries, sessionAdapter.removeToken]);
 
 	return (
-		<AppShell
-			header={{ height: 60 }}
-			navbar={{
-				width: 300,
-				breakpoint: "sm",
-				collapsed: { desktop: true, mobile: !opened },
-			}}
-			padding="md"
-		>
+		<AppShell header={{ height: 60 }} padding="md">
 			<AppShell.Header>
 				<Group h="100%" px="md">
-					<Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 					<Group justify="space-between" style={{ flex: 1 }}>
 						<UnstyledButton
 							component={Link}
@@ -66,13 +40,6 @@ export function AppLayout({ children }: PropsWithChildren) {
 							<Logo />
 						</UnstyledButton>
 						<Flex gap="lg">
-							<Group gap="lg" visibleFrom="sm">
-								{links.map(({ href, label }) => (
-									<UnstyledButton component={Link} key={href} to={href}>
-										{label}
-									</UnstyledButton>
-								))}
-							</Group>
 							<ThemeToggle />
 							<LanguageMenu />
 							<Button onClick={onClickLogout}>
@@ -82,14 +49,6 @@ export function AppLayout({ children }: PropsWithChildren) {
 					</Group>
 				</Group>
 			</AppShell.Header>
-
-			<AppShell.Navbar py="md" px="lg">
-				{links.map(({ href, label }) => (
-					<UnstyledButton component={Link} key={href} to={href}>
-						{label}
-					</UnstyledButton>
-				))}
-			</AppShell.Navbar>
 
 			<AppShell.Main>
 				<Container mx="auto">{children}</Container>
