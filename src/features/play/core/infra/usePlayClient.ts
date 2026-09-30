@@ -43,6 +43,13 @@ export function usePlayClient(): IPlayClient {
 		[fetcherAdapter],
 	);
 
+	const deletePlay: IPlayClient["delete"] = useCallback(
+		async ({ playId }) => {
+			await fetcherAdapter.delete(`/play/${playId}`);
+		},
+		[fetcherAdapter.delete],
+	);
+
 	const getAllByGameId: IPlayClient["getAllByGameId"] = useCallback(
 		async ({ gameId }) => {
 			const response = await fetcherAdapter.get(`/play/game/${gameId}`);
@@ -82,11 +89,12 @@ export function usePlayClient(): IPlayClient {
 	return useMemo(
 		() => ({
 			create,
+			delete: deletePlay,
 			getAllByGameId,
 			getById,
 			takeNumber,
 			updatePatterns,
 		}),
-		[create, getAllByGameId, getById, takeNumber, updatePatterns],
+		[create, deletePlay, getAllByGameId, getById, takeNumber, updatePatterns],
 	);
 }
