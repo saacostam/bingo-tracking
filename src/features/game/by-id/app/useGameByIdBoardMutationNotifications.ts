@@ -84,6 +84,29 @@ export function useGameByIdBoardMutationNotifications() {
 		[deleteBoardSuccess, deleteBoardError],
 	);
 
+	// Delete Play
+	const deletePlaySuccess = useCallback(() => {
+		notificationAdapter.notify({
+			type: "success",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_DELETED_TITLE),
+			msg: "Play deleted successfully",
+		});
+	}, [lang.get, notificationAdapter.notify]);
+	const deletePlayError = useCallback(() => {
+		notificationAdapter.notify({
+			type: "error",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
+			msg: "Unable to delete board",
+		});
+	}, [lang.get, notificationAdapter.notify]);
+	const deletePlay = useMemo(
+		() => ({
+			onSuccess: deletePlaySuccess,
+			onError: deletePlayError,
+		}),
+		[deletePlaySuccess, deletePlayError],
+	);
+
 	// Update Board
 	const updateBoardSuccess = useCallback(() => {
 		notificationAdapter.notify({
@@ -114,8 +137,9 @@ export function useGameByIdBoardMutationNotifications() {
 			createBoard,
 			createPlay,
 			deleteBoard,
+			deletePlay,
 			updateBoard,
 		}),
-		[createBoard, createPlay, deleteBoard, updateBoard],
+		[createBoard, createPlay, deleteBoard, deletePlay, updateBoard],
 	);
 }

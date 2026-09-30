@@ -1,27 +1,20 @@
-import {
-	Avatar,
-	Box,
-	Card,
-	Flex,
-	Grid,
-	Paper,
-	Text,
-	Title,
-} from "@mantine/core";
-import { Link } from "react-router";
+import { Box, Grid, Paper } from "@mantine/core";
 import type { IPlay } from "@/features/play/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { EmptyQuery } from "@/shared/components";
-import { PuzzlePieceIcon } from "@/shared/icons";
-import { genRoute, RouteName } from "@/shared/router/app";
+import { PlaysListItem } from "./PlaysListItem";
 
 export interface PlaysListContentProps {
+	onDeletePlay: (id: string) => void;
 	plays: IPlay[];
 }
 
-export function PlaysListContent({ plays }: PlaysListContentProps) {
-	const { date, lang } = useAdapters();
+export function PlaysListContent({
+	onDeletePlay,
+	plays,
+}: PlaysListContentProps) {
+	const { lang } = useAdapters();
 
 	return (
 		<Box data-testid="plays-list-content">
@@ -37,38 +30,11 @@ export function PlaysListContent({ plays }: PlaysListContentProps) {
 			) : (
 				<Grid gutter="md">
 					{plays.map((play) => (
-						<Grid.Col
+						<PlaysListItem
 							key={play.id}
-							data-testid="plays-list-content-item"
-							span={{ base: 12, xs: 6, sm: 4 }}
-						>
-							<Card
-								component={Link}
-								h="100%"
-								to={genRoute({
-									name: RouteName.PLAY_BY_ID,
-									params: {
-										id: play.id,
-									},
-								})}
-								withBorder
-							>
-								<Flex direction="row" gap="md" wrap="wrap">
-									<Avatar color="indigo">
-										<PuzzlePieceIcon />
-									</Avatar>
-									<Box>
-										<Title size="lg">{play.name}</Title>
-										<Text c="dimmed" size="xs">
-											{date.formatDateTime({
-												type: "utc-ms",
-												value: play.startedAt,
-											})}
-										</Text>
-									</Box>
-								</Flex>
-							</Card>
-						</Grid.Col>
+							onDeletePlay={onDeletePlay}
+							play={play}
+						/>
 					))}
 				</Grid>
 			)}

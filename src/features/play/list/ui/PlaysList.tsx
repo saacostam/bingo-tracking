@@ -11,9 +11,14 @@ import { PlaysListSkeleton } from "./PlaysListSkeleton";
 export interface PlaysListProps {
 	gameId: string;
 	onCreatePlay: () => void;
+	onDeletePlay: (id: string) => void;
 }
 
-export function PlaysList({ gameId, onCreatePlay }: PlaysListProps) {
+export function PlaysList({
+	gameId,
+	onCreatePlay,
+	onDeletePlay,
+}: PlaysListProps) {
 	const { lang } = useAdapters();
 
 	const queryAllPlaysByGameId = useQueryAllPlaysByGameId({ gameId }).useQuery();
@@ -52,7 +57,10 @@ export function PlaysList({ gameId, onCreatePlay }: PlaysListProps) {
 					/>
 				)}
 				{queryAllPlaysByGameId.isSuccess && (
-					<PlaysListContent plays={queryAllPlaysByGameId.data.plays} />
+					<PlaysListContent
+						onDeletePlay={onDeletePlay}
+						plays={queryAllPlaysByGameId.data.plays}
+					/>
 				)}
 			</Box>
 		</Flex>

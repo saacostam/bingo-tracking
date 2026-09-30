@@ -30,6 +30,7 @@ export interface GameByIdContentProps {
 	onCreateBoard: () => void;
 	onCreatePlay: () => void;
 	onDeleteBoard: (boardId: string) => void;
+	onDeletePlay: (playId: string) => void;
 	onSetGameBoardTemplate: () => void;
 	onUpdateBoard: (boardId: string) => void;
 	PlaysListSlot: ComponentType<PlaysListProps>;
@@ -40,6 +41,7 @@ export function GameByIdContent({
 	onCreateBoard,
 	onCreatePlay,
 	onDeleteBoard,
+	onDeletePlay,
 	onSetGameBoardTemplate,
 	onUpdateBoard,
 	PlaysListSlot,
@@ -55,7 +57,11 @@ export function GameByIdContent({
 				</Text>
 			</Box>
 			<Divider />
-			<PlaysListSlot gameId={game.id} onCreatePlay={onCreatePlay} />
+			<PlaysListSlot
+				gameId={game.id}
+				onCreatePlay={onCreatePlay}
+				onDeletePlay={onDeletePlay}
+			/>
 			<Divider />
 			<Box>
 				<Flex

@@ -22,6 +22,7 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 		| { type: "create-board"; payload: { gameId: string } }
 		| { type: "create-play"; payload: { gameId: string } }
 		| { type: "delete-board"; payload: { id: string } }
+		| { type: "delete-play"; payload: { playId: string } }
 		| { type: "update-board"; payload: { id: string } }
 		| { type: "update-game-layout"; payload: { gameId: string } }
 	>({
@@ -46,6 +47,15 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 		[],
 	);
 
+	const onDeletePlay = useCallback(
+		(playId: string) =>
+			setModal({
+				type: "delete-play",
+				payload: { playId },
+			}),
+		[],
+	);
+
 	const onSetGameBoardTemplate = useCallback(
 		() => setModal({ type: "update-game-layout", payload: { gameId } }),
 		[gameId],
@@ -64,6 +74,7 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 			onCreateBoard,
 			onCreatePlay,
 			onDeleteBoard,
+			onDeletePlay,
 			onSetGameBoardTemplate,
 			onUpdateBoard,
 		}),
@@ -73,6 +84,7 @@ export function useGameByIdModals({ gameId }: UseGameByIdModalsArgs) {
 			onCreateBoard,
 			onCreatePlay,
 			onDeleteBoard,
+			onDeletePlay,
 			onUpdateBoard,
 			onSetGameBoardTemplate,
 		],

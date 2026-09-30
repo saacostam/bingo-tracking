@@ -32,13 +32,14 @@ export function GameByIdComposer({
 		onCreateBoard,
 		onCreatePlay,
 		onDeleteBoard,
+		onDeletePlay,
 		onSetGameBoardTemplate,
 		onUpdateBoard,
 	} = useGameByIdModals({
 		gameId: id,
 	});
 
-	const { createBoard, createPlay, deleteBoard, updateBoard } =
+	const { createBoard, createPlay, deleteBoard, deletePlay, updateBoard } =
 		useGameByIdBoardMutationNotifications();
 
 	return (
@@ -48,6 +49,7 @@ export function GameByIdComposer({
 				onCreateBoard={onCreateBoard}
 				onCreatePlay={onCreatePlay}
 				onDeleteBoard={onDeleteBoard}
+				onDeletePlay={onDeletePlay}
 				onSetGameBoardTemplate={onSetGameBoardTemplate}
 				onUpdateBoard={onUpdateBoard}
 				PlaysListSlot={playSlots.List}
@@ -93,6 +95,21 @@ export function GameByIdComposer({
 						onCancel={onClose}
 						onError={deleteBoard.onError}
 						onSuccess={deleteBoard.onSuccess}
+						onSettled={onClose}
+					/>
+				)}
+			</Modal>
+			<Modal
+				opened={view.type === "delete-play"}
+				onClose={onClose}
+				title="Delete"
+			>
+				{view.type === "delete-play" && (
+					<playSlots.Delete
+						id={view.payload.playId}
+						onCancel={onClose}
+						onError={deletePlay.onError}
+						onSuccess={deletePlay.onSuccess}
 						onSettled={onClose}
 					/>
 				)}

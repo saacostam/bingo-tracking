@@ -13,6 +13,7 @@ import {
 } from "@/features/game/by-id/ui";
 import { UpdateGameLayout } from "@/features/game/update-layout/ui";
 import { CreatePlay } from "@/features/play/create/ui";
+import { DeletePlay } from "@/features/play/delete/ui";
 import { PlaysList } from "@/features/play/list/ui";
 import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
@@ -42,6 +43,7 @@ const GameByIdWithBoardsSlots: GameByIdScreenControllerProps["GameById"] = (
 	const playSlots: IPlaySlots = useMemo(
 		() => ({
 			Create: CreatePlay,
+			Delete: DeletePlay,
 			List: PlaysList,
 		}),
 		[],
