@@ -28,6 +28,7 @@ export enum MutationKeys {
 
 	// PLAYS
 	CREATE_PLAY = "Create Play",
+	DELETE_PLAY = "Delete Play",
 	TAKE_NUMBER = "Take Number",
 	UPDATE_PATTERNS = "Update Patterns",
 
