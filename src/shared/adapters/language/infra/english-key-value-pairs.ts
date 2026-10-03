@@ -148,4 +148,19 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG]:
 		"Unable to retrieve board information",
 	[ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM]: "Save",
+
+	// UPDATE GAME LAYOUT
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_MODAL_TITLE]: "Update Layout",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_QUERY_BOARD_ERROR_MSG]:
+		"Unable to retrieve game information.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_DESCRIPTION]:
+		"Match the layout to the dimensions and mark available and blocked slots.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_AVAILABLE_LABEL]: "Available",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_BLOCKED_LABEL]: "Blocked",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_CANCEL_BTN_LABEL]: "Close",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_SUBMIT_BTN_LABEL]: "Save",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_ERROR]:
+		"Unable to update board layout.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_SUCCESS]:
+		"Board layout updated successfully.",
 };

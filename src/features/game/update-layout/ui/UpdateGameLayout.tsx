@@ -1,4 +1,6 @@
 import { useQueryGameById } from "@/features/game/core/app";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useRetry } from "@/shared/async-state";
 import { QueryError } from "@/shared/components";
 import { UpdateGameLayoutContent } from "./UpdateGameLayoutContent";
@@ -10,6 +12,8 @@ export interface UpdateGameLayoutProps {
 }
 
 export function UpdateGameLayout({ gameId, onClose }: UpdateGameLayoutProps) {
+	const { lang } = useAdapters();
+
 	const queryGame = useQueryGameById({
 		id: gameId,
 	}).useQuery();
@@ -21,7 +25,9 @@ export function UpdateGameLayout({ gameId, onClose }: UpdateGameLayoutProps) {
 			{queryGame.isLoading && <UpdateGameLayoutSkeleton />}
 			{queryGame.isError && (
 				<QueryError
-					msg="Unable to retrieve game information"
+					msg={lang.get(
+						ILanguageAdapterKey.UPDATE_GAME_LAYOUT_QUERY_BOARD_ERROR_MSG,
+					)}
 					retry={retry}
 					error={queryGame.error}
 					where="SetBoardTemplate.queryGame.isError"

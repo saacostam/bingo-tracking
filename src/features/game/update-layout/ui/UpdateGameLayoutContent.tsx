@@ -16,7 +16,7 @@ import z from "zod";
 import { useSetBoardTemplateMutation } from "@/features/game/core/app";
 import type { IGame, IWithBoardTemplate } from "@/features/game/core/domain";
 import { useAdapters } from "@/shared/adapters/core/app";
-
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { GridInput } from "./GridInput";
 
 const boardRangeSchema = z
@@ -40,7 +40,8 @@ export function UpdateGameLayoutContent({
 	game,
 	onClose,
 }: UpdateGameLayoutContentProps) {
-	const { notificationAdapter } = useAdapters();
+	const { lang, notificationAdapter } = useAdapters();
+
 	const { boardTemplate } = game;
 
 	const setBoardTemplate = useSetBoardTemplateMutation();
@@ -62,18 +63,18 @@ export function UpdateGameLayoutContent({
 	const onSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
-			title: "Updated",
-			msg: "Board layout updated successfully.",
+			msg: lang.get(
+				ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_SUCCESS,
+			),
 		});
-	}, [notificationAdapter.notify]);
+	}, [lang.get, notificationAdapter.notify]);
 
 	const onError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
-			title: "Error",
-			msg: "Unable to update board layout.",
+			msg: lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_ERROR),
 		});
-	}, [notificationAdapter.notify]);
+	}, [lang.get, notificationAdapter.notify]);
 
 	const onSubmit = useCallback(
 		(data: BoardRangeForm) => {
@@ -110,8 +111,7 @@ export function UpdateGameLayoutContent({
 		<form onSubmit={form.handleSubmit(onSubmit)}>
 			<Stack gap="md">
 				<Text size="sm">
-					Match the layout to the dimensions and mark available and blocked
-					slots.
+					{lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_DESCRIPTION)}
 				</Text>
 
 				<Group grow>
@@ -120,7 +120,7 @@ export function UpdateGameLayoutContent({
 						name="min"
 						render={({ field, fieldState }) => (
 							<NumberInput
-								label="Minimum"
+								label="Min"
 								min={1}
 								max={299}
 								{...field}
@@ -134,7 +134,7 @@ export function UpdateGameLayoutContent({
 						name="max"
 						render={({ field, fieldState }) => (
 							<NumberInput
-								label="Maximum"
+								label="Max"
 								min={2}
 								max={300}
 								{...field}
@@ -155,7 +155,11 @@ export function UpdateGameLayoutContent({
 								bg={gridColors.available}
 								style={{ borderRadius: "var(--mantine-radius-sm)" }}
 							/>
-							<Text size="sm">Available</Text>
+							<Text size="sm">
+								{lang.get(
+									ILanguageAdapterKey.UPDATE_GAME_LAYOUT_AVAILABLE_LABEL,
+								)}
+							</Text>
 						</Group>
 
 						<Group gap="xs">
@@ -165,7 +169,9 @@ export function UpdateGameLayoutContent({
 								bg={gridColors.blocked}
 								style={{ borderRadius: "var(--mantine-radius-sm)" }}
 							/>
-							<Text size="sm">Blocked</Text>
+							<Text size="sm">
+								{lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_BLOCKED_LABEL)}
+							</Text>
 						</Group>
 					</Group>
 				</Alert>
@@ -176,11 +182,11 @@ export function UpdateGameLayoutContent({
 
 				<Group justify="end" gap="md" wrap="wrap">
 					<Button onClick={onClose} variant="outline">
-						Close
+						{lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_CANCEL_BTN_LABEL)}
 					</Button>
 
 					<Button type="submit" loading={setBoardTemplate.isPending}>
-						Save
+						{lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_SUBMIT_BTN_LABEL)}
 					</Button>
 				</Group>
 			</Stack>

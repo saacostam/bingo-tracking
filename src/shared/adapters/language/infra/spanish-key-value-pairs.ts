@@ -154,4 +154,20 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.UPDATE_BOARD_QUERY_BOARD_ERROR_MSG]:
 		"No se pudo obtener la información del cartón",
 	[ILanguageAdapterKey.UPDATE_BOARD_SUBMIT_FORM]: "Guardar",
+
+	// UPDATE GAME LAYOUT
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_MODAL_TITLE]:
+		"Actualizar distribución",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_QUERY_BOARD_ERROR_MSG]:
+		"No se pudo obtener la información del juego.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_DESCRIPTION]:
+		"Ajusta la distribución a las dimensiones y marca los espacios disponibles y bloqueados.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_AVAILABLE_LABEL]: "Disponible",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_BLOCKED_LABEL]: "Bloqueado",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_CANCEL_BTN_LABEL]: "Cerrar",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_SUBMIT_BTN_LABEL]: "Guardar",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_ERROR]:
+		"No se pudo actualizar la distribución del tablero.",
+	[ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_SUCCESS]:
+		"Distribución del tablero actualizada correctamente.",
 };

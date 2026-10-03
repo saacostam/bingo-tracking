@@ -131,7 +131,7 @@ export function GameByIdComposer({
 			<Modal
 				opened={view.type === "update-game-layout"}
 				onClose={onClose}
-				title="Update Layout"
+				title={lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_MODAL_TITLE)}
 			>
 				{view.type === "update-game-layout" && (
 					<gameSlots.SetBoardTemplate
