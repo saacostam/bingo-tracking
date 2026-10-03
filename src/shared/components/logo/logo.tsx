@@ -8,8 +8,8 @@ export function Logo() {
 				<TableCellsIcon />
 			</ThemeIcon>
 			<Text fw="bold" size="xl">
-				<span style={{ color: "var(--mantine-primary-color-5)" }}>D</span>a
-				<span style={{ color: "var(--mantine-primary-color-5)" }}>B</span>o
+				Bingo
+				<span style={{ color: "var(--mantine-primary-color-5)" }}>Kit</span>
 			</Text>
 		</Flex>
 	);
