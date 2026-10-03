@@ -1,0 +1,1 @@
+import{i as m,e as p,j as c,b as n}from"./index-CmpU-okh.js";const x=m((e,o)=>{const{w:s,h:a,miw:r,mih:t,...i}=p("Space",null,e);return c.jsx(n,{ref:o,...i,w:s,miw:r??s,h:a,mih:t??a})});x.displayName="@mantine/core/Space";export{x as S};
