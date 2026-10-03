@@ -13,6 +13,14 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Board created successfully.",
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Create",
 
+	// CREATE GAME
+	[ILanguageAdapterKey.CREATE_GAME_BUTTON_LABEL]: "Create",
+	[ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE]: "Create Game",
+	[ILanguageAdapterKey.CREATE_GAME_MODAL_SUBMIT]: "Create",
+	[ILanguageAdapterKey.CREATE_GAME_NAME_FIELD_LABEL]: "Name",
+	[ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_ERROR]: "Unable to create game",
+	[ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_SUCCESS]: "Game created",
+
 	// CREATE PLAY
 	[ILanguageAdapterKey.CREATE_PLAY_MODAL_TITLE]: "Start",
 	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_ERROR]: "Unable to start play.",

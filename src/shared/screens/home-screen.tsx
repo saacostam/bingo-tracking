@@ -37,18 +37,18 @@ export default function HomeScreen() {
 		({ gameId }: IGameClientPayload["createGame"]["res"]) => {
 			notificationAdapter.notify({
 				type: "success",
-				msg: "Game created",
+				msg: lang.get(ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_SUCCESS),
 			});
 			nav(genRoute({ name: RouteName.GAME_BY_ID, params: { id: gameId } }));
 		},
-		[nav, notificationAdapter.notify],
+		[lang.get, nav, notificationAdapter.notify],
 	);
 	const createGameError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
-			msg: "Unable to create game",
+			msg: lang.get(ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_ERROR),
 		});
-	}, [notificationAdapter.notify]);
+	}, [lang.get, notificationAdapter.notify]);
 	const onClickCreate = useCallback(() => setModal({ type: "create" }), []);
 
 	const deleteGameSuccess = useCallback(() => {
@@ -80,14 +80,16 @@ export default function HomeScreen() {
 				<Text size="xl" fw="bold" display="block">
 					{lang.get(ILanguageAdapterKey.GAMES_HEADER)}
 				</Text>
-				<Button onClick={onClickCreate}>Create</Button>
+				<Button onClick={onClickCreate}>
+					{lang.get(ILanguageAdapterKey.CREATE_GAME_BUTTON_LABEL)}
+				</Button>
 			</Flex>
 			<Games onClickDeleteGameById={onClickDeleteGameById} />
 
 			<Modal
 				opened={modal.type === "create"}
 				onClose={onClose}
-				title="Create Game"
+				title={lang.get(ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE)}
 			>
 				<CreateGame
 					onError={createGameError}

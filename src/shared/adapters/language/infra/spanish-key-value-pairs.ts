@@ -13,6 +13,15 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Cartón creado correctamente.",
 	[ILanguageAdapterKey.CREATE_BOARD_SUBMIT_FORM]: "Crear",
 
+	// CREATE GAME
+	[ILanguageAdapterKey.CREATE_GAME_BUTTON_LABEL]: "Crear",
+	[ILanguageAdapterKey.CREATE_GAME_MODAL_TITLE]: "Crear Juego",
+	[ILanguageAdapterKey.CREATE_GAME_MODAL_SUBMIT]: "Crear",
+	[ILanguageAdapterKey.CREATE_GAME_NAME_FIELD_LABEL]: "Nombre",
+	[ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_ERROR]:
+		"No se pudo crear el juego",
+	[ILanguageAdapterKey.CREATE_GAME_NOTIFICATION_SUCCESS]: "Juego creado",
+
 	// CREATE PLAY
 	[ILanguageAdapterKey.CREATE_PLAY_MODAL_TITLE]: "Iniciar",
 	[ILanguageAdapterKey.CREATE_PLAY_NOTIFICATION_ERROR]:

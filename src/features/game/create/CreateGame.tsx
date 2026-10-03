@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { useCreateGameMutation } from "@/features/game/core/app";
 import type { IGameClientPayload } from "@/features/game/core/domain";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface CreateGameProps {
 	onError: (e: unknown) => void;
@@ -19,6 +21,8 @@ const schema = z.object({
 export type ICreateGameForm = z.infer<typeof schema>;
 
 export function CreateGame({ onError, onSettled, onSuccess }: CreateGameProps) {
+	const { lang } = useAdapters();
+
 	const createGameMutation = useCreateGameMutation();
 
 	const { formState, handleSubmit, register } = useForm({
@@ -50,8 +54,10 @@ export function CreateGame({ onError, onSettled, onSuccess }: CreateGameProps) {
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Flex direction="column" gap="lg">
 				<TextInput
-					label="Name"
-					placeholder="Name"
+					label={lang.get(ILanguageAdapterKey.CREATE_GAME_NAME_FIELD_LABEL)}
+					placeholder={lang.get(
+						ILanguageAdapterKey.CREATE_GAME_NAME_FIELD_LABEL,
+					)}
 					{...register("name")}
 					error={formState.errors.name?.message}
 				/>
@@ -59,7 +65,7 @@ export function CreateGame({ onError, onSettled, onSuccess }: CreateGameProps) {
 				{rootErrorMessage && <Alert color="pink" title={rootErrorMessage} />}
 
 				<Button loading={createGameMutation.isPending} type="submit">
-					Create
+					{lang.get(ILanguageAdapterKey.CREATE_GAME_MODAL_SUBMIT)}
 				</Button>
 			</Flex>
 		</form>
