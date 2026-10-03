@@ -55,12 +55,14 @@ export default function HomeScreen() {
 	const deleteGameSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_DELETED_TITLE),
 			msg: lang.get(ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_SUCCESS),
 		});
 	}, [lang.get, notificationAdapter.notify]);
 	const deleteGameError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
 			msg: lang.get(ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_ERROR),
 		});
 	}, [lang.get, notificationAdapter.notify]);

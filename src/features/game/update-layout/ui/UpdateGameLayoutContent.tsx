@@ -63,6 +63,7 @@ export function UpdateGameLayoutContent({
 	const onSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_UPDATED_TITLE),
 			msg: lang.get(
 				ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_SUCCESS,
 			),
@@ -72,6 +73,7 @@ export function UpdateGameLayoutContent({
 	const onError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
+			title: lang.get(ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE),
 			msg: lang.get(ILanguageAdapterKey.UPDATE_GAME_LAYOUT_NOTIFICATION_ERROR),
 		});
 	}, [lang.get, notificationAdapter.notify]);
