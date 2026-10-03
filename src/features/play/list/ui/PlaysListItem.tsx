@@ -7,7 +7,6 @@ import {
 	Grid,
 	Text,
 	Title,
-	Tooltip,
 } from "@mantine/core";
 import { type MouseEvent, useCallback } from "react";
 import { Link } from "react-router";
@@ -64,11 +63,9 @@ export function PlaysListItem({ onDeletePlay, play }: PlaysListItemProps) {
 							})}
 						</Text>
 					</Box>
-					<Tooltip label="Delete Play">
-						<ActionIcon color="red" onClick={onClickDelete} variant="light">
-							<TrashIcon height="20" width="20" />
-						</ActionIcon>
-					</Tooltip>
+					<ActionIcon color="red" onClick={onClickDelete} variant="light">
+						<TrashIcon height="20" width="20" />
+					</ActionIcon>
 				</Flex>
 			</Card>
 		</Grid.Col>
