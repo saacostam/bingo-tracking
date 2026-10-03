@@ -24,8 +24,9 @@ type ModalStatus =
 	  };
 
 export default function HomeScreen() {
-	const nav = useNavigate();
 	const { lang, notificationAdapter } = useAdapters();
+
+	const nav = useNavigate();
 
 	const [modal, setModal] = useState<ModalStatus>({
 		type: "browse",
@@ -54,15 +55,15 @@ export default function HomeScreen() {
 	const deleteGameSuccess = useCallback(() => {
 		notificationAdapter.notify({
 			type: "success",
-			msg: "Game deleted",
+			msg: lang.get(ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_SUCCESS),
 		});
-	}, [notificationAdapter.notify]);
+	}, [lang.get, notificationAdapter.notify]);
 	const deleteGameError = useCallback(() => {
 		notificationAdapter.notify({
 			type: "error",
-			msg: "Unable to delete game",
+			msg: lang.get(ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_ERROR),
 		});
-	}, [notificationAdapter.notify]);
+	}, [lang.get, notificationAdapter.notify]);
 	const onClickDeleteGameById = useCallback(
 		(gameId: string) =>
 			setModal({
@@ -100,7 +101,7 @@ export default function HomeScreen() {
 			<Modal
 				opened={modal.type === "delete"}
 				onClose={onClose}
-				title="Delete Game"
+				title={lang.get(ILanguageAdapterKey.DELETE_GAME_MODAL_TITLE)}
 			>
 				{modal.type === "delete" && (
 					<DeleteGame

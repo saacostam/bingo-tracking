@@ -1,6 +1,8 @@
 import { Button, Flex, SimpleGrid, Text } from "@mantine/core";
 import { useCallback } from "react";
 import { useDeleteGameMutation, useQueryGames } from "@/features/game/core/app";
+import { useAdapters } from "@/shared/adapters/core/app";
+import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 
 export interface DeleteGameProps {
 	id: string;
@@ -17,6 +19,8 @@ export function DeleteGame({
 	onSettled,
 	onSuccess,
 }: DeleteGameProps) {
+	const { lang } = useAdapters();
+
 	const deleteGameMutation = useDeleteGameMutation();
 	const queryGames = useQueryGames();
 
@@ -48,13 +52,15 @@ export function DeleteGame({
 
 	return (
 		<Flex direction="column" gap="lg">
-			<Text>Are you sure you want to delete this game?</Text>
+			<Text>
+				{lang.get(ILanguageAdapterKey.DELETE_GAME_MODAL_CONFIRMATION)}
+			</Text>
 			<SimpleGrid cols={{ span: 1, xs: 2 }}>
 				<Button onClick={onCancel} variant="outline">
-					Cancel
+					{lang.get(ILanguageAdapterKey.DELETE_GAME_CANCEL_BUTTON_LABEL)}
 				</Button>
 				<Button loading={deleteGameMutation.isPending} onClick={onConfirm}>
-					Delete
+					{lang.get(ILanguageAdapterKey.DELETE_GAME_CONFIRM_BUTTON_LABEL)}
 				</Button>
 			</SimpleGrid>
 		</Flex>

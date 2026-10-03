@@ -41,6 +41,16 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_SUCCESS]:
 		"Cartón eliminado correctamente.",
 
+	// DELETE GAME
+	[ILanguageAdapterKey.DELETE_GAME_CANCEL_BUTTON_LABEL]: "Cancelar",
+	[ILanguageAdapterKey.DELETE_GAME_CONFIRM_BUTTON_LABEL]: "Eliminar",
+	[ILanguageAdapterKey.DELETE_GAME_MODAL_CONFIRMATION]:
+		"¿Estás seguro de que quieres eliminar este juego?",
+	[ILanguageAdapterKey.DELETE_GAME_MODAL_TITLE]: "Eliminar juego",
+	[ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_ERROR]:
+		"No se pudo eliminar el juego",
+	[ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_SUCCESS]: "Juego eliminado",
+
 	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Juegos",
 	[ILanguageAdapterKey.GAMES_QUERY_GAMES_ERROR_MSG]:

@@ -39,6 +39,15 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.DELETE_BOARD_NOTIFICATION_SUCCESS]:
 		"Board deleted successfully.",
 
+	// DELETE GAME
+	[ILanguageAdapterKey.DELETE_GAME_CANCEL_BUTTON_LABEL]: "Cancel",
+	[ILanguageAdapterKey.DELETE_GAME_CONFIRM_BUTTON_LABEL]: "Delete",
+	[ILanguageAdapterKey.DELETE_GAME_MODAL_CONFIRMATION]:
+		"Are you sure you want to delete this game?",
+	[ILanguageAdapterKey.DELETE_GAME_MODAL_TITLE]: "Delete Game",
+	[ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_ERROR]: "Unable to delete game",
+	[ILanguageAdapterKey.DELETE_GAME_NOTIFICATION_SUCCESS]: "Game deleted",
+
 	// GAMES
 	[ILanguageAdapterKey.GAMES_HEADER]: "Games",
 	[ILanguageAdapterKey.GAMES_QUERY_GAMES_ERROR_MSG]:
