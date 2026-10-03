@@ -67,7 +67,8 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 
 	// LOGIN
 	[ILanguageAdapterKey.LOGIN_HEADER]: "Iniciar sesión",
-	[ILanguageAdapterKey.LOGIN_DESCRIPTION]: "¡Lorem ipsum dolor sit amet!",
+	[ILanguageAdapterKey.LOGIN_DESCRIPTION]:
+		"🎯 Inicia sesión. Juega. Disfruta la partida.",
 	[ILanguageAdapterKey.LOGIN_USERNAME_FIELD_LABEL]: "Usuario",
 	[ILanguageAdapterKey.LOGIN_PASSWORD_FIELD_LABEL]: "Contraseña",
 	[ILanguageAdapterKey.LOGIN_SUBMIT_CTA]: "Ingresar",
