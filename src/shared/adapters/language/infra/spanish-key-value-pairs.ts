@@ -71,6 +71,7 @@ export const SPANISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 		"Actualmente no hay cartones disponibles",
 
 	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL]: "Crear",
+	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_LAYOUT_BUTTON_LABEL]: "Distribución",
 	[ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL]: "Iniciar Partida",
 	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BOARD_BUTTON_TOOLTIP]: "Eliminar",
 	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BOARD_BUTTON_TOOLTIP]: "Editar",

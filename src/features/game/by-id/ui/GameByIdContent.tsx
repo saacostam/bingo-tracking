@@ -80,8 +80,14 @@ export function GameByIdContent({
 						</Text>
 					</Box>
 					<Group gap="md" wrap="wrap">
-						<Button onClick={onSetGameBoardTemplate} variant="outline">
-							Update Layout
+						<Button
+							leftSection={<PencilIcon height="1rem" width="1rem" />}
+							onClick={onSetGameBoardTemplate}
+							variant="outline"
+						>
+							{lang.get(
+								ILanguageAdapterKey.GAME_BY_ID_UPDATE_LAYOUT_BUTTON_LABEL,
+							)}
 						</Button>
 						<Button
 							leftSection={<PlusIcon height="1rem" width="1rem" />}

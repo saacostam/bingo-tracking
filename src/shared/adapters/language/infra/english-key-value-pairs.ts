@@ -66,16 +66,17 @@ export const ENGLISH_KEY_VALUE_PAIRS: Record<ILanguageAdapterKey, string> = {
 	[ILanguageAdapterKey.GAME_BY_ID_NO_BOARDS_DESCRIPTION]:
 		"There are currently no boards available",
 
+	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL]: "Create",
+	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_LAYOUT_BUTTON_LABEL]: "Layout",
+	[ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL]: "Start Play",
+	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BOARD_BUTTON_TOOLTIP]: "Delete",
+	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BOARD_BUTTON_TOOLTIP]: "Edit",
+
 	// GENERIC
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_CREATED_TITLE]: "Created",
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_DELETED_TITLE]: "Deleted",
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_ERROR_TITLE]: "Error",
 	[ILanguageAdapterKey.GENERIC_NOTIFICATION_UPDATED_TITLE]: "Updated",
-
-	[ILanguageAdapterKey.GAME_BY_ID_CREATE_BOARD_BUTTON_LABEL]: "Create",
-	[ILanguageAdapterKey.GAME_BY_ID_CREATE_PLAY_BUTTON_lABEL]: "Start Play",
-	[ILanguageAdapterKey.GAME_BY_ID_DELETE_BOARD_BUTTON_TOOLTIP]: "Delete",
-	[ILanguageAdapterKey.GAME_BY_ID_UPDATE_BOARD_BUTTON_TOOLTIP]: "Edit",
 
 	// LANGUAGE
 	[ILanguageAdapterKey.LANGUAGE_MENU_HEADER]: "Available Languages",
