@@ -10,7 +10,6 @@ export function mapValuesToBoardTemplate(
 			cell.type === "blocked"
 				? {
 						type: "blocked" as const,
-						value: undefined,
 					}
 				: {
 						type: "available" as const,
