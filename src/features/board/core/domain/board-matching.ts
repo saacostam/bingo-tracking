@@ -55,10 +55,12 @@ export function applyPatternToBoardAndGetPercentage(
 			isWinningCell(cell) &&
 			!!takenNumbers.find((number) => number === cell.value),
 	);
-	const ratio = Math.max(
-		0,
-		Math.min(matchedCells.length / allWinningCells.length, 1),
-	);
+
+	const denominator = allWinningCells.length;
+	const ratio =
+		denominator <= 0
+			? 0
+			: Math.max(0, Math.min(matchedCells.length / denominator, 1));
 
 	return ratio * 100;
 }
