@@ -12,7 +12,7 @@ import { useAdapters } from "@/shared/adapters/core/app";
 import { ILanguageAdapterKey } from "@/shared/adapters/language/domain";
 import { useLogin } from "../app";
 
-export function MockLogin() {
+export function Login() {
 	const { lang } = useAdapters();
 
 	const { form, isLoading, onSubmit } = useLogin();
